@@ -1,0 +1,21 @@
+# Datasets
+dataset/
+raw/
+train/
+
+# Model files
+*.h5
+*.pkl
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+.virtual_documents/
+
+# Images
+*.png
+*.jpg
+*.jpeg
+
+# Python cache
+__pycache__/
+*.pyc

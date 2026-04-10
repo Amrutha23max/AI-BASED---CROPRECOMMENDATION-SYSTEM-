@@ -79,5 +79,6 @@ Analysis done: {analysis_done}. If analysis is not done and user asks about thei
 
     return jsonify({"reply": reply})
 
+
 if __name__ == "__main__":
     app.run(debug=True)

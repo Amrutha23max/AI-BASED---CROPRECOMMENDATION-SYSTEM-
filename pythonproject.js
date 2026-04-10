@@ -4,7 +4,7 @@
 
 // ---- TRANSLATIONS ----
 // ---- PAGE NAVIGATION CONFIG ----
-const BACKEND_URL = "https://crop-backend-lwhy.onrender.com";
+const BACKEND_URL = "https://crop-backend-3kzm.onrender.com";
 // 1. PAGE CONFIGURATION
 let analysisDone = false;
 const pageSequence = ["home", "phone", "otp", "location","choice", "upload", "manual","analyzing", "results","suggestions","contact"];
@@ -129,7 +129,14 @@ const translations = {
     cropRotation: "फसल चक्र",
   },
 };
-
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
 const dummyResults = {
   soilType: "Black Cotton Soil",
   soilColor: "#3d2b1f",
@@ -169,17 +176,34 @@ function changeLang(lang) {
   }
 }
 function renderSuggestionsFromServer() {
-  fetch("https://crop-backend-lwhy.onrender.com/get-suggestions")
+  const list = document.getElementById('suggestionsList');
+
+  // Show 3 skeleton cards while loading
+  list.innerHTML = Array(3).fill(`
+    <div class="suggestion-item skeleton-card">
+      <div class="skel-line" style="width:90%; height:14px;"></div>
+      <div class="skel-line" style="width:75%; height:14px; margin-top:8px;"></div>
+      <div class="skel-line" style="width:50%; height:14px; margin-top:8px;"></div>
+      <div class="skel-line" style="width:40%; height:12px; margin-top:16px; margin-left:auto;"></div>
+    </div>
+  `).join('');
+
+  fetch("https://crop-backend-3kzm.onrender.com/get-suggestions")
     .then(res => res.json())
     .then(data => {
-      const list = document.getElementById('suggestionsList');
-
+      if (data.length === 0) {
+        list.innerHTML = `<p style="text-align:center; color:#6a8a6a; grid-column:1/-1;">No suggestions yet. Be the first!</p>`;
+        return;
+      }
       list.innerHTML = data.map(s => `
         <div class="suggestion-item">
-          <p>"${s.text}"</p>
-          <div>— ${s.name}</div>
+          <p class="suggestion-item-text">"${s.text}"</p>
+          <div class="suggestion-item-author">— ${s.name}</div>
         </div>
       `).join('');
+    })
+    .catch(() => {
+      list.innerHTML = `<p style="text-align:center; color:#c62828; grid-column:1/-1;">Could not load suggestions. Please try again.</p>`;
     });
 }
 // ---- NAVIGATION (With Browser History) ----
@@ -204,11 +228,11 @@ function goTo(page, pushToHistory = true) {
   // Show target page
   const target = document.getElementById("page-" + page);
   if (target) {
-    target.classList.add("active");
-    target.style.display = "block";
-    target.classList.add("fade-in");
-    setTimeout(() => target.classList.remove("fade-in"), 500);
-  }
+  target.style.display = "block";
+  // Force reflow so transition fires
+  target.getBoundingClientRect();
+  target.classList.add("active");
+}
 
   // Mark page as visited **only if coming forward**
   visitedPages.add(page);
@@ -319,15 +343,17 @@ function goForward() {
 // ---- PHONE & OTP LOGIC ----
 function handleSendOTP() {
   const phone = document.getElementById('phoneNumber').value;
+  const errEl = document.getElementById('phoneError');
   if (/^\d{10}$/.test(phone)) {
+    errEl.textContent = '';
     generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
     document.getElementById('otpHintCode').textContent = generatedOTP;
     document.getElementById('otpHintBox').style.display = 'block';
-
     resetOTPFields();
     goTo('otp');
   } else {
-    alert("Please enter a valid 10-digit phone number");
+    errEl.textContent = '⚠️ Please enter a valid 10-digit number.';
+    document.getElementById('phoneNumber').focus();
   }
 }
 
@@ -335,10 +361,10 @@ function handleVerifyOTP() {
   let userEnteredOtp = "";
   document.querySelectorAll('.otp-input').forEach(input => { userEnteredOtp += input.value; });
   if (userEnteredOtp === generatedOTP) {
-    alert("Phone Verified Successfully!");
+    showToast("✅ Phone verified!", "success");
     goTo('location');
   } else {
-    alert("Invalid OTP! Try again.");
+    showToast("❌ Invalid OTP, try again.", "error");
      resetOTPFields();
     document.querySelectorAll('.otp-input').forEach(input => input.value = "");
     document.querySelectorAll('.otp-input')[0].focus();
@@ -544,11 +570,11 @@ function handleExpertSubmit() {
   const sug  = document.getElementById('expertSug').value.trim();
 
   if (!name || !sug) {
-    alert("Fill both fields");
+    showToast("⚠️ Please fill all fields.", "error");
     return;
   }
 
-  fetch("https://crop-backend-lwhy.onrender.com/add-suggestion", {
+  fetch("https://crop-backend-3kzm.onrender.com/add-suggestion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -600,16 +626,6 @@ function showSlides() {
   slideTimer = setTimeout(showSlides, 3000); // Save timer reference
 }
 
-function resetSlides() {
-  clearTimeout(slideTimer);
-  slideIndex = 0;
-}
-function currentSlide(n){
-  clearTimeout(slideTimer);
-  slideIndex = n - 1;
-  showSlides();
-}
-
 // ---- INITIALIZATION & BROWSER LISTENERS ----
 // ---- INITIALIZATION (FORCED HOME ON REFRESH) ----
 document.addEventListener("DOMContentLoaded", () => {
@@ -631,7 +647,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 5. Start the normal app functions
   changeLang("en");
   showSlides();
-
+  
   // 6. Keep your existing OTP auto-focus logic
   const otpInputs = document.querySelectorAll('.otp-input');
   otpInputs.forEach((input, index) => {
@@ -692,7 +708,7 @@ function sendChatMessage() {
   chatBox.innerHTML += `<div class="bot-msg">Typing...</div>`;
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  fetch("https://crop-backend-lwhy.onrender.com/chat", {
+  fetch("https://crop-backend-3kzm.onrender.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

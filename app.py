@@ -60,8 +60,8 @@ def add_suggestion():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    data = request.json
-    user_msg = request.json.get("message")
+    data = request.get_json(silent=True) or {}
+    user_msg = data.get("message")
     if not user_msg or not user_msg.strip():
         return jsonify({"reply": "Please enter a valid message."})
     analysis_done = data.get("analysisDone", False)
@@ -74,8 +74,12 @@ If asked anything unrelated to agriculture, politely say you only help with farm
 Analysis done: {analysis_done}. If analysis is not done and user asks about their crop result, tell them to complete soil analysis first."""
 
     try:
+        print("API KEY:", os.getenv("GOOGLE_API_KEY"))
+
+        model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(system_prompt + "\n\nUser: " + user_msg)
-        reply = response.text
+
+        reply = response.text if response.text else "No response from AI"
     except Exception as e:
         print("ERROR:", str(e))   # goes to Render logs
         reply = str(e)            # sends actual error to frontend

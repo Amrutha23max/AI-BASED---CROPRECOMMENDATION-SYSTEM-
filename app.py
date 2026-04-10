@@ -64,37 +64,18 @@ def chat():
     user_msg = data.get("message", "")
     analysis_done = data.get("analysisDone", False)
 
+    system_prompt = f"""You are AgriBot, an AI assistant for AgriXAI — an Indian agriculture platform.
+You help farmers with crop recommendations, soil health, fertilizers, weather, and farming tips.
+Always answer in simple, friendly language a farmer can understand.
+Keep answers short — maximum 3 sentences.
+If asked anything unrelated to agriculture, politely say you only help with farming topics.
+Analysis done: {analysis_done}. If analysis is not done and user asks about their crop result, tell them to complete soil analysis first."""
+
     try:
-        prompt = f"""
-You are AgriBot 🌱, an AI assistant for farmers.
-
-Context:
-- This app helps farmers analyze soil and recommend crops.
-- analysisDone = {analysis_done}
-
-Instructions:
-- If analysisDone is False → tell user to complete soil analysis first.
-- If analysisDone is True → explain crop results clearly and suggest crops.
-
-User message:
-{user_msg}
-
-Rules:
-- Keep answers simple and practical
-- Focus only on agriculture
-"""
-
-        response = model.generate_content(prompt)
-
-        reply = ""
-        if response and hasattr(response, "text") and response.text:
-            reply = response.text
-        else:
-            reply = "No response from AI. Try again."
-
+        response = model.generate_content(system_prompt + "\n\nUser: " + user_msg)
+        reply = response.text
     except Exception as e:
-        print("ERROR:", str(e))
-        reply = "Server error. Please try again."
+        reply = "Sorry, I'm having trouble responding right now. Please try again."
 
     return jsonify({"reply": reply})
 

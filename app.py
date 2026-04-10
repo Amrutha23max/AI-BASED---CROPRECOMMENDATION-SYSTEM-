@@ -4,7 +4,7 @@ import psycopg2
 import os
 import google.generativeai as genai
 
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 def get_db_connection():
@@ -47,7 +47,7 @@ def get_suggestions():
 
 @app.route('/add-suggestion', methods=['POST'])
 def add_suggestion():
-    data = request.json
+    data = request.get_json(silent=True) or {}
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -61,7 +61,9 @@ def add_suggestion():
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
-    user_msg = data.get("message", "")
+    user_msg = request.json.get("message")
+    if not user_msg or not user_msg.strip():
+        return jsonify({"reply": "Please enter a valid message."})
     analysis_done = data.get("analysisDone", False)
 
     system_prompt = f"""You are AgriBot, an AI assistant for AgriXAI — an Indian agriculture platform.
@@ -75,10 +77,10 @@ Analysis done: {analysis_done}. If analysis is not done and user asks about thei
         response = model.generate_content(system_prompt + "\n\nUser: " + user_msg)
         reply = response.text
     except Exception as e:
-        reply = "Sorry, I'm having trouble responding right now. Please try again."
+        print("ERROR:", str(e))   # goes to Render logs
+        reply = str(e)            # sends actual error to frontend
 
     return jsonify({"reply": reply})
-
 
 if __name__ == "__main__":
     app.run(debug=True)

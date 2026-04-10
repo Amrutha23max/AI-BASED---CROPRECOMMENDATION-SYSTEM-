@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
 import os
+import google.generativeai as genai
+
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def get_db_connection():
     db_url = os.environ.get("DATABASE_URL", "")
@@ -62,27 +66,34 @@ def chat():
 
     try:
         prompt = f"""
-        You are AgriBot 🌱, an AI assistant for farmers.
+You are AgriBot 🌱, an AI assistant for farmers.
 
-        Context:
-        - This app helps farmers analyze soil and recommend crops.
-        - If analysisDone is False, guide user to complete analysis first.
-        - If analysisDone is True, help explain crop results and suggestions.
+Context:
+- This app helps farmers analyze soil and recommend crops.
+- analysisDone = {analysis_done}
 
-        User message:
-        {user_msg}
+Instructions:
+- If analysisDone is False → tell user to complete soil analysis first.
+- If analysisDone is True → explain crop results clearly and suggest crops.
 
-        Rules:
-        - Keep answers simple and practical
-        - Focus only on agriculture
-        - Do not give unrelated answers
-        """
+User message:
+{user_msg}
+
+Rules:
+- Keep answers simple and practical
+- Focus only on agriculture
+"""
 
         response = model.generate_content(prompt)
-        reply = response.text
+
+        reply = ""
+        if response and hasattr(response, "text") and response.text:
+            reply = response.text
+        else:
+            reply = "No response from AI. Try again."
 
     except Exception as e:
-        print(e)
+        print("ERROR:", str(e))
         reply = "Server error. Please try again."
 
     return jsonify({"reply": reply})

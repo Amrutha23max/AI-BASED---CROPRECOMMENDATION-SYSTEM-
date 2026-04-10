@@ -4,7 +4,7 @@
 
 // ---- TRANSLATIONS ----
 // ---- PAGE NAVIGATION CONFIG ----
-const BACKEND_URL = "https://crop-backend-3kzm.onrender.com";
+const BACKEND_URL = "https://crop-backend-lwhy.onrender.com";
 // 1. PAGE CONFIGURATION
 let analysisDone = false;
 const pageSequence = ["home", "phone", "otp", "location","choice", "upload", "manual","analyzing", "results","suggestions","contact"];
@@ -188,7 +188,7 @@ function renderSuggestionsFromServer() {
     </div>
   `).join('');
 
-  fetch("https://crop-backend-3kzm.onrender.com/get-suggestions")
+  fetch("https://crop-backend-lwhy.onrender.com/get-suggestions")
     .then(res => res.json())
     .then(data => {
       if (data.length === 0) {
@@ -574,7 +574,7 @@ function handleExpertSubmit() {
     return;
   }
 
-  fetch("https://crop-backend-3kzm.onrender.com/add-suggestion", {
+  fetch("https://crop-backend-lwhy.onrender.com/add-suggestion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -708,7 +708,7 @@ function sendChatMessage() {
   chatBox.innerHTML += `<div class="bot-msg">Typing...</div>`;
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  fetch("https://crop-backend-3kzm.onrender.com", {
+  fetch("https://crop-backend-lwhy.onrender.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

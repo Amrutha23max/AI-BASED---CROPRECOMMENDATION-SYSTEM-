@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
 import os
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
-# ── Gemini setup ──────────────────────────────────────────────
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 SYSTEM_PROMPT = """You are AgriBot, an AI assistant for AgriXAI — an Indian agriculture platform.
 You help farmers with crop recommendations, soil health, fertilizers, weather, and farming tips.
@@ -13,20 +13,12 @@ Always answer in simple, friendly language a farmer can understand.
 Keep answers short — maximum 3 sentences.
 If asked anything unrelated to agriculture, politely say you only help with farming topics."""
 
-# Use system_instruction properly instead of string concatenation
-model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
-    system_instruction=SYSTEM_PROMPT
-)
-
-# ── DB ────────────────────────────────────────────────────────
 def get_db_connection():
     db_url = os.environ.get("DATABASE_URL", "")
     if db_url.startswith("postgres://"):
         db_url = db_url.replace("postgres://", "postgresql://", 1)
     return psycopg2.connect(db_url, sslmode="require")
 
-# ── App ───────────────────────────────────────────────────────
 app = Flask(__name__)
 CORS(app)
 
@@ -88,13 +80,18 @@ def chat():
 
     analysis_done = data.get("analysisDone", False)
 
-    # Inject analysis context into the user turn, not the system prompt
     if not analysis_done:
         user_msg += "\n\n[Note: Soil analysis has NOT been completed yet. If user asks about crop results, remind them to complete soil analysis first.]"
 
     try:
-        response = model.generate_content(user_msg)
-        reply = response.text if response.text else "Sorry, I couldn't generate a response."
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT
+            ),
+            contents=user_msg
+        )
+        reply = response.text
     except Exception as e:
         print("Gemini ERROR:", str(e))
         reply = f"AI error: {str(e)}"

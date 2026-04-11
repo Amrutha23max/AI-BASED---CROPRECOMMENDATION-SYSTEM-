@@ -85,7 +85,7 @@ def chat():
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-flash-preview-0417",
+            model="gemini-2.5-flash-lite",
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT
             ),

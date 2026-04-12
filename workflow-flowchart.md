@@ -1,6 +1,6 @@
 # Workflow Flowchart
 <p align="center">
-  <img src="AI%20crop%20recommendation.drawio.png" width="600"/>
+  <img src="AI%20crop%20recommendation.jpg" width="450"/>
 </p>
 * Diagram Link: * https://drive.google.com/file/d/1ddtFHwPpCo0SBgpYEeVS_zzDg3BCQHa7/view?usp=sharing
 
@@ -12,7 +12,7 @@
 
 **3. Manual Soil Entry:** User enters soil details manually.
 
-**4. CNN Model:** Predicts soil type.
+**4. CNN Model:** Predicts soil type.p
 
 **5. Low Confidence:** If prediction is low, manual input is requested.
 
@@ -20,8 +20,6 @@
 
 **7. Combine Data:** Soil and weather data are combined.
 
-**8. Random Forest Model:** Recommends suitable crops.
+**8. Crop Recommendation:** Recommends suitable crops.
 
-**9. Display Crops:** Shows recommended crops with scores.
-
-**10. Explanation:** Displays feature importance.
+**9. Display Crops and Explanation:** Shows recommended crops with scores and display the feature importance.

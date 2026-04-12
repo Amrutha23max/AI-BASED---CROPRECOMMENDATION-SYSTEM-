@@ -74,12 +74,17 @@ def add_suggestion():
 def chat():
     data = request.get_json(silent=True) or {}
     user_msg = data.get("message", "").strip()
-
+    lang = data.get("lang", "en")
     if not user_msg:
         return jsonify({"reply": "Please enter a valid message."})
 
     analysis_done = data.get("analysisDone", False)
-
+    lang_instruction = {
+        "te": "Always reply in Telugu (తెలుగు).",
+        "hi": "Always reply in Hindi (हिन्दी).",
+        "en": "Always reply in English."
+    }.get(lang, "Always reply in English.")
+    
     if not analysis_done:
         user_msg += "\n\n[Note: Soil analysis has NOT been completed yet. If user asks about crop results, remind them to complete soil analysis first.]"
 
@@ -87,7 +92,7 @@ def chat():
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
             config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_PROMPT
+                system_instruction=SYSTEM_PROMPT + " " + lang_instruction
             ),
             contents=user_msg
         )

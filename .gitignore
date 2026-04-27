@@ -6,6 +6,7 @@ train/
 # Model files
 *.h5
 *.pkl
+*.keras
 
 # Notebook checkpoints
 .ipynb_checkpoints/
@@ -19,3 +20,7 @@ train/
 # Python cache
 __pycache__/
 *.pyc
+
+
+# Environment variables
+.env

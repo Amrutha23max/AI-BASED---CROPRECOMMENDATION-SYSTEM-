@@ -4,3 +4,8 @@ psycopg2-binary
 gunicorn
 google-genai
 SQLAlchemy
+xgboost
+numpy
+tensorflow
+Pillow
+shap

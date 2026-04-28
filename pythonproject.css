@@ -34,12 +34,28 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Nunito', sans-serif;
-  background: var(--green-bg);
   color: var(--text-dark);
   min-height: 100vh;
-  overflow-x:hidden;
+  overflow-x: hidden;
+  background-image: url('https://i.pinimg.com/originals/40/73/d4/4073d4378fad895860ee2285fedf3a74.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
-
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(238, 239, 237, 0.88);
+  opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
+}
+.navbar, .page, .page-wide, footer, #chat-wrapper, .sidebar {
+  position: relative;
+  z-index: 1;
+}
 /* ---- ANIMATIONS ---- */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -336,15 +352,18 @@ body {
 
 /* ---- PAGES ---- */
 .page, .page-wide {
-   display: none; 
-    opacity: 0;
-    width: 100%;
+  display: none;
+  opacity: 0;
+  width: 100%;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.page.active,.page-wide.active {
-   display: block !important;
-   opacity:1; 
-  }
-  .progress-fill {
+.page.active, .page-wide.active {
+  display: block !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+.progress-fill {
     transition: width 0.4s ease;
     width: 0%;
 }
@@ -376,20 +395,23 @@ body {
 .dots{
 margin-top:10px;
 text-align:center;
+position: relative;
+z-index: 2;
 }
 
-.dots .dot{
-height:12px;
-width:12px;
-margin:5px;
-background-color:gray;
-border-radius:50%;
-display:inline-block;
-cursor:pointer;
+.dots .dot {
+  height: 10px;
+  width: 10px;
+  margin: 4px;
+  background-color: rgba(100, 100, 100, 0.6);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .dots .dot.active{
-background-color:black;
+  background-color: var(--green-dark); 
 }
 /* --- SPLIT SCREEN LAYOUT --- */
 .page-wide {
@@ -406,9 +428,9 @@ background-color:black;
 }
 
 .guide-side {
-  flex: 1; /* Half Width */
-  background: var(--green-dark);
-  color: white;
+  flex: 0 0 300px; /* Half Width */
+  background: #1b7a27;
+  color: var(--green-mid);
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -421,19 +443,23 @@ background-color:black;
   background: var(--white);
 }
 
-/* --- STEP ITEMS --- */
 .step-item {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;   /* align to top for long text */
+  gap: 12px;
   opacity: 0.4;
-  font-size: 1.1rem;
+  font-size: 0.95rem;        /* slightly smaller to fit Telugu */
   transition: 0.3s;
+  line-height: 1.4;
+  word-break: break-word;    /* prevents overflow */
 }
 .step-item.active { opacity: 1; font-weight: bold; }
-.step-item span {
-  width: 30px;
-  height: 30px;
+
+/* The NUMBER circle */
+.step-item > span:first-child {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;           /* KEY: stops circle from shrinking */
   background: var(--amber);
   color: var(--text-dark);
   border-radius: 50%;
@@ -441,6 +467,15 @@ background-color:black;
   align-items: center;
   justify-content: center;
   font-weight: 800;
+  font-size: 0.85rem;
+  flex-shrink: 0;            /* KEY: circle never squishes */
+  margin-top: 2px;           /* aligns with first line of text */
+}
+
+/* The TEXT span */
+.step-item > span:last-child {
+  flex: 1;                   /* takes remaining width */
+  color: #e8f5e9;
 }
 
 /* --- MANUAL GRID --- */
@@ -1049,9 +1084,9 @@ background-color:black;
   margin: 30px 0;         /* 30px space top and bottom */
   line-height: 1.8;
   color: var(--text-mid);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   text-align: center;     /* Centers the actual words */
-  font-weight: 500;
+  font-weight: 700;
   
   /* 4. Reset any box styles */
   background: none;
@@ -1077,19 +1112,19 @@ background-color:black;
   position: fixed;
   bottom: 25px;
   right: 25px;
-  width: 65px;
-  height: 65px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--green-main), var(--green-dark));
   color: white;
   border: none;
   cursor: pointer;
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  z-index: 3000; /* Stays above everything */
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -1170,17 +1205,20 @@ background-color:black;
 
 .chat-input-area {
   display: flex;
-  padding: 12px;
+  padding: 10px 12px;
   background: white;
   border-top: 1px solid var(--green-light);
+  align-items: center;
+  gap: 6px;
 }
 
 .chat-input-area input {
   flex: 1;
   border: none;
   outline: none;
-  padding: 8px;
+  padding: 8px 10px;
   font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
 }
 
 .chat-input-area button {
@@ -1189,7 +1227,42 @@ background-color:black;
   color: var(--green-main);
   font-size: 1.2rem;
   cursor: pointer;
-  padding-left: 10px;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+#micBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green-pale);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--green-dark);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+#micBtn:hover {
+  background: var(--green-light);
+  transform: scale(1.08);
+}
+#micBtn.listening {
+  background: #ffebee;
+  color: #c62828;
+  animation: micPulse 1s ease-in-out infinite;
+}
+
+@keyframes micPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
 }
 
 
@@ -1311,20 +1384,20 @@ background-color:black;
 /* ---- FLOATING + BUTTON ---- */
 .sug-fab {
   position: fixed;
-  bottom: 100px;        /* sits above the chatbot FAB */
+  bottom: 90px;        /* 25px + 55px height + 10px gap = 90px */
   right: 25px;
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--amber), #f57c00);
+  background: linear-gradient(135deg, var(--green-main));
   color: white;
   font-size: 2rem;
   font-weight: 300;
   border: none;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  z-index: 2500;
-  display: none;          /* hidden by default, shown only on suggestions page */
+  z-index: 3100;
+  display: none;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
@@ -1337,12 +1410,15 @@ background-color:black;
 /* ---- MODAL ---- */
 .sug-modal-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 4000;
   display: none;
-  align-items: center;
+  align-items: flex-start;        /* align to top, not center */
   justify-content: center;
+  padding: 80px 16px 40px;        /* 80px top = clears the navbar */
 }
 
 .sug-modal-overlay.open {
@@ -1358,6 +1434,8 @@ background-color:black;
   position: relative;
   box-shadow: var(--shadow-md);
   animation: fadeInUp 0.3s ease;
+  margin: 0;                      /* remove old margin-top */
+  flex-shrink: 0;                 /* prevents squishing */
 }
 
 .sug-modal-close {
@@ -1498,4 +1576,103 @@ background-color:black;
   .hero-side { display: none; }
   .hero-wrapper { width: 100%; left: 0; transform: none; }
   .hero { flex: unset; max-width: 100%; }
+}
+
+
+/* ---- TOAST NOTIFICATIONS ---- */
+#toast-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.toast {
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  animation: toastIn 0.3s ease, toastOut 0.4s ease 2.6s forwards;
+  min-width: 220px;
+  text-align: center;
+}
+.toast.success { background: #2d7a2d;; }
+.toast.error   { background: #c62828; }
+.toast.info    { background: #1565c0; }
+@keyframes toastIn  { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+@keyframes toastOut { from { opacity:1; } to { opacity:0; transform: translateY(10px); } }
+
+/* ---- SKELETON LOADER ---- */
+.skel-line {
+  background: linear-gradient(90deg, #e8f5e9 25%, #c8e6c9 50%, #e8f5e9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- TYPING INDICATOR ---- */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--green-pale);
+  border-radius: 15px;
+  border-bottom-left-radius: 2px;
+  width: fit-content;
+  align-self: flex-start;
+}
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--green-main);
+  border-radius: 50%;
+  animation: typingBounce 1.2s infinite;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-6px); }
+}
+
+#page-suggestions.active ~ footer,
+#page-contact.active ~ footer {
+  display: none;
+}
+
+#splash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transition: opacity 0.5s ease;
+}
+#splash.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input-field.auto-filled {
+  border-color: var(--green-mid);
+  background: #f0fff0;
+  color: var(--green-dark);
+  font-weight: 700;
 }

@@ -13,7 +13,13 @@ from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 from PIL import Image
 import shap
 
-client = genai.Client(api_key="AIzaSyD9kNqZlVaFKTpcFuoHU61NRqjMlkyB9Cw")
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+
 
 SYSTEM_PROMPT = """You are AgriBot, an AI assistant for AgriXAI — an Indian agriculture platform.
 You help farmers with crop recommendations, soil health, fertilizers, weather, and farming tips.
@@ -260,12 +266,25 @@ def predict_image():
         humidity = float(request.form.get("humidity", 80))
         rainfall = float(request.form.get("rainfall", 200))
 
+        # soil_type, soil_confidence = predict_soil_type(image)
+
+        # if soil_type not in soil_map:
+        #     return jsonify({
+        #         "error": f"Soil type '{soil_type}' not found in soil_npk_map.json"
+        #     }), 400
         soil_type, soil_confidence = predict_soil_type(image)
 
+        if soil_confidence < 60:
+          return jsonify({
+            "error": "Low confidence. Please upload a clearer soil image.",
+            "soil_type": soil_type,
+            "soil_confidence": soil_confidence
+          }), 400
+
         if soil_type not in soil_map:
-            return jsonify({
-                "error": f"Soil type '{soil_type}' not found in soil_npk_map.json"
-            }), 400
+           return jsonify({
+           "error": f"Soil type '{soil_type}' not found in soil_npk_map.json"
+        }), 400
 
         soil_vals = soil_map[soil_type]
 

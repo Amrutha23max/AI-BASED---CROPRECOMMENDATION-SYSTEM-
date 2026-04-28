@@ -9,6 +9,11 @@
   
 </head>
 <body>
+  <div id="splash">
+    <div class="logo" style="font-size:2.5rem;">Agri<span>X</span>AI</div>
+    <p style="color:var(--green-main); font-weight:700;">Smart Soil. Smart Crops.</p>
+    <div class="spin-icon" style="font-size:2rem;">🌱</div>
+  </div>
     <!-- NAV -->
   <nav class="navbar">
   <div class="nav-left">
@@ -20,13 +25,13 @@
     </div>
     
     <div class="nav-controls">
-      <button id="backBtn" class="nav-btn" onclick="goBack()">❮</button>
-      <button id="forwardBtn" class="nav-btn" onclick="goForward()">❯</button>
+      <button id="backBtn" class="nav-btn" onclick="goBack()">&#10094;</button>
+      <button id="forwardBtn" class="nav-btn" onclick="goForward()">&#10095;</button>
     </div>
   </div>
 
   <div class="logo">Agri<span>X</span>AI</div>
-  <div class="nav-about">
+  <div class="nav-about" data-key="navAbout">
     AI-powered crop recommendations using soil and climate data.
   </div>
 
@@ -49,11 +54,11 @@
     <button class="close-btn" onclick="toggleSidebar()">×</button>
   </div>
   <ul class="sidebar-links">
-  <li><a href="javascript:void(0)" onclick="navTo('home')">🏠 Home</a></li>
-  <li><a href="javascript:void(0)" onclick="navTo('features')">✨ Features</a></li>
-  <li><a href="javascript:void(0)" onclick="navTo('suggestions')">💡 Suggestions</a></li>
-  <li><a href="javascript:void(0)" onclick="navTo('about')">📖 About</a></li>
-  <li><a href="javascript:void(0)" onclick="navTo('contact')">📞 Contact</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('home')" data-key="sideHome">🏠 Home</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('features')" data-key="sideFeatures">✨ Features</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('suggestions')" data-key="sideSuggestions">💡 Suggestions</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('about')" data-key="sideAbout">📖 About</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('contact')" data-key="sideContact">📞 Contact</a></li>
 </ul>
 </div>
 <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
@@ -69,12 +74,27 @@
   <!-- ===== PAGE: HOME ===== -->
   <section id="page-home" class="page active container">
     <div class="slideshow">
-      <div class="slide"><img src="images/pic7.jpeg"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200" alt="Farmer in field"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1200" alt="Soil close-up"></div>
+      <div class="slide"><img src="images/pic5.jpeg" alt="Green crops"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1715244416160-85885f8fc032?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Harvest"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200" alt="Rice field"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1600150806237-a7dffed6b53c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGluZGlhbiUyMGFncmljdWx0dXJlfGVufDB8fDB8fHww" alt="Indian farmer"></div>
+      <div class="slide"><img src="https://media.istockphoto.com/id/1327938763/photo/close-up-low-angle-view-at-row-of-young-corn-stalks-at-field-spring-time.webp?a=1&b=1&s=612x612&w=0&k=20&c=mihVH6DQzU1BXBiSTKNBlr21d6aGhCEehfjrrYkw5iU=" alt="Vegetable farm"></div>
+      <div class="slide"><img src="https://media.istockphoto.com/id/2194173767/photo/close-up-of-male-hands-touching-dry-ground-in-an-agricultural-field.jpg?s=612x612&w=0&k=20&c=fqfL9Gio2GNnSYPjunHG1kinQTG6udsF4DEaT0tX9xg=" alt="Healthy crops"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=1200" alt="Greenhouse farming"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1661962692059-55d5a4319814?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWdyaWN1bHR1cmV8ZW58MHx8MHx8fDA%3D" alt="Green paddy field"></div>
+      <div class="slide"><img src="https://media.istockphoto.com/id/182174646/photo/corrot-in-field.jpg?s=612x612&w=0&k=20&c=CbwqAg2DnDLUl_L4cbiTRqWv1ko4tZYfC9sgh6qhHX0=" alt="Soil in hands"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1661964196891-3d3f378a97b2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D" alt="Farm landscape"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1661836197241-48be1b48baed?q=80&w=1162&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Green farmland"></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1602867741746-6df80f40b3f6?w=1200" alt="Farmer plowing"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1663089572474-6e2dc35d0ede?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fresh vegetables harvest"></div>
+      <!-- <div class="slide"><img src="images/pic7.jpeg"></div>
       <div class="slide"><img src="images/pic2.jpeg"></div>
       <div class="slide"><img src="images/pic3.jpeg"></div>
       <div class="slide"><img src="images/pic6.jpeg"></div>
       <div class="slide"><img src="images/pic1.jpeg"></div>
-      <div class="slide"><img src="images/pic5.jpeg"></div>
+      <div class="slide"><img src="images/pic5.jpeg"></div> -->
     </div>
 
     <div class="dots">
@@ -84,6 +104,15 @@
       <span class="dot" onclick="currentSlide(4)"></span>
       <span class="dot" onclick="currentSlide(5)"></span>
       <span class="dot" onclick="currentSlide(6)"></span>
+      <span class="dot" onclick="currentSlide(7)"></span>
+      <span class="dot" onclick="currentSlide(8)"></span>
+      <span class="dot" onclick="currentSlide(9)"></span>
+      <span class="dot" onclick="currentSlide(10)"></span>
+      <span class="dot" onclick="currentSlide(11)"></span>
+      <span class="dot" onclick="currentSlide(12)"></span>
+      <span class="dot" onclick="currentSlide(13)"></span>
+      <span class="dot" onclick="currentSlide(14)"></span>
+      <span class="dot" onclick="currentSlide(15)"></span>
     </div>
 
 <div class="hero-wrapper">
@@ -112,7 +141,7 @@
     <h1 class="brand-title">AgriXAI</h1>
     <p class="tagline" data-key="tagline">Smart Soil. Smart Crops.</p>
     <p class="subtitle" data-key="subtitle">AI-powered crop recommendations for every farmer</p>
-    <div id="about-section" class="hero-about">
+    <div id="about-section" class="hero-about" data-key="heroAbout">
       AgriXAI is an advanced AI-powered platform dedicated to helping Indian farmers make data-driven decisions. By combining soil science with machine learning, we provide instant crop recommendations based on your unique soil health and local climate conditions to enhance productivity and sustainability.
     </div>
     <button class="btn-primary pulse" onclick="goTo('phone')" data-key="startBtn">🚀 Start Analysis</button>
@@ -140,16 +169,16 @@
 </div>
   
     
-    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">Features</h2>
+    <h2 class="section-title" style="text-align: center; margin-bottom: 25px;" data-key="featuresTitle">Features</h2>
     <div class="feature-grid" id="features-section">
       <div class="feature-card">
         <div class="f-icon">🧪</div>
-        <div class="f-label">Soil Analysis</div>
+        <div class="f-label" data-key="featureSoil">Soil Analysis</div>
       </div>
       
       <div class="feature-card">
         <div class="f-icon">🌱</div>
-        <div class="f-label">Crop Advice</div>
+        <div class="f-label" data-key="featureCrop">Crop Advice</div>
       </div>
 
       <div class="feature-card">
@@ -157,21 +186,22 @@
         <div class="f-label" data-key="cropRotation">Crop Rotation</div>
       </div>
     </div>
+    
     <!-- SUGGESTIONS SECTION ON HOME -->
 <div class="suggestions-container">
-  <h2 class="section-title" style="text-align: center; margin-bottom: 25px;">Expert Suggestions</h2>
+  <h2 class="section-title" style="text-align: center; margin-bottom: 25px;" data-key="expertTitle">Expert Suggestions</h2>
   <div class="suggestion-grid">
     <div class="suggestion-card">
-      <p class="sug-text">"Integrate real-time market prices for the recommended crops to help farmers calculate potential profit."</p>
-      <div class="sug-author">- Dr. Aruna, Agronomist</div>
+      <p class="sug-text" data-key="sug1">"Integrate real-time market prices for the recommended crops to help farmers calculate potential profit."</p>
+      <div class="sug-author" data-key="sug1Author">- Dr. Aruna, Agronomist</div>
     </div>
     <div class="suggestion-card">
-      <p class="sug-text">"Add a fertilizer calculator based on the specific nutrient deficiency found in the soil analysis."</p>
-      <div class="sug-author">- Ramesh Rao, Agri-Tech Expert</div>
+      <p class="sug-text" data-key="sug2">"Add a fertilizer calculator based on the specific nutrient deficiency found in the soil analysis."</p>
+      <div class="sug-author" data-key="sug2Author">- Ramesh Rao, Agri-Tech Expert</div>
     </div>
     <div class="suggestion-card">
-      <p class="sug-text">"Implement a satellite-based weather alert system to warn farmers about upcoming heavy rainfall."</p>
-      <div class="sug-author">- ISRO Research Team</div>
+      <p class="sug-text" data-key="sug3">"Implement a satellite-based weather alert system to warn farmers about upcoming heavy rainfall."</p>
+      <div class="sug-author" data-key="sug3Author">- ISRO Research Team</div>
     </div>
   </div>
 </div>
@@ -184,12 +214,13 @@
     <div class="form-group">
       <div style="display: flex; gap: 8px;">
         <input class="input-field" style="width: 80px;" type="text" value="+91" readonly />
-        <input class="input-field" id="phoneNumber" type="tel" placeholder="Enter 10 digit number" maxlength="10" />
+        <input class="input-field" id="phoneNumber" type="tel" data-key-placeholder="phonePlaceholder" placeholder="Enter 10 digit number" maxlength="10" />
       </div>
     </div>
     <div class="form-group" style="margin-top:20px;">
       <button class="btn-primary" onclick="handleSendOTP()" data-key="getOtpBtn">Get OTP</button>
     </div>
+    <div id="phoneError" style="color:#c62828; font-size:0.85rem; font-weight:700; margin-top:6px; min-height:20px;"></div>
   </section>
 
   <!-- ===== PAGE: OTP VERIFICATION ===== -->
@@ -198,9 +229,9 @@
     <p class="section-desc" data-key="otpDesc">We have sent a 4-digit code to your phone.</p>
     
     <div id="otpHintBox" style="display:none; background:#e8f5e9; border:2px solid #4caf50; border-radius:12px; padding:14px 18px; margin-bottom:20px; text-align:center;">
-    <div style="font-size:0.8rem; color:#4a6741; font-weight:700; margin-bottom:4px;">YOUR OTP</div>
-    <div id="otpHintCode" style="font-size:2rem; font-weight:900; color:#1b5e20; letter-spacing:10px;"></div>
-  </div>
+  <div style="font-size:0.8rem; color:#4a6741; font-weight:700; margin-bottom:4px;" data-key="yourOtp">YOUR OTP</div>
+  <div id="otpHintCode" style="font-size:2rem; font-weight:900; color:#1b5e20; letter-spacing:10px;"></div>
+</div>
 
   <div class="otp-container">
     <input class="input-field otp-input" type="text" maxlength="1" inputmode="numeric" />
@@ -225,17 +256,17 @@
     <input class="input-field" id="manualLoc" type="text" placeholder="e.g. Hyderabad" />
   </div>
   <!-- Change: goes to CHOICE page now -->
-  <button class="btn-primary" onclick="goTo('choice')" data-key="continueBtn">Continue →</button>
+<button class="btn-primary" onclick="handleContinue()" data-key="continueBtn">Continue →</button>
 </section>
 
 <!-- ===== PAGE: CHOICE (New) ===== -->
 <section id="page-choice" class="page container">
-  <h2 class="section-title">Choose Analysis Method</h2>
-  <p class="section-desc">How would you like to provide your soil details?</p>
+  <h2 class="section-title" data-key="choiceTitle">Choose Analysis Method</h2>
+  <p class="section-desc" data-key="choiceDesc">How would you like to provide your soil details?</p>
   <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 30px;">
-    <button class="btn-primary blue-btn" onclick="goTo('upload')">📸 Upload Soil Image</button>
-    <div class="divider">OR</div>
-    <button class="btn-secondary" onclick="goTo('manual')">⌨️ Enter Data Manually</button>
+    <button class="btn-primary blue-btn" onclick="goTo('upload')" data-key="imgUploadBtn">📸 Upload Soil Image</button>
+    <div class="divider" data-key="orText">OR</div>
+    <button class="btn-secondary" onclick="goTo('manual')" data-key="manualEntryBtn">⌨️ Enter Data Manually</button>
   </div>
 </section>
 
@@ -244,25 +275,25 @@
   <div class="split-container">
     <!-- Left Side: Process Guide -->
     <div class="guide-side">
-      <h3>Analysis Process</h3>
-      <div class="step-item active" id="s1"><span>1</span> Click "Choose Image"</div>
-      <div class="step-item" id="s2"><span>2</span> Select a clear soil photo</div>
-      <div class="step-item" id="s3"><span>3</span> Click "Analyze Soil"</div>
-      <div class="step-item" id="s4"><span>4</span> View AI Crop Result</div>
+      <h3 data-key="processTitle">Analysis Process</h3>
+      <div class="step-item active" id="s1"><span>1</span> <span data-key="step1">Click "Choose Image"</span></div>
+      <div class="step-item" id="s2"><span>2</span> <span data-key="step2">Select a clear soil photo</span></div>
+      <div class="step-item" id="s3"><span>3</span> <span data-key="step3">Click "Analyze Soil"</span></div>
+      <div class="step-item" id="s4"><span>4</span> <span data-key="step4">View AI Crop Result</span></div>
     </div>
     
     <!-- Right Side: The Webpage Content -->
     <div class="upload-side">
-      <h2 class="section-title">Upload Image</h2>
+      <h2 class="section-title" data-key="uploadPageTitle">Upload Image</h2>
       <label class="upload-zone" for="soilImg" onclick="updateStep(2)">
         <div id="uploadPlaceholder">
           <div style="font-size:3rem;">📁</div>
-          <div class="upload-label">Choose Image</div>
+          <div class="upload-label" data-key="chooseImgBtn">Choose Image</div>
         </div>
         <img id="imgPreview" src="" style="display:none;" />
       </label>
       <input type="file" id="soilImg" accept="image/*" onchange="previewImage(event)" hidden />
-      <button class="btn-primary" id="analyzeBtn" onclick="startAnalysis()" style="margin-top:20px; opacity:0.5; pointer-events:none;">🔬 Analyze Soil</button>
+      <button class="btn-primary" id="analyzeBtn" onclick="startAnalysis()" data-key="analyzeSoilBtn" style="margin-top:20px; opacity:0.5; pointer-events:none;">🔬 Analyze Soil</button>
     </div>
   </div>
 </section>
@@ -274,55 +305,55 @@
     
     <!-- Left Side: Manual Process Guide -->
     <div class="guide-side" style="background: #2e4a3e;"> <!-- Slightly different green for manual -->
-      <h3>Manual Entry Process</h3>
-      <div class="step-item active" id="m1"><span>1</span> Enter Nutrients (N, P, K)</div>
-      <div class="step-item" id="m2"><span>2</span> Enter Soil pH Level</div>
-      <div class="step-item" id="m3"><span>3</span> Enter Climate Details</div>
-      <div class="step-item" id="m4"><span>4</span> Submit for AI Analysis</div>
+      <h3 data-key="manualProcessTitle">Manual Entry Process</h3>
+      <div class="step-item active" id="m1"><span>1</span><span data-key="mStep1">Enter Nutrients (N, P, K)</span></div>
+      <div class="step-item" id="m2"><span>2</span><span data-key="mStep2">Enter Soil pH Level</span></div>
+      <div class="step-item" id="m3"><span>3</span><span data-key="mStep3">Enter Climate Details</span></div>
+      <div class="step-item" id="m4"><span>4</span><span data-key="mStep4">Submit for AI Analysis</span></div>
     </div>
     
     <!-- Right Side: The Data Form -->
     <div class="upload-side">
-      <h2 class="section-title">Soil Lab Data</h2>
-      <p class="section-desc">Please enter the values from your soil test report.</p>
+      <h2 class="section-title" data-key="soilLabTitle">Soil Lab Data</h2>
+      <p class="section-desc" data-key="soilLabDesc">Please enter the values from your soil test report.</p>
       
       <div class="manual-grid">
         <!-- Nutrients Group -->
         <div class="form-group">
-          <label>Nitrogen (N) <small>(Range: 0-150 mg/kg)</small></label>
+          <label data-key="labelN">Nitrogen (N) <small>(Range: 0-150 mg/kg)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 70" onfocus="updateManualStep(1)">
         </div>
         <div class="form-group">
-          <label>Phosphorus (P) <small>(Range: 0-50 mg/kg)</small></label>
+          <label data-key="labelP">Phosphorus (P) <small>(Range: 0-50 mg/kg)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 25" onfocus="updateManualStep(1)">
         </div>
         <div class="form-group">
-          <label>Potassium (K) <small>(Range: 0-300 mg/kg)</small></label>
+          <label data-key="labelK">Potassium (K) <small>(Range: 0-300 mg/kg)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 150" onfocus="updateManualStep(1)">
         </div>
 
         <!-- pH Group -->
         <div class="form-group">
-          <label>pH Level <small>(Range: 3.5 - 9.0)</small></label>
+          <label data-key="labelPH">pH Level <small>(Range: 3.5 - 9.0)</small></label>
           <input type="number" step="0.1" class="input-field" placeholder="e.g. 7.0" onfocus="updateManualStep(2)">
         </div>
 
         <!-- Climate Group -->
         <div class="form-group">
-          <label>Temperature <small>(Range: 10-50 °C)</small></label>
+          <label data-key="labelTemp">Temperature <small>(Range: 10-50 °C)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 28" onfocus="updateManualStep(3)">
         </div>
         <div class="form-group">
-          <label>Humidity <small>(Range: 10-100 %)</small></label>
+          <label data-key="labelHumidity">Humidity <small>(Range: 10-100 %)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 65" onfocus="updateManualStep(3)">
         </div>
         <div class="form-group" style="grid-column: span 2;">
-          <label>Rainfall <small>(Range: 200-2500 mm)</small></label>
+          <label data-key="labelRain">Rainfall <small>(Range: 200-2500 mm)</small></label>
           <input type="number" class="input-field" placeholder="e.g. 1100" onfocus="updateManualStep(3)">
         </div>
       </div>
       
-      <button class="btn-primary" onclick="startManualAnalysis()" style="margin-top:20px;">🔬 Analyze Data</button>
+      <button class="btn-primary" onclick="startManualAnalysis()" data-key="analyzeDataBtn" style="margin-top:20px;">🔬 Analyze Data</button>
     </div>
   </div>
 </section>
@@ -355,7 +386,10 @@
           <div class="conf-pct" id="confPct">0%</div>
         </div>
     </div>
-
+    <div class="card">
+      <div class="card-label">Soil Nutrients (N · P · K)</div>
+      <canvas id="npkChart" height="80"></canvas>
+    </div>
     <div class="crop-card">
       <div class="crop-badge" data-key="cropRec">Recommended Crop</div>
       <div class="crop-emoji" id="cropEmoji">🌿</div>
@@ -374,95 +408,67 @@
 <section id="page-suggestions" class="page sug-page">
 
   <div class="sug-page-header">
-    <h2 class="section-title">💡 Community Suggestions</h2>
-    <p class="section-desc">See what experts and farmers are saying about AgriXAI.</p>
+    <h2 class="section-title" data-key="sugPageTitle">💡 Community Suggestions</h2>
+    <p class="section-desc" data-key="sugPageDesc">See what experts and farmers are saying about AgriXAI.</p>
   </div>
 
   <!-- SUGGESTIONS GRID -->
   <div id="suggestionsList" class="sug-grid"></div>
 
   <!-- FLOATING + BUTTON -->
-  <button class="sug-fab" onclick="openSugModal()" title="Add your suggestion">+</button>
+  <!-- <button class="sug-fab" onclick="openSugModal()" title="Add your suggestion">+</button> -->
 
   <!-- MODAL POPUP -->
   <div id="sugModal" class="sug-modal-overlay" onclick="closeSugModal(event)">
     <div class="sug-modal">
       <button class="sug-modal-close" onclick="closeSugModal()">×</button>
-      <h3 class="suggestions-form-title">✍️ Add Your Suggestion</h3>
-      <p class="section-desc">Have an idea to improve AgriXAI? Share it below.</p>
+      <h3 class="suggestions-form-title" data-key="addSugTitle">✍️ Add Your Suggestion</h3>
+      <p class="section-desc" data-key="addSugDesc">Have an idea to improve AgriXAI? Share it below.</p>
 
       <div class="form-group">
-        <label class="form-label">Name & Profession</label>
+        <label class="form-label" data-key="nameLabel">Name & Profession</label>
         <input type="text" id="expertName" class="input-field" placeholder="e.g. Dr. Singh, Scientist">
       </div>
 
       <div class="form-group">
-        <label class="form-label">Your Suggestion</label>
+        <label class="form-label" data-key="sugLabel">Your Suggestion</label>
         <textarea id="expertSug" class="input-field suggestions-textarea" placeholder="Share your suggestions here..."></textarea>
       </div>
 
-      <button class="btn-primary" onclick="handleExpertSubmit()">🚀 Submit Suggestion</button>
+      <button class="btn-primary" data-key="submitSug" onclick="handleExpertSubmit()">🚀 Submit Suggestion</button>
     </div>
   </div>
 
   <div style="text-align:center; margin-top: 30px;">
-    <button class="btn-secondary" onclick="goTo('home')">← Back to Home</button>
+    <button class="btn-secondary" data-key="backHome" onclick="goTo('home')">← Back to Home</button>
   </div>
 
 </section>
-<!-- ===== PAGE: LEADERBOARD ===== -->
-<section id="page-leaderboard" class="page container">
-  <h2 class="section-title">🏆 Top Agri-Experts</h2>
-  <p class="section-desc">Farmers using AI to achieve the best yields this month.</p>
-  
-  <div class="card">
-    <table style="width: 100%; border-collapse: collapse;">
-      <tr style="border-bottom: 2px solid var(--green-pale); color: var(--green-main);">
-        <th style="padding: 10px; text-align: left;">Rank</th>
-        <th style="padding: 10px; text-align: left;">Farmer Name</th>
-        <th style="padding: 10px; text-align: right;">Points</th>
-      </tr>
-      <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 10px;">1</td>
-        <td style="padding: 10px;">Rajesh Kumar (Punjab)</td>
-        <td style="padding: 10px; text-align: right; font-weight: bold;">1,250</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 10px;">2</td>
-        <td style="padding: 10px;">Sita Devi (Telangana)</td>
-        <td style="padding: 10px; text-align: right; font-weight: bold;">1,180</td>
-      </tr>
-      <tr>
-        <td style="padding: 10px;">3</td>
-        <td style="padding: 10px;">Amit Singh (UP)</td>
-        <td style="padding: 10px; text-align: right; font-weight: bold;">950</td>
-      </tr>
-    </table>
-  </div>
-  <button class="btn-secondary" onclick="goTo('home')">Back to Home</button>
-</section>
 <!-- ===== PAGE: CONTACT ===== -->
 <section id="page-contact" class="page container">
-  <h2 class="section-title">📞 Contact Support</h2>
-  <p class="section-desc">Have questions? Our agronomists are here to help.</p>
+  <h2 class="section-title" data-key="contactTitle">📞 Contact Support</h2>
+  <p class="section-desc" data-key="contactDesc">Have questions? Our agronomists are here to help.</p>
   
   <div class="card">
     <div style="margin-bottom: 15px;">
-      <strong style="color: var(--green-dark);">Email:</strong> support@agrixai.com
+      <strong style="color: var(--green-dark);" data-key="emailLabel">Email:</strong> support@agrixai.com
     </div>
     <div style="margin-bottom: 15px;">
-      <strong style="color: var(--green-dark);">Phone:</strong> +91 98765 43210
+      <strong style="color: var(--green-dark);" data-key="phoneLabel">Phone:</strong> +91 98765 43210
     </div>
     <div style="margin-bottom: 15px;">
-      <strong style="color: var(--green-dark);">Address:</strong> T-Hub, Madhapur, Hyderabad, India.
+      <strong style="color: var(--green-dark);" data-key="addressLabel">Address:</strong> T-Hub, Madhapur, Hyderabad, India.
     </div>
   </div>
 
   <div class="form-group">
-    <textarea class="input-field" placeholder="Type your message here..." style="height: 100px;"></textarea>
-  </div>
-  <button class="btn-primary">Send Message</button>
-  <button class="btn-secondary" style="margin-top:10px" onclick="goTo('home')">Back to Home</button>
+  <textarea id="contactMsg" class="input-field" data-key-placeholder="msgPlaceholder" 
+    placeholder="Type your message here..." style="height:100px;"></textarea>
+</div>
+<button class="btn-primary" id="contactSendBtn" onclick="handleContactSubmit()" data-key="sendMsg">
+  Send Message
+</button>
+  <button class="btn-secondary" style="margin-top:10px" onclick="goTo('home')" data-key="backHome">Back to Home</button>
 </section>
 
   <!-- ===== FOOTER ===== --> 
@@ -474,26 +480,34 @@
         
         <div>
           <div class="footer-heading" data-key="team">Team</div>
-          <p class="footer-text">Developed by AgriXAI Research Team, Hyderabad.</p>
+          <p class="footer-text" data-key="teamDesc">Developed by AgriXAI Research Team, Hyderabad.</p>
         </div>
       </div>
-      <div class="footer-copy">© 2024 AgriXAI · Made with 💚 for Indian Farmers</div>
+      <div class="footer-copy" data-key="footerCopy">© 2024 AgriXAI · Made with 💚 for Indian Farmers</div>
     </div>
   </footer>
 
-  
   <!-- CHATBOT UI -->
 <div id="chat-wrapper">
   <div id="chat-container" class="chat-hidden">
     <div class="chat-header">
-      <span>🌱 AgriBot AI</span>
-      <button onclick="toggleChat()">×</button>
+      <span data-key="chatTitle">🌱 AgriBot AI</span>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button id="ttsToggleBtn" onclick="toggleTTS()" 
+          title="Toggle voice replies" 
+          style="background:none; border:1px solid rgba(255,255,255,0.3); color:white; border-radius:8px; padding:3px 8px; font-size:0.8rem; cursor:pointer; opacity:0.6;">
+          🔇
+        </button>
+        <button onclick="toggleChat()">×</button>
+      </div>
     </div>
     <div id="chat-box">
-      <div class="bot-msg">Hello! I am your AgriXAI assistant. How can I help you today?</div>
+      <div class="bot-msg" id="botGreeting">Hello! I am your AgriXAI assistant. How can I help you today?</div>
     </div>
     <div class="chat-input-area">
-      <input type="text" id="chatInput" placeholder="Ask about crops, soil..." onkeypress="handleChatKey(event)">
+      <button id="micBtn" onclick="toggleVoiceInput()" title="Speak">🎤</button>
+      <input type="text" id="chatInput" data-key-placeholder="chatPlaceholder" 
+        placeholder="Ask about crops, soil..." onkeypress="handleChatKey(event)">
       <button onclick="sendChatMessage()">➤</button>
     </div>
   </div>
@@ -502,6 +516,8 @@
     <span class="fab-icon">💬</span>
   </button>
 </div>
+<button class="sug-fab" onclick="openSugModal()" title="Add your suggestion">+</button>
 <script src="pythonproject.js"></script>
+<div id="toast-container"></div>
 </body>
 </html>

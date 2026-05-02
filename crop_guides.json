@@ -1,0 +1,852 @@
+{
+    "rice": {
+        "season": "Kharif season, mainly June to November",
+        "water_requirement": "High water requirement",
+        "how_to_grow": [
+            "Prepare a puddled field before transplanting.",
+            "Use healthy seedlings around 20 to 30 days old.",
+            "Maintain proper water level during vegetative growth."
+        ],
+        "common_diseases": [
+            "Blast",
+            "Bacterial leaf blight",
+            "Sheath blight"
+        ],
+        "chemical_fertilizers": [
+            "Urea for nitrogen",
+            "DAP for phosphorus",
+            "MOP for potassium"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Compost",
+            "Neem cake",
+            "Azospirillum biofertilizer"
+        ],
+        "purchase_links": [
+            {
+                "name": "Rice Seeds",
+                "url": "https://www.amazon.in/s?k=rice+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Rice",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+rice"
+            },
+            {
+                "name": "Chemical Fertilizer for Rice",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+rice"
+            }
+        ]
+        
+    },
+    "maize": {
+        "season": "Kharif and Rabi seasons",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Use well-drained fertile soil.",
+            "Maintain proper spacing between plants.",
+            "Irrigate during flowering and grain formation."
+        ],
+        "common_diseases": [
+            "Leaf blight",
+            "Downy mildew",
+            "Rust"
+        ],
+        "chemical_fertilizers": [
+            "Urea",
+            "DAP",
+            "MOP"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Vermicompost",
+            "Azospirillum"
+        ],
+        "purchase_links": [
+            {
+                "name": "Maize Seeds",
+                "url": "https://www.amazon.in/s?k=maize+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Maize",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+maize"
+            },
+            {
+                "name": "Chemical Fertilizer for Maize",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+maize"
+            }
+        ]
+    },
+    "jute": {
+        "season": "Warm and humid season, mainly March to May sowing",
+        "water_requirement": "High moisture requirement",
+        "how_to_grow": [
+            "Grow in warm humid conditions.",
+            "Use alluvial or loamy soil.",
+            "Keep field moist during early growth."
+        ],
+        "common_diseases": [
+            "Stem rot",
+            "Root rot",
+            "Leaf mosaic"
+        ],
+        "chemical_fertilizers": [
+            "Urea",
+            "SSP",
+            "MOP"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Compost",
+            "Green manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Jute Seeds",
+                "url": "https://www.amazon.in/s?k=jute+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Jute",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+jute"
+            },
+            {
+                "name": "Chemical Fertilizer for Jute",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+jute"
+            }
+        ]
+    },
+    "cotton": {
+        "season": "Kharif season",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Use black cotton soil or well-drained loamy soil.",
+            "Avoid waterlogging.",
+            "Provide irrigation during flowering and boll formation."
+        ],
+        "common_diseases": [
+            "Bacterial blight",
+            "Wilt",
+            "Leaf curl virus"
+        ],
+        "chemical_fertilizers": [
+            "Urea",
+            "DAP",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Neem cake",
+            "Vermicompost",
+            "Trichoderma"
+        ],
+        "purchase_links": [
+            {
+                "name": "Cotton Seeds",
+                "url": "https://www.amazon.in/s?k=cotton+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Cotton",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+cotton"
+            },
+            {
+                "name": "Chemical Fertilizer for Cotton",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+cotton"
+            }
+        ]
+    },
+    "coconut": {
+        "season": "Can be planted during monsoon season",
+        "water_requirement": "High water requirement",
+        "how_to_grow": [
+            "Plant in well-drained sandy loam or laterite soil.",
+            "Provide regular irrigation during dry months.",
+            "Use proper spacing between palms."
+        ],
+        "common_diseases": [
+            "Bud rot",
+            "Leaf rot",
+            "Root wilt"
+        ],
+        "chemical_fertilizers": [
+            "Urea",
+            "Rock phosphate",
+            "MOP"
+        ],
+        "organic_suggestions": [
+            "Coconut husk compost",
+            "Farmyard manure",
+            "Neem cake",
+            "Vermicompost"
+        ],
+        "purchase_links": [
+            {
+                "name": "Coconut Plant",
+                "url": "https://www.amazon.in/s?k=coconut+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Coconut",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coconut"
+            },
+            {
+                "name": "Chemical Fertilizer for Coconut",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+coconut"
+            }
+        ]
+    },
+    "papaya": {
+        "season": "Can be grown throughout the year in warm climate",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Use well-drained soil rich in organic matter.",
+            "Avoid waterlogging near roots.",
+            "Protect young plants from strong winds."
+        ],
+        "common_diseases": [
+            "Papaya ring spot virus",
+            "Powdery mildew",
+            "Root rot"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Urea",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Vermicompost",
+            "Neem oil spray"
+        ],
+        "purchase_links": [
+            {
+                "name": "Papaya Seeds",
+                "url": "https://www.amazon.in/s?k=papaya+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Papaya",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+papaya"
+            },
+            {
+                "name": "Chemical Fertilizer for Papaya",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+papaya"
+            }
+        ]
+    },
+    "orange": {
+        "season": "Best planted during monsoon or spring",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow in well-drained loamy soil.",
+            "Avoid water stagnation around roots.",
+            "Prune dry and diseased branches regularly."
+        ],
+        "common_diseases": [
+            "Citrus canker",
+            "Gummosis",
+            "Greening disease"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Zinc sulphate",
+            "Magnesium sulphate"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Compost",
+            "Neem cake",
+            "Biofertilizers"
+        ],
+        "purchase_links": [
+            {
+                "name": "Orange Plant",
+                "url": "https://www.amazon.in/s?k=orange+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Orange",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+orange"
+            },
+            {
+                "name": "Chemical Fertilizer for Orange",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+orange"
+            }
+        ]
+    },
+    "apple": {
+        "season": "Temperate climate, planted during winter dormancy",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow in cool climate with well-drained soil.",
+            "Prune trees annually.",
+            "Protect flowers from frost damage."
+        ],
+        "common_diseases": [
+            "Apple scab",
+            "Powdery mildew",
+            "Fire blight"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Calcium nitrate",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Neem oil spray",
+            "Vermicompost"
+        ],
+        "purchase_links": [
+            {
+                "name": "Apple Plant",
+                "url": "https://www.amazon.in/s?k=apple+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Apple",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+apple"
+            },
+            {
+                "name": "Chemical Fertilizer for Apple",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+apple"
+            }
+        ]
+    },
+    "muskmelon": {
+        "season": "Summer season",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow in sandy loam soil.",
+            "Provide warm temperature and sunlight.",
+            "Avoid excess irrigation near fruit maturity."
+        ],
+        "common_diseases": [
+            "Powdery mildew",
+            "Downy mildew",
+            "Fusarium wilt"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Urea",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Vermicompost",
+            "Neem cake",
+            "Organic mulch"
+        ],
+        "purchase_links": [
+            {
+                "name": "Muskmelon Seeds",
+                "url": "https://www.amazon.in/s?k=muskmelon+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Muskmelon",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+muskmelon"
+            },
+            {
+                "name": "Chemical Fertilizer for Muskmelon",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+muskmelon"
+            }
+        ]
+    },
+    "watermelon": {
+        "season": "Summer season",
+        "water_requirement": "Moderate to high water requirement",
+        "how_to_grow": [
+            "Use sandy loam soil with good drainage.",
+            "Provide enough sunlight.",
+            "Reduce watering near fruit maturity for better sweetness."
+        ],
+        "common_diseases": [
+            "Anthracnose",
+            "Powdery mildew",
+            "Fusarium wilt"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Urea",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Compost",
+            "Neem cake",
+            "Vermicompost"
+        ],
+        "purchase_links": [
+            {
+                "name": "Watermelon Seeds",
+                "url": "https://www.amazon.in/s?k=watermelon+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Watermelon",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+watermelon"
+            },
+            {
+                "name": "Chemical Fertilizer for Watermelon",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+watermelon"
+            }
+        ]
+    },
+    "grapes": {
+        "season": "Usually planted during winter or early spring",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow in well-drained soil.",
+            "Train vines using support structures.",
+            "Prune vines regularly for better fruiting."
+        ],
+        "common_diseases": [
+            "Powdery mildew",
+            "Downy mildew",
+            "Anthracnose"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Potash",
+            "Micronutrient mixture"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Neem oil spray",
+            "Organic mulch"
+        ],
+        "purchase_links": [
+            {
+                "name": "Grape Plant",
+                "url": "https://www.amazon.in/s?k=grape+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Grapes",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+grapes"
+            },
+            {
+                "name": "Chemical Fertilizer for Grapes",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+grapes"
+            }
+        ]
+    },
+    "mango": {
+        "season": "Best planted during monsoon",
+        "water_requirement": "Low to moderate water requirement after establishment",
+        "how_to_grow": [
+            "Use deep well-drained soil.",
+            "Provide irrigation during flowering and fruit development.",
+            "Prune dead or diseased branches."
+        ],
+        "common_diseases": [
+            "Anthracnose",
+            "Powdery mildew",
+            "Dieback"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Potash",
+            "Micronutrient mixture"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Compost",
+            "Neem cake",
+            "Organic mulch"
+        ],
+        "purchase_links": [
+            {
+                "name": "Mango Plant",
+                "url": "https://www.amazon.in/s?k=mango+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Mango",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mango"
+            },
+            {
+                "name": "Chemical Fertilizer for Mango",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mango"
+            }
+        ]
+    },
+    "banana": {
+        "season": "Can be grown throughout the year with irrigation",
+        "water_requirement": "High water requirement",
+        "how_to_grow": [
+            "Use fertile well-drained soil.",
+            "Provide regular irrigation.",
+            "Remove unwanted suckers for better growth."
+        ],
+        "common_diseases": [
+            "Panama wilt",
+            "Sigatoka leaf spot",
+            "Bunchy top virus"
+        ],
+        "chemical_fertilizers": [
+            "Urea",
+            "DAP",
+            "MOP"
+        ],
+        "organic_suggestions": [
+            "Farmyard manure",
+            "Vermicompost",
+            "Neem cake",
+            "Banana waste compost"
+        ],
+        "purchase_links": [
+            {
+                "name": "Banana Plant",
+                "url": "https://www.amazon.in/s?k=banana+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Banana",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+banana"
+            },
+            {
+                "name": "Chemical Fertilizer for Banana",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+banana"
+            }
+        ]
+    },
+    "pomegranate": {
+        "season": "Best planted during monsoon or spring",
+        "water_requirement": "Low to moderate water requirement",
+        "how_to_grow": [
+            "Grow in well-drained soil.",
+            "Avoid waterlogging.",
+            "Prune regularly for better flowering and fruiting."
+        ],
+        "common_diseases": [
+            "Bacterial blight",
+            "Fruit rot",
+            "Wilt"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Potash",
+            "Micronutrients"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Neem cake",
+            "Biofertilizers"
+        ],
+        "purchase_links": [
+            {
+                "name": "Pomegranate Plant",
+                "url": "https://www.amazon.in/s?k=pomegranate+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Pomegranate",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+pomegranate"
+            },
+            {
+                "name": "Chemical Fertilizer for Pomegranate",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+pomegranate"
+            }
+        ]
+    },
+    "lentil": {
+        "season": "Rabi season",
+        "water_requirement": "Low water requirement",
+        "how_to_grow": [
+            "Use well-drained loamy soil.",
+            "Avoid excess irrigation.",
+            "Use seed treatment before sowing."
+        ],
+        "common_diseases": [
+            "Rust",
+            "Wilt",
+            "Root rot"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash if needed"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Lentil Seeds",
+                "url": "https://www.amazon.in/s?k=lentil+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Lentil",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+lentil"
+            },
+            {
+                "name": "Chemical Fertilizer for Lentil",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+lentil"
+            }
+        ]
+    },
+    "blackgram": {
+        "season": "Kharif or summer season",
+        "water_requirement": "Low to moderate water requirement",
+        "how_to_grow": [
+            "Use well-drained soil.",
+            "Treat seeds before sowing.",
+            "Avoid waterlogging."
+        ],
+        "common_diseases": [
+            "Yellow mosaic virus",
+            "Powdery mildew",
+            "Root rot"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash if required"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Neem cake"
+        ],
+        "purchase_links": [
+            {
+                "name": "Blackgram Seeds",
+                "url": "https://www.amazon.in/s?k=blackgram+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Blackgram",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+blackgram"
+            },
+            {
+                "name": "Chemical Fertilizer for Blackgram",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+blackgram"
+            }
+        ]
+    },
+    "mungbean": {
+        "season": "Kharif, Rabi, or summer season",
+        "water_requirement": "Low to moderate water requirement",
+        "how_to_grow": [
+            "Grow in well-drained sandy loam soil.",
+            "Use treated seeds.",
+            "Avoid excess moisture during flowering."
+        ],
+        "common_diseases": [
+            "Yellow mosaic virus",
+            "Powdery mildew",
+            "Cercospora leaf spot"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash if required"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Mungbean Seeds",
+                "url": "https://www.amazon.in/s?k=mungbean+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Mungbean",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mungbean"
+            },
+            {
+                "name": "Chemical Fertilizer for Mungbean",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mungbean"
+            }
+        ]
+    },
+    "mothbeans": {
+        "season": "Kharif season, suitable for dry regions",
+        "water_requirement": "Low water requirement",
+        "how_to_grow": [
+            "Grow in dry and sandy soil.",
+            "Avoid waterlogging.",
+            "Use drought-tolerant varieties."
+        ],
+        "common_diseases": [
+            "Yellow mosaic virus",
+            "Root rot",
+            "Powdery mildew"
+        ],
+        "chemical_fertilizers": [
+            "SSP",
+            "DAP in small quantity"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Mothbean Seeds",
+                "url": "https://www.amazon.in/s?k=mothbean+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Mothbeans",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mothbeans"
+            },
+            {
+                "name": "Chemical Fertilizer for Mothbeans",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mothbeans"
+            }
+        ]
+    },
+    "pigeonpeas": {
+        "season": "Kharif season",
+        "water_requirement": "Low to moderate water requirement",
+        "how_to_grow": [
+            "Use well-drained soil.",
+            "Maintain proper spacing for branching.",
+            "Avoid waterlogging."
+        ],
+        "common_diseases": [
+            "Wilt",
+            "Sterility mosaic disease",
+            "Phytophthora blight"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash if required"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Pigeonpea Seeds",
+                "url": "https://www.amazon.in/s?k=pigeonpea+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Pigeonpeas",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+pigeonpeas"
+            },
+            {
+                "name": "Chemical Fertilizer for Pigeonpeas",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+pigeonpeas"
+            }
+        ]
+    },
+    "kidneybeans": {
+        "season": "Rabi season or cool climate season",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow in well-drained loamy soil.",
+            "Avoid waterlogging.",
+            "Provide irrigation during flowering and pod formation."
+        ],
+        "common_diseases": [
+            "Anthracnose",
+            "Rust",
+            "Root rot"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Kidneybean Seeds",
+                "url": "https://www.amazon.in/s?k=kidneybean+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Kidneybeans",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+kidneybeans"
+            },
+            {
+                "name": "Chemical Fertilizer for Kidneybeans",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+kidneybeans"
+            }
+        ]
+    },
+    "chickpea": {
+        "season": "Rabi season",
+        "water_requirement": "Low water requirement",
+        "how_to_grow": [
+            "Grow in well-drained soil.",
+            "Avoid excess irrigation.",
+            "Treat seeds before sowing."
+        ],
+        "common_diseases": [
+            "Fusarium wilt",
+            "Ascochyta blight",
+            "Root rot"
+        ],
+        "chemical_fertilizers": [
+            "DAP",
+            "SSP",
+            "Potash if required"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer",
+            "Compost",
+            "Farmyard manure"
+        ],
+        "purchase_links": [
+            {
+                "name": "Chickpea Seeds",
+                "url": "https://www.amazon.in/s?k=chickpea+seeds"
+            },
+            {
+                "name": "Organic Fertilizer for Chickpea",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+chickpea"
+            },
+            {
+                "name": "Chemical Fertilizer for Chickpea",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+chickpea"
+            }
+        ]
+    },
+    "coffee": {
+        "season": "Best planted during monsoon",
+        "water_requirement": "Moderate water requirement",
+        "how_to_grow": [
+            "Grow under partial shade.",
+            "Use well-drained acidic soil.",
+            "Maintain regular pruning and shade management."
+        ],
+        "common_diseases": [
+            "Coffee leaf rust",
+            "Berry disease",
+            "Root disease"
+        ],
+        "chemical_fertilizers": [
+            "NPK fertilizer",
+            "Magnesium sulphate",
+            "Micronutrients"
+        ],
+        "organic_suggestions": [
+            "Compost",
+            "Farmyard manure",
+            "Coffee pulp compost",
+            "Neem cake"
+        ],
+        "purchase_links": [
+            {
+                "name": "Coffee Plant",
+                "url": "https://www.amazon.in/s?k=coffee+plant"
+            },
+            {
+                "name": "Organic Fertilizer for Coffee",
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coffee"
+            },
+            {
+                "name": "Chemical Fertilizer for Coffee",
+                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+coffee"
+            }
+        ]
+    }
+}

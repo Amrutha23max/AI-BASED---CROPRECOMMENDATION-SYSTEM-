@@ -7,8 +7,8 @@
 const BACKEND_URL = "https://crop-backend-lwhy.onrender.com";
 // 1. PAGE CONFIGURATION
 let analysisDone = false;
-const pageSequence = ["home", "phone", "otp", "location","choice", "upload", "manual","analyzing", "results","suggestions","contact"];
-let currentPageIndex = 0;
+const pageSequence = ["home", "phone", "otp", "location", "choice", "upload", "manual", "analyzing", "results", "guidance", "suggestions", "contact"];
+
 
 const translations = {
   en: {
@@ -356,21 +356,7 @@ function showToast(message, type = 'success') {
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
-const dummyResults = {
-  soilType: "Black Cotton Soil",
-  soilColor: "#3d2b1f",
-  ph: 7.8,
-  nitrogen: 42,
-  phosphorus: 28,
-  potassium: 65,
-  temperature: "28°C",
-  humidity: "72%",
-  rainfall: "850 mm/yr",
-  crop: "Cotton",
-  cropEmoji: "🌿",
-  confidence: 87,
-  explanation: "Black cotton soil has high clay content and excellent water retention. Its slightly alkaline pH (7.8) and moderate nitrogen levels are ideal for cotton cultivation.",
-};
+
 
 // ---- STATE ----
 let currentLang = "en";
@@ -1001,6 +987,62 @@ function showResults() {
   drawNPKChart(d.nitrogen, d.phosphorus, d.potassium);
   goTo("results");
   analysisDone = true;
+}
+function fillList(id, items) {
+  const el = document.getElementById(id);
+  el.innerHTML = "";
+
+  if (!items || items.length === 0) {
+    el.innerHTML = "<li>No data available</li>";
+    return;
+  }
+
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    el.appendChild(li);
+  });
+}
+
+function showCropGuidance() {
+  if (!latestMLResult || !latestMLResult.crop_guidance) {
+    alert("Guidance data not available.");
+    return;
+  }
+
+  const selected = latestMLResult.crop_guidance[0];
+  const guide = selected.guidance || {};
+
+  document.getElementById("guideCropName").textContent =
+    `${selected.crop} (${selected.confidence}%)`;
+
+  document.getElementById("guideSeason").textContent =
+    guide.season || "Not available";
+
+  document.getElementById("guideWater").textContent =
+    guide.water_requirement || "Not available";
+
+  fillList("guideGrow", guide.how_to_grow);
+  fillList("guideDiseases", guide.common_diseases);
+  fillList("guideChemical", guide.chemical_fertilizers);
+  fillList("guideOrganic", guide.organic_suggestions);
+
+  const linksBox = document.getElementById("guideLinks");
+  linksBox.innerHTML = "";
+
+  if (guide.purchase_links && guide.purchase_links.length > 0) {
+    guide.purchase_links.forEach(link => {
+      const a = document.createElement("a");
+      a.href = link.url;
+      a.target = "_blank";
+      a.textContent = `🛒 ${link.name}`;
+      linksBox.appendChild(a);
+    });
+  } else {
+    linksBox.textContent = "No purchase links available.";
+  }
+
+  goTo("guidance");
 }
 
 function openSugModal() {

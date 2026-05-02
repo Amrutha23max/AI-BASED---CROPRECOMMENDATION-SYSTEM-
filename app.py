@@ -58,6 +58,11 @@ try:
         soil_map = json.load(f)
 except FileNotFoundError:
     soil_map = {}
+try:
+    with open("crop_guides.json", "r", encoding="utf-8") as f:
+        crop_guides = json.load(f)
+except FileNotFoundError:
+    crop_guides = {}
 
 def get_top_3(proba):
     top_idx = np.argsort(proba)[::-1][:3]
@@ -126,6 +131,20 @@ def init_db():
         cur.close()
     finally:
         conn.close()
+def get_crop_guidance(top3):
+    guidance_list = []
+
+    for item in top3:
+        crop = item["crop"]
+        guide = crop_guides.get(crop, {})
+
+        guidance_list.append({
+            "crop": crop,
+            "confidence": item["confidence"],
+            "guidance": guide
+        })
+
+    return guidance_list
 
 #init_db()
 
@@ -243,11 +262,13 @@ def predict():
             input_array,
             top3[0]["crop"]
         )
+        crop_guidance = get_crop_guidance(top3)
 
         return jsonify({
             "best_crop": top3[0],
             "top_3_crops": top3,
-            "explanation": explanation
+            "explanation": explanation,
+            "crop_guidance": crop_guidance,
         })
 
     except Exception as e:
@@ -304,6 +325,7 @@ def predict_image():
         proba = model.predict_proba(input_array)[0]
         top3 = get_top_3(proba)
         explanation = get_shap_explanation(input_array, top3[0]["crop"])
+        crop_guidance = get_crop_guidance(top3)
 
         return jsonify({
             "soil_type": soil_type,
@@ -318,7 +340,8 @@ def predict_image():
             },
             "best_crop": top3[0],
             "top_3_crops": top3,
-            "explanation": explanation
+            "explanation": explanation,
+            "crop_guidance": crop_guidance,
         })
 
 

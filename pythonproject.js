@@ -7,8 +7,13 @@
 const BACKEND_URL = "https://crop-backend-lwhy.onrender.com";
 // 1. PAGE CONFIGURATION
 let analysisDone = false;
-const pageSequence = ["home", "phone", "otp", "location", "choice", "upload", "manual", "analyzing", "results", "guidance", "suggestions", "contact"];
+const pageSequence = [
+  "home", "phone", "otp", "location", "choice",
+  "upload", "manual", "analyzing", "results",
+  "history", "suggestions", "contact"
+];
 
+let currentPageIndex = 0;
 
 const translations = {
   en: {
@@ -97,6 +102,7 @@ const translations = {
     sideHome: "🏠 Home",
     sideFeatures: "✨ Features",
     sideSuggestions: "💡 Suggestions",
+    sideHistory: "📜 History",
     sideAbout: "📖 About",
     sideContact: "📞 Contact",
     yourOtp: "YOUR OTP",
@@ -209,6 +215,7 @@ const translations = {
     sideHome: "🏠 హోమ్",
     sideFeatures: "✨ విశేషాలు",
     sideSuggestions: "💡 సూచనలు",
+    sideHistory: "📜 చరిత్ర",
     sideAbout: "📖 గురించి",
     sideContact: "📞 సంప్రదించండి",
     yourOtp: "మీ OTP",
@@ -321,6 +328,7 @@ const translations = {
     sideHome: "🏠 होम",
     sideFeatures: "✨ विशेषताएं",
     sideSuggestions: "💡 सुझाव",
+    sideHistory: "📜 इतिहास",
     sideAbout: "📖 के बारे में",
     sideContact: "📞 संपर्क",
     yourOtp: "आपका OTP",
@@ -356,7 +364,21 @@ function showToast(message, type = 'success') {
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
-
+const dummyResults = {
+  soilType: "Black Cotton Soil",
+  soilColor: "#3d2b1f",
+  ph: 7.8,
+  nitrogen: 42,
+  phosphorus: 28,
+  potassium: 65,
+  temperature: "28°C",
+  humidity: "72%",
+  rainfall: "850 mm/yr",
+  crop: "Cotton",
+  cropEmoji: "🌿",
+  confidence: 87,
+  explanation: "Black cotton soil has high clay content and excellent water retention. Its slightly alkaline pH (7.8) and moderate nitrogen levels are ideal for cotton cultivation.",
+};
 
 // ---- STATE ----
 let currentLang = "en";
@@ -516,6 +538,9 @@ function goTo(page, pushToHistory = true) {
     const fab = document.querySelector('.sug-fab');
     if (fab) fab.classList.remove('visible');
   }
+  if (page === "history") {
+    renderHistory();
+  }
   if (page === "home") {
     clearTimeout(slideTimer); // Stop old timer before starting new one
     slideIndex = 0;
@@ -558,12 +583,7 @@ function clearAllData() {
     document.getElementById('xaiText').innerText = '—';
     document.getElementById('confPct').innerText = '0%';
      document.getElementById('confFill').style.width = '0%';
-    
-    const imgPreview = document.getElementById('imgPreview');
-    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-    if(imgPreview) imgPreview.style.display = 'none';
-    if(uploadPlaceholder) uploadPlaceholder.style.display = 'block';
-
+   
     // 4. Resets Analysis Progress Bar
     const progressFill = document.getElementById('progressFill');
     if(progressFill) progressFill.style.width = '0%';
@@ -740,7 +760,7 @@ function previewImage(event) {
   };
   reader.readAsDataURL(file);
 }
-
+let latestPredictionData = null;
 async function fetchAndFillWeather() {
   if (!window.detectedLat || !window.detectedLon) return;
 
@@ -750,7 +770,7 @@ async function fetchAndFillWeather() {
   try {
     const res = await fetch(url);
     const data = await res.json();
-
+    
     if (data.cod === 401 || data.cod === "401" || data.cod === 429) {
       showToast("⚠️ Weather service not ready. Please enter manually.", "error");
       return;
@@ -863,6 +883,15 @@ function handleContinue() {
       goTo('choice'); // even if geocoding fails, still continue
     });
 }
+
+function setProgress(pct) {
+  const fill = document.getElementById("progressFill");
+  const label = document.getElementById("progressLabel");
+
+  if (fill) fill.style.width = pct + "%";
+  if (label) label.textContent = pct + "%";
+}
+
 // --- Specific Start for Manual Path ---
 function startManualAnalysis() {
   const inputs = document.querySelectorAll('#page-manual .input-field');
@@ -918,10 +947,96 @@ function startManualAnalysis() {
 
   // All good — proceed
   updateManualStep(4);
-  setTimeout(() => {
+
+submitManualPrediction({
+  N: Number(n),
+  P: Number(p),
+  K: Number(k),
+  ph: Number(ph),
+  temperature: Number(temp),
+  humidity: Number(humidity),
+  rainfall: Number(rainfall)
+});
+}
+async function submitManualPrediction(payload) {
+  try {
     goTo("analyzing");
-    animateProgress();
-  }, 400);
+    setProgress(35);
+
+    const response = await fetch(`${BACKEND_URL}/predict`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await parseJsonResponse(response);
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || "Prediction failed");
+    }
+
+    setProgress(100);
+    latestPredictionData = data;
+    displayPredictionResults(data, payload);
+  } catch (err) {
+    showToast(err.message || "Prediction failed. Try again.", "error");
+    goTo("manual");
+  }
+}
+
+async function startImageAnalysis() {
+  if (!selectedImageFile) {
+    showToast("Please upload a soil image first.", "error");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", selectedImageFile);
+  formData.append("temperature", 25);
+  formData.append("humidity", 80);
+  formData.append("rainfall", 200);
+
+  try {
+    goTo("analyzing");
+    setProgress(35);
+
+    const response = await fetch(`${BACKEND_URL}/predict-image`, {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await parseJsonResponse(response);
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || "Image prediction failed");
+    }
+
+    setProgress(100);
+    latestPredictionData = data;
+    displayPredictionResults(data, data.estimated_values || {});
+  } catch (err) {
+    showToast(err.message || "Image analysis failed. Try another image.", "error");
+    goTo("upload");
+  }
+}
+
+async function parseJsonResponse(response) {
+  const contentType = response.headers.get("content-type") || "";
+  const text = await response.text();
+
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      `Server returned ${response.status || "a non-JSON response"}. Check that the backend has /predict-image deployed.`
+    );
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error("Server response was not valid JSON.");
+  }
 }
 
 
@@ -975,75 +1090,51 @@ function drawNPKChart(n, p, k) {
     ctx.fillText(bar.value, canvas.width - 48, y + 13);
   });
 }
-function showResults() {
-  const d = dummyResults;
-  document.getElementById("soilColorBox").style.background = d.soilColor;
-  document.getElementById("soilTypeVal").textContent = d.soilType;
-  document.getElementById("confFill").style.width    = d.confidence + "%";
-  document.getElementById("confPct").textContent     = d.confidence + "%";
-  document.getElementById("cropEmoji").textContent   = d.cropEmoji;
-  document.getElementById("cropName").textContent    = d.crop;
-  document.getElementById("xaiText").textContent     = d.explanation;
-  drawNPKChart(d.nitrogen, d.phosphorus, d.potassium);
+function displayPredictionResults(data, inputValues = {}) {
+  const bestCrop = data.best_crop || {};
+  const estimated = data.estimated_values || inputValues;
+
+  document.getElementById("soilColorBox").style.background = "#6b4f3f";
+  document.getElementById("soilTypeVal").textContent = data.soil_type || "Manual soil data";
+
+  const confidence = Math.round(bestCrop.confidence || bestCrop.probability || 0);
+  document.getElementById("confFill").style.width = confidence + "%";
+  document.getElementById("confPct").textContent = confidence + "%";
+
+  document.getElementById("cropEmoji").textContent = "🌿";
+  document.getElementById("cropName").textContent = bestCrop.name || bestCrop.crop || "Unknown";
+
+  const explanation = Array.isArray(data.explanation)
+    ? data.explanation.join(" ")
+    : data.explanation || "No explanation available.";
+
+  document.getElementById("xaiText").textContent = explanation;
+
+  drawNPKChart(
+    Number(estimated.N || estimated.nitrogen || 0),
+    Number(estimated.P || estimated.phosphorus || 0),
+    Number(estimated.K || estimated.potassium || 0)
+  );
+
+  renderAdvancedResults(data);
+  saveAnalysisToHistory(data);
+
   goTo("results");
   analysisDone = true;
 }
-function fillList(id, items) {
-  const el = document.getElementById(id);
-  el.innerHTML = "";
 
-  if (!items || items.length === 0) {
-    el.innerHTML = "<li>No data available</li>";
-    return;
-  }
-
-  items.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    el.appendChild(li);
+function showResults() {
+  displayPredictionResults(latestPredictionData || {
+    best_crop: { name: dummyResults.crop, confidence: dummyResults.confidence },
+    explanation: [dummyResults.explanation],
+    top_3_crops: []
+  }, {
+    N: dummyResults.nitrogen,
+    P: dummyResults.phosphorus,
+    K: dummyResults.potassium
   });
 }
 
-function showCropGuidance() {
-  if (!latestMLResult || !latestMLResult.crop_guidance) {
-    alert("Guidance data not available.");
-    return;
-  }
-
-  const selected = latestMLResult.crop_guidance[0];
-  const guide = selected.guidance || {};
-
-  document.getElementById("guideCropName").textContent =
-    `${selected.crop} (${selected.confidence}%)`;
-
-  document.getElementById("guideSeason").textContent =
-    guide.season || "Not available";
-
-  document.getElementById("guideWater").textContent =
-    guide.water_requirement || "Not available";
-
-  fillList("guideGrow", guide.how_to_grow);
-  fillList("guideDiseases", guide.common_diseases);
-  fillList("guideChemical", guide.chemical_fertilizers);
-  fillList("guideOrganic", guide.organic_suggestions);
-
-  const linksBox = document.getElementById("guideLinks");
-  linksBox.innerHTML = "";
-
-  if (guide.purchase_links && guide.purchase_links.length > 0) {
-    guide.purchase_links.forEach(link => {
-      const a = document.createElement("a");
-      a.href = link.url;
-      a.target = "_blank";
-      a.textContent = `🛒 ${link.name}`;
-      linksBox.appendChild(a);
-    });
-  } else {
-    linksBox.textContent = "No purchase links available.";
-  }
-
-  goTo("guidance");
-}
 
 function openSugModal() {
   document.getElementById('sugModal').classList.add('open');
@@ -1138,7 +1229,9 @@ document.addEventListener("DOMContentLoaded", () => {
   goTo(initialPage, false);
   
   // 5. Start the normal app functions
-  changeLang("en");
+  const initialLang = getActiveLanguage();
+  changeLang(translations[initialLang] ? initialLang : "en");
+  syncLanguageDropdown();
   showSlides();
   setTimeout(() => {
     document.getElementById('splash').classList.add('hidden');
@@ -1361,4 +1454,370 @@ function toggleTTS() {
   }
   if (!ttsEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
   showToast(ttsEnabled ? t.ttsOn : t.ttsOff, "info");
+}
+
+function renderAdvancedResults(data) {
+  renderTopCrops(data.top_3_crops || []);
+  renderFarmerExplanation(data.explanation || []);
+  renderCropGuide(data.crop_guide || {});
+  renderFertilizers(data.fertilizer_suggestions || []);
+  renderPurchaseLinks(data.best_crop);
+}
+
+function renderTopCrops(crops) {
+  const container = document.getElementById("topCropsContainer");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  crops.forEach((crop, index) => {
+    container.innerHTML += `
+      <div class="crop-card">
+        <div class="crop-rank">Rank #${index + 1}</div>
+        <div class="crop-name">${crop.name || crop.crop}</div>
+        <div class="crop-score">Confidence: ${crop.confidence}%</div>
+      </div>
+    `;
+  });
+}
+
+function renderFarmerExplanation(explanations) {
+  const container = document.getElementById("farmerExplanation");
+
+  if (!container) return;
+
+  if (!explanations.length) {
+    container.innerHTML = "No explanation available.";
+    return;
+  }
+
+  container.innerHTML = explanations
+    .map(item => `<p>✅ ${item}</p>`)
+    .join("");
+}
+
+function renderCropGuide(guide) {
+  document.getElementById("guideGrow").textContent = guide.how_to_grow || "N/A";
+
+  document.getElementById("guideWater").textContent = guide.water_requirement || "N/A";
+
+  document.getElementById("guideSeason").textContent = guide.season || "N/A";
+
+  document.getElementById("guideSoil").textContent = guide.soil_care || "N/A";
+
+  document.getElementById("guidePest").textContent = guide.pest_care || "N/A";
+}
+
+function renderFertilizers(fertilizers) {
+  const container = document.getElementById("fertilizerContainer");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  fertilizers.forEach(fert => {
+    container.innerHTML += `
+      <div class="fertilizer-card">
+        <h4>${fert.name}</h4>
+        <p>${fert.reason}</p>
+      </div>
+    `;
+  });
+}
+
+function renderPurchaseLinks(bestCrop) {
+  const container = document.getElementById("purchaseLinks");
+
+  if (!container || !bestCrop) return;
+
+  const cropName = bestCrop.name || bestCrop.crop || "crop";
+
+  const links = [
+    {
+      title: `${cropName} Seeds`,
+      url: `https://www.amazon.in/s?k=${cropName}+seeds`
+    },
+    {
+      title: `Fertilizers for ${cropName}`,
+      url: `https://www.amazon.in/s?k=${cropName}+fertilizer`
+    },
+    {
+      title: `${cropName} Farming Tools`,
+      url: `https://www.amazon.in/s?k=${cropName}+farming+tools`
+    }
+  ];
+
+  container.innerHTML = links.map(link => `
+    <div class="purchase-card">
+      <a href="${link.url}" target="_blank">
+        ${link.title}
+      </a>
+    </div>
+  `).join("");
+}
+
+let selectedRating = 0;
+
+function setRating(rating) {
+  selectedRating = rating;
+}
+
+async function submitFeedback(useful) {
+  const comment = document.getElementById("feedbackComment").value;
+
+  const payload = {
+    rating: selectedRating,
+    useful,
+    comment,
+    crop: latestPredictionData?.best_crop?.name || latestPredictionData?.best_crop?.crop || "Unknown"
+  };
+
+  try {
+    await fetch(`${BACKEND_URL}/submit-feedback`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    alert("Feedback submitted successfully!");
+  }
+  catch(err) {
+    console.error(err);
+    alert("Failed to submit feedback");
+  }
+}
+
+function saveAnalysisToHistory(data) {
+  const history = JSON.parse(localStorage.getItem("cropHistory") || "[]");
+
+  history.unshift({
+    crop: data.best_crop?.name || "Unknown",
+    confidence: data.best_crop?.confidence || 0,
+    date: new Date().toLocaleString(),
+    data
+  });
+
+  localStorage.setItem("cropHistory", JSON.stringify(history.slice(0, 20)));
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("cropHistory") || "[]");
+
+  const container = document.getElementById("historyContainer");
+
+  if (!container) return;
+
+  if (!history.length) {
+    container.innerHTML = "<p>No history found.</p>";
+    return;
+  }
+
+  container.innerHTML = history.map(item => `
+    <div class="crop-card">
+      <h3>${item.crop}</h3>
+      <p>Confidence: ${item.confidence}%</p>
+      <p>${item.date}</p>
+    </div>
+  `).join("");
+}
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("soilImage");
+const previewContainer = document.getElementById("previewContainer");
+
+let selectedImageFile = null;
+const uploadBtn = document.querySelector(".upload-btn");
+
+uploadBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  fileInput.click();
+});
+fileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+
+  if (file) {
+    handleImageFile(file);
+  }
+});
+["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+
+  dropZone.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
+});
+
+["dragenter", "dragover"].forEach(eventName => {
+
+  dropZone.addEventListener(eventName, () => {
+    dropZone.classList.add("dragover");
+  });
+
+});
+
+["dragleave", "drop"].forEach(eventName => {
+
+  dropZone.addEventListener(eventName, () => {
+    dropZone.classList.remove("dragover");
+  });
+
+});
+dropZone.addEventListener("drop", (e) => {
+
+  const files = e.dataTransfer.files;
+
+  if (files.length > 0) {
+    handleImageFile(files[0]);
+  }
+
+});
+function handleImageFile(file) {
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please upload an image file.");
+    return;
+  }
+
+  const maxSizeMB = 5;
+
+  if (file.size > maxSizeMB * 1024 * 1024) {
+    alert("Image size must be below 5MB.");
+    return;
+  }
+
+  selectedImageFile = file;
+
+  updateUploadState(file);
+  showImagePreview(file);
+}
+
+function updateUploadState(file) {
+  if (uploadBtn) {
+    uploadBtn.textContent = "Image Selected";
+    uploadBtn.disabled = true;
+    uploadBtn.classList.add("disabled");
+  }
+
+  if (dropZone) {
+    dropZone.classList.add("has-file");
+    const title = dropZone.querySelector("h3");
+    const help = dropZone.querySelector("p");
+    if (title) title.textContent = file.name;
+    if (help) help.textContent = "Ready to analyze";
+  }
+
+  const analyzeBtn = document.getElementById("imageAnalyzeBtn");
+  if (analyzeBtn) analyzeBtn.disabled = false;
+}
+
+function translatePage(lang) {
+  if (!lang) return;
+
+  localStorage.setItem("agrixaiLanguage", lang);
+
+  const previousGoogleLang = getGoogleCookieLanguage();
+  const target = lang === "en" ? "/en/en" : `/en/${lang}`;
+  setGoogleTranslateCookie(target);
+
+  setLanguageDropdownValue(lang);
+
+  if (!translations[lang] || (previousGoogleLang && previousGoogleLang !== lang && !translations[previousGoogleLang])) {
+    location.reload();
+    return;
+  }
+
+  const applyTranslation = () => {
+    const googleSelect = document.querySelector(".goog-te-combo");
+    if (!googleSelect) {
+      if (translations[lang]) changeLang(lang);
+      return false;
+    }
+
+    googleSelect.value = lang;
+    googleSelect.dispatchEvent(new Event("change", { bubbles: true }));
+    if (translations[lang]) {
+      setTimeout(() => changeLang(lang), 150);
+      setTimeout(() => changeLang(lang), 600);
+    }
+    setTimeout(() => setLanguageDropdownValue(lang), 150);
+    setTimeout(() => setLanguageDropdownValue(lang), 600);
+    return true;
+  };
+
+  if (applyTranslation()) return;
+
+  let tries = 0;
+  const timer = setInterval(() => {
+    tries += 1;
+    if (applyTranslation() || tries > 20) {
+      clearInterval(timer);
+    }
+  }, 250);
+}
+
+function setGoogleTranslateCookie(value) {
+  document.cookie = `googtrans=${value}; path=/; SameSite=Lax`;
+  document.cookie = `googtrans=${value}; path=/; domain=${location.hostname}; SameSite=Lax`;
+
+  if (location.hostname.includes(".")) {
+    const rootDomain = "." + location.hostname.split(".").slice(-2).join(".");
+    document.cookie = `googtrans=${value}; path=/; domain=${rootDomain}; SameSite=Lax`;
+  }
+}
+
+function getActiveLanguage() {
+  return getGoogleCookieLanguage()
+    || localStorage.getItem("agrixaiLanguage")
+    || "en";
+}
+
+function getGoogleCookieLanguage() {
+  const cookie = document.cookie
+    .split(";")
+    .map(part => part.trim())
+    .find(part => part.startsWith("googtrans="));
+
+  if (!cookie) return "";
+
+  const value = decodeURIComponent(cookie.split("=")[1] || "");
+  const parts = value.split("/").filter(Boolean);
+  return parts[parts.length - 1] || "";
+}
+
+function setLanguageDropdownValue(lang) {
+  const select = document.getElementById("customLangSelect");
+  if (!select || !lang) return;
+
+  const hasOption = Array.from(select.options).some(option => option.value === lang);
+  if (hasOption) select.value = lang;
+}
+
+function syncLanguageDropdown() {
+  setLanguageDropdownValue(getActiveLanguage());
+}
+function showImagePreview(file) {
+
+  previewContainer.innerHTML = "";
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+
+    previewContainer.innerHTML = `
+      <img
+        src="${e.target.result}"
+        class="preview-image"
+        alt="Soil Preview"
+      />
+
+      <div class="file-name">
+        ${file.name}
+      </div>
+    `;
+  };
+
+  reader.readAsDataURL(file);
 }

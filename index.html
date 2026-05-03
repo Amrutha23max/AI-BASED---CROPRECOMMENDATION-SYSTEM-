@@ -42,11 +42,32 @@
     <a href="javascript:void(0)" onclick="navTo('about')">About</a>
     <a href="javascript:void(0)" onclick="navTo('footer')">Contact</a>
   </div> -->
-    <select id="langSelect" onchange="changeLang(this.value)">
-      <option value="en">🇬🇧 English</option>
-      <option value="te">🇮🇳 తెలుగు</option>
-      <option value="hi">🇮🇳 हिन्दी</option>
+    <!-- <select id="langSelect" onchange="changeLang(this.value)">
+      <option value="en">English</option>
+      <option value="te">Telugu</option>
+      <option value="hi">Hindi</option>
+      <option value="ta">Tamil</option>
+      <option value="kn">Kannada</option>
+      <option value="mr">Marathi</option>
+    </select> -->
+
+    <select id="customLangSelect" class="language-select" onchange="translatePage(this.value)">
+      <option value="">Language</option>
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="te">Telugu</option>
+      <option value="ta">Tamil</option>
+      <option value="kn">Kannada</option>
+      <option value="mr">Marathi</option>
+      <option value="ml">Malayalam</option>
+      <option value="bn">Bengali</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa">Punjabi</option>
+      <option value="ur">Urdu</option>
     </select>
+    <div id="google_translate_element" aria-hidden="true"></div>
+
+
   </nav>
   <div id="sidebar" class="sidebar">
   <div class="sidebar-header">
@@ -57,6 +78,7 @@
   <li><a href="javascript:void(0)" onclick="navTo('home')" data-key="sideHome">🏠 Home</a></li>
   <li><a href="javascript:void(0)" onclick="navTo('features')" data-key="sideFeatures">✨ Features</a></li>
   <li><a href="javascript:void(0)" onclick="navTo('suggestions')" data-key="sideSuggestions">💡 Suggestions</a></li>
+  <li><a href="javascript:void(0)" onclick="navTo('history')" data-key="sideHistory">📜 History</a></li>
   <li><a href="javascript:void(0)" onclick="navTo('about')" data-key="sideAbout">📖 About</a></li>
   <li><a href="javascript:void(0)" onclick="navTo('contact')" data-key="sideContact">📞 Contact</a></li>
 </ul>
@@ -76,7 +98,7 @@
     <div class="slideshow">
       <div class="slide"><img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200" alt="Farmer in field"></div>
       <div class="slide"><img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1200" alt="Soil close-up"></div>
-      <div class="slide"><img src="images/pic5.jpeg" alt="Green crops"></div>
+      <div class="slide"><img src="https://plus.unsplash.com/premium_photo-1663045395165-f370251c9e80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Green crops"></div>
       <div class="slide"><img src="https://images.unsplash.com/photo-1715244416160-85885f8fc032?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Harvest"></div>
       <div class="slide"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200" alt="Rice field"></div>
       <div class="slide"><img src="https://images.unsplash.com/photo-1600150806237-a7dffed6b53c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGluZGlhbiUyMGFncmljdWx0dXJlfGVufDB8fDB8fHww" alt="Indian farmer"></div>
@@ -283,19 +305,29 @@
     </div>
     
     <!-- Right Side: The Webpage Content -->
-    <div class="upload-side">
-      <h2 class="section-title" data-key="uploadPageTitle">Upload Image</h2>
-      <label class="upload-zone" for="soilImg" onclick="updateStep(2)">
-        <div id="uploadPlaceholder">
-          <div style="font-size:3rem;">📁</div>
-          <div class="upload-label" data-key="chooseImgBtn">Choose Image</div>
-        </div>
-        <img id="imgPreview" src="" style="display:none;" />
-      </label>
-      <input type="file" id="soilImg" accept="image/*" onchange="previewImage(event)" hidden />
-      <button class="btn-primary" id="analyzeBtn" onclick="startAnalysis()" data-key="analyzeSoilBtn" style="margin-top:20px; opacity:0.5; pointer-events:none;">🔬 Analyze Soil</button>
+    <div class="upload-wrapper">
+
+  <div id="dropZone" class="drop-zone">
+    <div class="upload-content">
+      <div class="upload-icon">📸</div>
+      <h3>Drag & Drop Soil Image</h3>
+      <p>or click below to choose image</p>
+      <button type="button" class="upload-btn">
+        Choose Image
+      </button>
+      <input
+        type="file"
+        id="soilImage"
+        accept="image/*"
+        hidden
+      />
     </div>
   </div>
+  <div id="previewContainer" class="preview-container"></div>
+  <button id="imageAnalyzeBtn" class="btn-primary" onclick="startImageAnalysis()" style="margin-top:20px;">
+  Analyze Soil
+</button>
+</div>
 </section>
 
 <!-- ===== PAGE: MANUAL  ===== -->
@@ -395,16 +427,93 @@
       <div class="crop-emoji" id="cropEmoji">🌿</div>
       <div class="crop-name" id="cropName">—</div>
     </div>
-    <button class="btn-primary" onclick="showCropGuidance()" style="margin-top:18px;">
-      🌾 View Full Crop Guidance
-    </button>
-
     
     <div class="card xai-card">
         <div class="xai-header">🔍 <span data-key="whyCrop">Why this crop?</span></div>
         <p class="xai-text" id="xaiText">—</p>
     </div>
+    <!-- TOP 3 CROPS -->
+    <div class="result-block">
+      <h3 class="result-heading">🌾 Top 3 Recommended Crops</h3>
+      <div id="topCropsContainer" class="top-crops-grid"></div>
+    </div>
 
+    <!-- FARMER FRIENDLY EXPLANATION -->
+    <div class="result-block">
+      <h3 class="result-heading">🧠 Why This Crop?</h3>
+      <div id="farmerExplanation" class="farmer-explanation"></div>
+    </div>
+    <!-- CROP GUIDE -->
+<div class="result-block">
+  <h3 class="result-heading">📘 Complete Crop Guide</h3>
+
+  <div class="guide-grid">
+    <div class="guide-card">
+      <h4>🌱 How to Grow</h4>
+      <p id="guideGrow"></p>
+    </div>
+
+    <div class="guide-card">
+      <h4>💧 Water Requirement</h4>
+      <p id="guideWater"></p>
+    </div>
+
+    <div class="guide-card">
+      <h4>☀️ Best Season</h4>
+      <p id="guideSeason"></p>
+    </div>
+    <div class="guide-card">
+      <h4>🌍 Soil Care</h4>
+      <p id="guideSoil"></p>
+    </div>
+
+    <div class="guide-card">
+      <h4>🐛 Pest Care</h4>
+      <p id="guidePest"></p>
+    </div>
+  </div>
+</div>
+
+<!-- FERTILIZER SUGGESTIONS -->
+<div class="result-block">
+  <h3 class="result-heading">🧪 Fertilizer Suggestions</h3>
+  <div id="fertilizerContainer" class="fertilizer-grid"></div>
+</div>
+
+<!-- PURCHASE LINKS -->
+<div class="result-block">
+  <h3 class="result-heading">🛒 Useful Purchase Links</h3>
+  <div id="purchaseLinks" class="purchase-grid"></div>
+</div>
+<!-- FEEDBACK SECTION -->
+<div class="result-block">
+  <h3 class="result-heading">⭐ Feedback</h3>
+
+  <div class="feedback-box">
+    <div class="rating-row">
+      <span onclick="setRating(1)">⭐</span>
+      <span onclick="setRating(2)">⭐</span>
+      <span onclick="setRating(3)">⭐</span>
+      <span onclick="setRating(4)">⭐</span>
+      <span onclick="setRating(5)">⭐</span>
+    </div>
+
+    <textarea
+      id="feedbackComment"
+      class="input-field"
+      placeholder="Tell us your feedback..."
+    ></textarea>
+
+    <div class="feedback-actions">
+      <button class="btn-secondary" onclick="submitFeedback(true)">
+        👍 Useful
+      </button>
+      <button class="btn-secondary" onclick="submitFeedback(false)">
+        👎 Not Useful
+      </button>
+    </div>
+  </div>
+</div>
     <button class="btn-secondary" onclick="startOver()" data-key="startOver">🔄 Start New Analysis</button>
   </section>
 
@@ -475,6 +584,11 @@
   <button class="btn-secondary" style="margin-top:10px" onclick="goTo('home')" data-key="backHome">Back to Home</button>
 </section>
 
+<section id="page-history" class="page container">
+  <h2 class="section-title">📜 Analysis History</h2>
+
+  <div id="historyContainer"></div>
+</section>
   <!-- ===== FOOTER ===== --> 
    <footer class="footer">
     <div class="footer-inner">
@@ -521,6 +635,25 @@
   </button>
 </div>
 <button class="sug-fab" onclick="openSugModal()" title="Add your suggestion">+</button>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages: "en,hi,te,ta,kn,mr,ml,bn,gu,pa,ur",
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      },
+      "google_translate_element"
+    );
+    if (typeof syncLanguageDropdown === "function") {
+      syncLanguageDropdown();
+      setTimeout(syncLanguageDropdown, 500);
+    }
+  }
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script src="pythonproject.js"></script>
 <div id="toast-container"></div>
 </body>

@@ -2,10 +2,19 @@
     "rice": {
         "season": "Kharif season, mainly June to November",
         "water_requirement": "High water requirement",
+        "ideal_soil": "Clayey or loamy soil with good water retention",
         "how_to_grow": [
             "Prepare a puddled field before transplanting.",
             "Use healthy seedlings around 20 to 30 days old.",
             "Maintain proper water level during vegetative growth."
+        ],
+        "soil_care": [
+            "Maintain standing water during early growth.",
+            "Ensure good leveling to avoid uneven irrigation."
+        ],
+        "pest_care": [
+            "Use neem oil spray for pests.",
+            "Monitor regularly for leaf infections."
         ],
         "common_diseases": [
             "Blast",
@@ -13,9 +22,9 @@
             "Sheath blight"
         ],
         "chemical_fertilizers": [
-            "Urea for nitrogen",
-            "DAP for phosphorus",
-            "MOP for potassium"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)"
         ],
         "organic_suggestions": [
             "Farmyard manure",
@@ -37,15 +46,23 @@
                 "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+rice"
             }
         ]
-        
     },
     "maize": {
         "season": "Kharif and Rabi seasons",
         "water_requirement": "Moderate water requirement",
+        "ideal_soil": "Well-drained fertile loamy soil",
         "how_to_grow": [
             "Use well-drained fertile soil.",
             "Maintain proper spacing between plants.",
             "Irrigate during flowering and grain formation."
+        ],
+        "soil_care": [
+            "Avoid waterlogging.",
+            "Maintain soil fertility with organic matter."
+        ],
+        "pest_care": [
+            "Use pheromone traps.",
+            "Apply neem-based pesticides."
         ],
         "common_diseases": [
             "Leaf blight",
@@ -53,9 +70,9 @@
             "Rust"
         ],
         "chemical_fertilizers": [
-            "Urea",
-            "DAP",
-            "MOP"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)"
         ],
         "organic_suggestions": [
             "Compost",
@@ -81,10 +98,19 @@
     "jute": {
         "season": "Warm and humid season, mainly March to May sowing",
         "water_requirement": "High moisture requirement",
+        "ideal_soil": "Alluvial or loamy soil",
         "how_to_grow": [
             "Grow in warm humid conditions.",
             "Use alluvial or loamy soil.",
             "Keep field moist during early growth."
+        ],
+        "soil_care": [
+            "Maintain moisture during early growth.",
+            "Avoid dry conditions."
+        ],
+        "pest_care": [
+            "Use organic sprays.",
+            "Remove infected plants early."
         ],
         "common_diseases": [
             "Stem rot",
@@ -92,9 +118,9 @@
             "Leaf mosaic"
         ],
         "chemical_fertilizers": [
-            "Urea",
-            "SSP",
-            "MOP"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)"
         ],
         "organic_suggestions": [
             "Farmyard manure",
@@ -105,45 +131,52 @@
             {
                 "name": "Jute Seeds",
                 "url": "https://www.amazon.in/s?k=jute+seeds"
-            },
-            {
-                "name": "Organic Fertilizer for Jute",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+jute"
-            },
-            {
-                "name": "Chemical Fertilizer for Jute",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+jute"
             }
         ]
     },
     "cotton": {
-        "season": "Kharif season",
-        "water_requirement": "Moderate water requirement",
+        "season": "Kharif season, sown from April to July",
+        "water_requirement": "Moderate to high water requirement",
+        "ideal_soil": "Deep black cotton soil (Vertisol) or well-drained loamy soil",
         "how_to_grow": [
-            "Use black cotton soil or well-drained loamy soil.",
-            "Avoid waterlogging.",
-            "Provide irrigation during flowering and boll formation."
+            "Sow seeds after last frost when soil temperature reaches 18°C or above.",
+            "Maintain row spacing of 60–90 cm and plant spacing of 30–45 cm.",
+            "Irrigate at critical stages: flowering, boll formation, and boll opening.",
+            "Apply topping (removal of terminal bud) to promote lateral branching."
+        ],
+        "soil_care": [
+            "Deep ploughing before sowing to break hardpan and improve aeration.",
+            "Maintain soil pH between 6.0 and 8.0.",
+            "Avoid waterlogging as cotton roots are susceptible to rot."
+        ],
+        "pest_care": [
+            "Monitor for bollworms, aphids, and whiteflies regularly.",
+            "Use yellow sticky traps to detect and control whiteflies.",
+            "Apply neem oil spray or Bt-based biopesticides for bollworm control.",
+            "Use pheromone traps for monitoring American bollworm."
         ],
         "common_diseases": [
-            "Bacterial blight",
-            "Wilt",
-            "Leaf curl virus"
+            "Cotton leaf curl virus (CLCuV)",
+            "Bacterial blight (Angular leaf spot)",
+            "Fusarium wilt",
+            "Alternaria leaf spot"
         ],
         "chemical_fertilizers": [
-            "Urea",
-            "DAP",
-            "Potash"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Zinc sulphate (micronutrient)"
         ],
         "organic_suggestions": [
-            "Farmyard manure",
+            "Farmyard manure (10 tonnes/hectare before sowing)",
             "Neem cake",
             "Vermicompost",
-            "Trichoderma"
+            "Trichoderma-based biofertilizer for soil health"
         ],
         "purchase_links": [
             {
-                "name": "Cotton Seeds",
-                "url": "https://www.amazon.in/s?k=cotton+seeds"
+                "name": "Cotton Seeds (Bt Cotton)",
+                "url": "https://www.amazon.in/s?k=cotton+seeds+bt"
             },
             {
                 "name": "Organic Fertilizer for Cotton",
@@ -156,33 +189,48 @@
         ]
     },
     "coconut": {
-        "season": "Can be planted during monsoon season",
-        "water_requirement": "High water requirement",
+        "season": "Year-round crop; best planted at the onset of monsoon (June to September)",
+        "water_requirement": "Moderate and regular water requirement; drought-sensitive",
+        "ideal_soil": "Sandy loam, laterite, or alluvial soil with good drainage; pH 5.5 to 8.0",
         "how_to_grow": [
-            "Plant in well-drained sandy loam or laterite soil.",
-            "Provide regular irrigation during dry months.",
-            "Use proper spacing between palms."
+            "Select disease-free, high-yielding seedlings (10–12 months old) from a reputed nursery.",
+            "Dig pits of 1m x 1m x 1m and fill with topsoil, sand, and compost.",
+            "Plant seedlings at 7.5m x 7.5m triangular spacing for maximum yield.",
+            "Provide regular irrigation, especially during the dry months.",
+            "Intercropping with banana, turmeric, or cocoa is beneficial."
+        ],
+        "soil_care": [
+            "Mulch the basin with dry leaves or coir pith to conserve moisture.",
+            "Weed regularly around the trunk, especially in early years.",
+            "Apply lime if soil is acidic (below pH 5.5)."
+        ],
+        "pest_care": [
+            "Monitor for rhinoceros beetle; use pheromone traps and Metarhizium biopesticide.",
+            "Check for red palm weevil; remove and destroy infested palms.",
+            "Apply neem oil to leaf axils to deter coconut mite."
         ],
         "common_diseases": [
-            "Bud rot",
-            "Leaf rot",
-            "Root wilt"
+            "Root wilt disease",
+            "Bud rot (Phytophthora palmivora)",
+            "Stem bleeding disease",
+            "Grey leaf spot (Pestalotiopsis)"
         ],
         "chemical_fertilizers": [
-            "Urea",
-            "Rock phosphate",
-            "MOP"
+            "Urea (Nitrogen source)",
+            "SSP or DAP (Phosphorus source)",
+            "MOP (Potassium source) — coconut is potassium-demanding",
+            "Borax (Boron micronutrient for preventing button shedding)"
         ],
         "organic_suggestions": [
-            "Coconut husk compost",
+            "Coir pith compost",
             "Farmyard manure",
-            "Neem cake",
-            "Vermicompost"
+            "Green manure crops like Crotalaria",
+            "Trichoderma viride for root zone protection"
         ],
         "purchase_links": [
             {
-                "name": "Coconut Plant",
-                "url": "https://www.amazon.in/s?k=coconut+plant"
+                "name": "Coconut Seedlings",
+                "url": "https://www.amazon.in/s?k=coconut+seedlings"
             },
             {
                 "name": "Organic Fertilizer for Coconut",
@@ -190,38 +238,53 @@
             },
             {
                 "name": "Chemical Fertilizer for Coconut",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+coconut"
+                "url": "https://www.amazon.in/s?k=mop+urea+fertilizer+for+coconut"
             }
         ]
     },
     "papaya": {
-        "season": "Can be grown throughout the year in warm climate",
-        "water_requirement": "Moderate water requirement",
+        "season": "Can be grown year-round; best planted February to March or June to October",
+        "water_requirement": "Moderate water requirement; does not tolerate waterlogging",
+        "ideal_soil": "Well-drained sandy loam or loamy soil; pH 6.0 to 6.5",
         "how_to_grow": [
-            "Use well-drained soil rich in organic matter.",
-            "Avoid waterlogging near roots.",
-            "Protect young plants from strong winds."
+            "Sow seeds in polybags and transplant 45–60-day-old seedlings.",
+            "Maintain spacing of 1.8m x 1.8m for dioecious varieties.",
+            "Irrigate frequently but avoid standing water to prevent root rot.",
+            "Stake plants in early stages to protect from wind.",
+            "Thin to one healthy plant per pit after sex determination."
+        ],
+        "soil_care": [
+            "Raise beds for planting in areas with heavy rainfall.",
+            "Mix farmyard manure into pits before planting.",
+            "Maintain soil moisture consistently; drip irrigation preferred."
+        ],
+        "pest_care": [
+            "Use yellow sticky traps for whiteflies and aphids.",
+            "Spray neem oil solution (5 ml/L) for mite and aphid control.",
+            "Uproot and destroy plants infected with papaya ringspot virus."
         ],
         "common_diseases": [
-            "Papaya ring spot virus",
+            "Papaya ringspot virus (PRSV)",
             "Powdery mildew",
-            "Root rot"
+            "Damping off (seedling stage)",
+            "Anthracnose (fruit rot)"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Urea",
-            "Potash"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Calcium nitrate spray for fruit quality"
         ],
         "organic_suggestions": [
-            "Compost",
-            "Farmyard manure",
+            "Compost (5 kg/pit at planting)",
             "Vermicompost",
-            "Neem oil spray"
+            "Neem cake (250 g/plant)",
+            "Azospirillum + Phosphobacteria biofertilizer drench"
         ],
         "purchase_links": [
             {
-                "name": "Papaya Seeds",
-                "url": "https://www.amazon.in/s?k=papaya+seeds"
+                "name": "Papaya Seeds (Red Lady / Taiwan)",
+                "url": "https://www.amazon.in/s?k=papaya+seeds+red+lady"
             },
             {
                 "name": "Organic Fertilizer for Papaya",
@@ -229,38 +292,53 @@
             },
             {
                 "name": "Chemical Fertilizer for Papaya",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+papaya"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+papaya"
             }
         ]
     },
     "orange": {
-        "season": "Best planted during monsoon or spring",
-        "water_requirement": "Moderate water requirement",
+        "season": "Planted during June to August (monsoon); harvest from November to February",
+        "water_requirement": "Moderate and well-regulated water requirement",
+        "ideal_soil": "Well-drained sandy loam or loamy soil; pH 6.0 to 7.5",
         "how_to_grow": [
-            "Grow in well-drained loamy soil.",
-            "Avoid water stagnation around roots.",
-            "Prune dry and diseased branches regularly."
+            "Use grafted or budded plants of certified varieties like Nagpur Mandarin.",
+            "Plant at spacing of 6m x 6m in pits of 60cm x 60cm x 60cm.",
+            "Irrigate at 10–15-day intervals in summer; reduce during fruit maturity.",
+            "Prune dead and crossing branches annually after harvest.",
+            "Apply deblossoming in the first two years to establish the tree."
+        ],
+        "soil_care": [
+            "Mulch the tree basin with dry leaves or straw to conserve moisture.",
+            "Apply lime if soil pH is below 6.0.",
+            "Avoid compaction; inter-till shallow to keep soil aerated."
+        ],
+        "pest_care": [
+            "Monitor for citrus psylla, leaf miner, and mealybug.",
+            "Use oil emulsion spray (1%) for scale insects.",
+            "Apply Chlorpyrifos or neem oil for leaf miner control."
         ],
         "common_diseases": [
-            "Citrus canker",
-            "Gummosis",
-            "Greening disease"
+            "Citrus canker (Xanthomonas axonopodis)",
+            "Phytophthora gummosis",
+            "Greening disease (Huanglongbing)",
+            "Sooty mould (secondary to insect infestation)"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Zinc sulphate",
-            "Magnesium sulphate"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Zinc sulphate and Manganese sulphate sprays"
         ],
         "organic_suggestions": [
-            "Farmyard manure",
-            "Compost",
+            "Farmyard manure (20 kg/tree/year)",
+            "Vermicompost",
             "Neem cake",
-            "Biofertilizers"
+            "Biofertilizers: Azospirillum + PSB"
         ],
         "purchase_links": [
             {
-                "name": "Orange Plant",
-                "url": "https://www.amazon.in/s?k=orange+plant"
+                "name": "Orange Plant (Nagpur Mandarin)",
+                "url": "https://www.amazon.in/s?k=orange+plant+nagpur+mandarin"
             },
             {
                 "name": "Organic Fertilizer for Orange",
@@ -268,72 +346,102 @@
             },
             {
                 "name": "Chemical Fertilizer for Orange",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+orange"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+citrus+orange"
             }
         ]
     },
     "apple": {
-        "season": "Temperate climate, planted during winter dormancy",
-        "water_requirement": "Moderate water requirement",
+        "season": "Planted November to January; harvest July to September depending on variety",
+        "water_requirement": "Moderate water requirement; needs dry weather during fruiting",
+        "ideal_soil": "Well-drained loamy soil with high organic matter; pH 5.5 to 6.5",
         "how_to_grow": [
-            "Grow in cool climate with well-drained soil.",
-            "Prune trees annually.",
-            "Protect flowers from frost damage."
+            "Grow in cool climate regions (1500–2700 m altitude); requires chilling hours (below 7°C).",
+            "Plant grafted saplings during dormancy (November to January) at 5m x 5m spacing.",
+            "Train trees using central leader or spindle bush system for maximum sunlight.",
+            "Irrigate once a week during dry periods; avoid waterlogging.",
+            "Thin fruits when marble-sized to improve size and quality of remaining fruits."
+        ],
+        "soil_care": [
+            "Mulch tree basins with straw or leaf litter to prevent moisture loss.",
+            "Apply organic matter every year before bud break.",
+            "Check drainage; apple roots cannot tolerate even brief waterlogging."
+        ],
+        "pest_care": [
+            "Monitor for codling moth, woolly apple aphid, and San Jose scale.",
+            "Use pheromone traps for codling moth detection.",
+            "Apply Kaolin clay sprays as a physical pest deterrent."
         ],
         "common_diseases": [
-            "Apple scab",
+            "Apple scab (Venturia inaequalis)",
+            "Fire blight (Erwinia amylovora)",
             "Powdery mildew",
-            "Fire blight"
+            "Crown rot (Phytophthora cactorum)"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Calcium nitrate",
-            "Potash"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Calcium chloride spray for bitter pit prevention"
         ],
         "organic_suggestions": [
-            "Compost",
-            "Farmyard manure",
-            "Neem oil spray",
-            "Vermicompost"
+            "Farmyard manure (20–25 kg/tree/year)",
+            "Vermicompost",
+            "Bone meal (Phosphorus supplement)",
+            "Wood ash (Potassium and calcium supplement)"
         ],
         "purchase_links": [
             {
-                "name": "Apple Plant",
-                "url": "https://www.amazon.in/s?k=apple+plant"
+                "name": "Apple Plant / Sapling",
+                "url": "https://www.amazon.in/s?k=apple+plant+sapling"
             },
             {
                 "name": "Organic Fertilizer for Apple",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+apple"
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+apple+tree"
             },
             {
                 "name": "Chemical Fertilizer for Apple",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+apple"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+apple+tree"
             }
         ]
     },
     "muskmelon": {
-        "season": "Summer season",
-        "water_requirement": "Moderate water requirement",
+        "season": "Summer crop; sown February to March; also grown September to October",
+        "water_requirement": "Moderate water requirement; reduce near harvesting for sweetness",
+        "ideal_soil": "Sandy loam or loamy soil with good drainage; pH 6.0 to 7.0",
         "how_to_grow": [
-            "Grow in sandy loam soil.",
-            "Provide warm temperature and sunlight.",
-            "Avoid excess irrigation near fruit maturity."
+            "Sow 2–3 seeds per hill and thin to the healthiest plant after germination.",
+            "Maintain hill spacing of 60 cm within rows and 1.5m between rows.",
+            "Provide trellis support if growing vertically.",
+            "Reduce irrigation 10–15 days before harvest to enhance sweetness and aroma.",
+            "Pollination by bees is critical; avoid insecticide sprays during flowering."
+        ],
+        "soil_care": [
+            "Prepare raised beds or ridges to improve drainage.",
+            "Add compost before planting for nutrient enrichment.",
+            "Mulch with black plastic or dry straw to retain moisture and suppress weeds."
+        ],
+        "pest_care": [
+            "Watch for red pumpkin beetle, aphids, and fruit flies.",
+            "Use protein bait traps for fruit fly control.",
+            "Spray neem oil (5 ml/L) for aphid and spider mite control."
         ],
         "common_diseases": [
             "Powdery mildew",
             "Downy mildew",
-            "Fusarium wilt"
+            "Fusarium wilt",
+            "Cucumber mosaic virus"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Urea",
-            "Potash"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Calcium nitrate for fruit quality"
         ],
         "organic_suggestions": [
-            "Compost",
+            "Compost (2 kg/hill)",
             "Vermicompost",
             "Neem cake",
-            "Organic mulch"
+            "Panchagavya foliar spray for fruit development"
         ],
         "purchase_links": [
             {
@@ -346,33 +454,48 @@
             },
             {
                 "name": "Chemical Fertilizer for Muskmelon",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+muskmelon"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+muskmelon"
             }
         ]
     },
     "watermelon": {
-        "season": "Summer season",
-        "water_requirement": "Moderate to high water requirement",
+        "season": "Summer crop; sown January to March; harvest May to July",
+        "water_requirement": "Moderate water requirement; reduce before harvest to improve sweetness",
+        "ideal_soil": "Sandy loam or loamy soil with good drainage; pH 6.0 to 7.0",
         "how_to_grow": [
-            "Use sandy loam soil with good drainage.",
-            "Provide enough sunlight.",
-            "Reduce watering near fruit maturity for better sweetness."
+            "Direct sow seeds 2–3 cm deep in hills spaced 1.8m x 2m apart.",
+            "Provide full sun with at least 8 hours of sunlight daily.",
+            "Ensure bee pollination by avoiding pesticide spray during flowering.",
+            "Place straw or wood board under developing fruits to prevent rot.",
+            "Check for ripeness by tapping — a hollow thud indicates maturity."
+        ],
+        "soil_care": [
+            "Raise beds to ensure drainage; watermelon is highly sensitive to root rot.",
+            "Mulch heavily with dry straw to maintain soil moisture and temperature.",
+            "Incorporate organic matter before planting."
+        ],
+        "pest_care": [
+            "Use protein bait traps for fruit fly control.",
+            "Apply neem oil spray for aphids and spider mites.",
+            "Monitor for red pumpkin beetle and remove manually."
         ],
         "common_diseases": [
+            "Fusarium wilt",
             "Anthracnose",
             "Powdery mildew",
-            "Fusarium wilt"
+            "Gummy stem blight"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Urea",
-            "Potash"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Calcium nitrate spray for rind strength"
         ],
         "organic_suggestions": [
-            "Farmyard manure",
-            "Compost",
+            "Compost (2–3 kg/hill)",
+            "Vermicompost",
             "Neem cake",
-            "Vermicompost"
+            "Jeevamrut soil drench for microbial activity"
         ],
         "purchase_links": [
             {
@@ -385,38 +508,54 @@
             },
             {
                 "name": "Chemical Fertilizer for Watermelon",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+watermelon"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+watermelon"
             }
         ]
     },
     "grapes": {
-        "season": "Usually planted during winter or early spring",
-        "water_requirement": "Moderate water requirement",
+        "season": "Pruning done December to January; harvest April to June in India",
+        "water_requirement": "Moderate and regular; drip irrigation strongly preferred",
+        "ideal_soil": "Well-drained loamy or sandy loam soil; pH 6.5 to 7.5",
         "how_to_grow": [
-            "Grow in well-drained soil.",
-            "Train vines using support structures.",
-            "Prune vines regularly for better fruiting."
+            "Plant rooted cuttings or grafted vines during monsoon (June to August) or winter.",
+            "Train vines on bower or trellis system for airflow and sunlight.",
+            "Prune twice a year to regulate cropping and maintain vine vigor.",
+            "Apply irrigation through drip system at regular intervals.",
+            "Thin bunches for larger berry size and better market quality."
+        ],
+        "soil_care": [
+            "Deep plough before planting to loosen subsoil.",
+            "Mulch interrow spaces to reduce evaporation.",
+            "Avoid waterlogging; raised bunds help manage drainage."
+        ],
+        "pest_care": [
+            "Monitor for thrips, mealybug, and flea beetle.",
+            "Use blue sticky traps for thrips detection.",
+            "Apply Profenofos or Spinosad for thrips management.",
+            "Spray neem oil or insecticidal soap for mealybug control."
         ],
         "common_diseases": [
-            "Powdery mildew",
-            "Downy mildew",
-            "Anthracnose"
+            "Downy mildew (Plasmopara viticola)",
+            "Powdery mildew (Uncinula necator)",
+            "Botrytis bunch rot",
+            "Anthracnose (Bird's eye rot)"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Potash",
-            "Micronutrient mixture"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source) — high potassium demand at berry fill",
+            "Ferrous sulphate for iron deficiency correction"
         ],
         "organic_suggestions": [
-            "Compost",
-            "Farmyard manure",
-            "Neem oil spray",
-            "Organic mulch"
+            "Farmyard manure (20–25 kg/vine/year)",
+            "Vermicompost",
+            "Neem cake (1 kg/vine)",
+            "Trichoderma-enriched compost for disease suppression"
         ],
         "purchase_links": [
             {
-                "name": "Grape Plant",
-                "url": "https://www.amazon.in/s?k=grape+plant"
+                "name": "Grape Vine Cutting / Sapling",
+                "url": "https://www.amazon.in/s?k=grape+vine+plant+sapling"
             },
             {
                 "name": "Organic Fertilizer for Grapes",
@@ -424,38 +563,54 @@
             },
             {
                 "name": "Chemical Fertilizer for Grapes",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+grapes"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+grapes"
             }
         ]
     },
     "mango": {
-        "season": "Best planted during monsoon",
-        "water_requirement": "Low to moderate water requirement after establishment",
+        "season": "Flowers February to March; harvest May to July depending on variety",
+        "water_requirement": "Low to moderate; dry spell before flowering is essential to trigger flowering",
+        "ideal_soil": "Deep, well-drained alluvial or loamy soil; pH 5.5 to 7.5",
         "how_to_grow": [
-            "Use deep well-drained soil.",
-            "Provide irrigation during flowering and fruit development.",
-            "Prune dead or diseased branches."
+            "Plant grafted saplings (of varieties like Alphonso, Dasheri, Kesar, Totapuri) at 10m x 10m spacing.",
+            "Dig pits of 1m x 1m x 1m before planting and fill with compost-enriched topsoil.",
+            "Irrigate young trees regularly but withhold irrigation 2 months before expected flowering.",
+            "Prune crowded and dead branches after harvest to maintain tree shape.",
+            "Intercrop with legumes in the initial years to improve soil fertility."
+        ],
+        "soil_care": [
+            "Mulch tree basin with dry leaves (1m radius) to conserve moisture.",
+            "Apply compost around the drip circle annually after harvest.",
+            "Check soil pH and apply lime if soil is too acidic."
+        ],
+        "pest_care": [
+            "Monitor for mango hopper, fruit fly, mealybug, and stem borer.",
+            "Use pheromone traps (Methyl eugenol) for fruit fly control.",
+            "Spray neem oil or Dimethoate for mango hopper at bud burst stage.",
+            "Band polythene sheets on trunk to prevent mealybug crawling up."
         ],
         "common_diseases": [
-            "Anthracnose",
-            "Powdery mildew",
-            "Dieback"
+            "Powdery mildew (Oidium mangiferae)",
+            "Anthracnose (Colletotrichum gloeosporioides)",
+            "Malformation (mango malformation disease)",
+            "Bacterial canker (Xanthomonas campestris)"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Potash",
-            "Micronutrient mixture"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Zinc sulphate spray at new flush emergence"
         ],
         "organic_suggestions": [
-            "Farmyard manure",
-            "Compost",
-            "Neem cake",
-            "Organic mulch"
+            "Farmyard manure (25–50 kg/tree/year based on age)",
+            "Vermicompost",
+            "Neem cake (2–5 kg/tree)",
+            "Biofertilizers: Azospirillum + PSB for young trees"
         ],
         "purchase_links": [
             {
-                "name": "Mango Plant",
-                "url": "https://www.amazon.in/s?k=mango+plant"
+                "name": "Mango Grafted Plant",
+                "url": "https://www.amazon.in/s?k=mango+grafted+plant"
             },
             {
                 "name": "Organic Fertilizer for Mango",
@@ -463,38 +618,53 @@
             },
             {
                 "name": "Chemical Fertilizer for Mango",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mango"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+mango+tree"
             }
         ]
     },
     "banana": {
-        "season": "Can be grown throughout the year with irrigation",
-        "water_requirement": "High water requirement",
+        "season": "Planted year-round; harvest 9–12 months after planting depending on variety",
+        "water_requirement": "High and regular water requirement",
+        "ideal_soil": "Rich, well-drained loamy or clay loam soil; pH 6.0 to 7.5",
         "how_to_grow": [
-            "Use fertile well-drained soil.",
-            "Provide regular irrigation.",
-            "Remove unwanted suckers for better growth."
+            "Use disease-free tissue-cultured plants or healthy sword suckers.",
+            "Plant at 1.8m x 1.8m spacing or use paired-row system (1.2m x 1.8m x 3.6m).",
+            "Earth up the base of plants every 4–6 weeks to provide support.",
+            "Prop the pseudo-stem with bamboo poles when the bunch emerges.",
+            "Remove ratoon suckers except one sword sucker per plant for next crop cycle."
+        ],
+        "soil_care": [
+            "Mulch with dry leaves or banana trash to conserve moisture.",
+            "Ensure drainage channels in waterlogged areas.",
+            "Trench composting between rows improves long-term fertility."
+        ],
+        "pest_care": [
+            "Monitor for banana weevil, thrips, and nematodes.",
+            "Drench corm with Chlorpyrifos or neem cake to control weevil.",
+            "Apply Carbofuran granules for nematode management."
         ],
         "common_diseases": [
-            "Panama wilt",
-            "Sigatoka leaf spot",
-            "Bunchy top virus"
+            "Fusarium wilt (Panama disease)",
+            "Sigatoka leaf spot (Mycosphaerella musicola)",
+            "Bunchy top virus (BBTV)",
+            "Banana mosaic disease"
         ],
         "chemical_fertilizers": [
-            "Urea",
-            "DAP",
-            "MOP"
+            "Urea (Nitrogen source)",
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source) — banana has very high potassium demand",
+            "Magnesium sulphate spray for correcting Mg deficiency"
         ],
         "organic_suggestions": [
-            "Farmyard manure",
+            "Farmyard manure (10 kg/plant at planting)",
             "Vermicompost",
             "Neem cake",
-            "Banana waste compost"
+            "Pseudomonas fluorescens soil drench for Fusarium wilt suppression"
         ],
         "purchase_links": [
             {
-                "name": "Banana Plant",
-                "url": "https://www.amazon.in/s?k=banana+plant"
+                "name": "Banana Tissue Culture Plant",
+                "url": "https://www.amazon.in/s?k=banana+tissue+culture+plant"
             },
             {
                 "name": "Organic Fertilizer for Banana",
@@ -502,38 +672,54 @@
             },
             {
                 "name": "Chemical Fertilizer for Banana",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+banana"
+                "url": "https://www.amazon.in/s?k=mop+urea+fertilizer+for+banana"
             }
         ]
     },
     "pomegranate": {
-        "season": "Best planted during monsoon or spring",
-        "water_requirement": "Low to moderate water requirement",
+        "season": "Planted June to August; major crop (Mrig bahar) harvested January to February",
+        "water_requirement": "Low to moderate; drought-tolerant once established",
+        "ideal_soil": "Well-drained loamy or sandy loam soil; pH 6.5 to 7.5; tolerates mild salinity",
         "how_to_grow": [
-            "Grow in well-drained soil.",
-            "Avoid waterlogging.",
-            "Prune regularly for better flowering and fruiting."
+            "Plant rooted cuttings or grafted plants at 4.5m x 3m spacing.",
+            "Train as a single-stem tree or multi-stem bush form.",
+            "Regulate flowering using bahar treatment (withholding water + defoliation) for market timing.",
+            "Apply bag covers (paper or non-woven fabric) on developing fruits to prevent fruit borer and sunburn.",
+            "Harvest when fruit skin turns pink to deep red and gives a metallic sound on tapping."
+        ],
+        "soil_care": [
+            "Mulch tree basin to conserve moisture.",
+            "Avoid waterlogging; ensure raised planting in heavy rainfall areas.",
+            "Add organic matter before each bahar season."
+        ],
+        "pest_care": [
+            "Monitor for anar butterfly (pomegranate fruit borer) — the most serious pest.",
+            "Bag fruits at marble size to prevent borer entry.",
+            "Apply Spinosad or neem oil spray at flowering.",
+            "Use pheromone traps to monitor fruit borer population."
         ],
         "common_diseases": [
-            "Bacterial blight",
-            "Fruit rot",
-            "Wilt"
+            "Bacterial blight (Xanthomonas axonopodis pv. punicae)",
+            "Wilt (Fusarium oxysporum)",
+            "Cercospora fruit spot",
+            "Phytophthora root and crown rot"
         ],
         "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Potash",
-            "Micronutrients"
+            "Urea (Nitrogen source)",
+            "SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Calcium nitrate spray for rind quality"
         ],
         "organic_suggestions": [
-            "Compost",
-            "Farmyard manure",
-            "Neem cake",
-            "Biofertilizers"
+            "Farmyard manure (15–20 kg/tree/year)",
+            "Vermicompost",
+            "Neem cake (1–2 kg/tree)",
+            "Trichoderma viride for soil-borne disease suppression"
         ],
         "purchase_links": [
             {
-                "name": "Pomegranate Plant",
-                "url": "https://www.amazon.in/s?k=pomegranate+plant"
+                "name": "Pomegranate Plant (Bhagwa)",
+                "url": "https://www.amazon.in/s?k=pomegranate+plant+bhagwa"
             },
             {
                 "name": "Organic Fertilizer for Pomegranate",
@@ -541,311 +727,431 @@
             },
             {
                 "name": "Chemical Fertilizer for Pomegranate",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+pomegranate"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+pomegranate"
             }
         ]
     },
     "lentil": {
-        "season": "Rabi season",
-        "water_requirement": "Low water requirement",
+        "season": "Rabi crop; sown October to December; harvested February to March",
+        "water_requirement": "Low water requirement; largely rainfed",
+        "ideal_soil": "Sandy loam to loamy soil with good drainage; pH 6.0 to 8.0",
         "how_to_grow": [
-            "Use well-drained loamy soil.",
-            "Avoid excess irrigation.",
-            "Use seed treatment before sowing."
+            "Sow seeds at a depth of 3–4 cm with row spacing of 25–30 cm.",
+            "Inoculate seeds with Rhizobium leguminosarum before sowing for nitrogen fixation.",
+            "One or two irrigations at branching and pod-filling stages are sufficient.",
+            "Avoid heavy irrigation which can cause excessive vegetative growth.",
+            "Harvest when 70–80% of pods turn brown and leaves begin to drop."
+        ],
+        "soil_care": [
+            "Lentil fixes nitrogen; avoid excess nitrogenous fertilizers.",
+            "Light ploughing is sufficient; deep tillage is not required.",
+            "Add phosphorus-rich compost or bone meal to improve nodulation."
+        ],
+        "pest_care": [
+            "Watch for aphids and pod borers.",
+            "Spray neem oil or Dimethoate for aphid control.",
+            "Use light traps to monitor and control pod borer adults."
         ],
         "common_diseases": [
-            "Rust",
-            "Wilt",
-            "Root rot"
+            "Rust (Uromyces viciae-fabae)",
+            "Stemphylium blight",
+            "Fusarium wilt",
+            "Ascochyta blight"
         ],
         "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash if needed"
+            "DAP or SSP (Phosphorus source — lentil requires more P than N)",
+            "MOP (Potassium source)",
+            "Low dose of Urea only as starter nitrogen"
         ],
         "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
-            "Farmyard manure"
+            "Rhizobium biofertilizer seed treatment (essential)",
+            "Farmyard manure (2–3 tonnes/hectare)",
+            "Phosphate solubilizing bacteria (PSB)",
+            "Compost"
         ],
         "purchase_links": [
             {
-                "name": "Lentil Seeds",
-                "url": "https://www.amazon.in/s?k=lentil+seeds"
+                "name": "Lentil Seeds (Masoor)",
+                "url": "https://www.amazon.in/s?k=lentil+masoor+seeds"
             },
             {
-                "name": "Organic Fertilizer for Lentil",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+lentil"
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
-                "name": "Chemical Fertilizer for Lentil",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+lentil"
+                "name": "Fertilizer for Lentil",
+                "url": "https://www.amazon.in/s?k=dap+ssp+fertilizer+for+lentil"
             }
         ]
     },
     "blackgram": {
-        "season": "Kharif or summer season",
-        "water_requirement": "Low to moderate water requirement",
+        "season": "Kharif (June to September) and spring (February to March)",
+        "water_requirement": "Low to moderate; sensitive to waterlogging",
+        "ideal_soil": "Well-drained loamy or clay loam soil; pH 6.0 to 7.5",
         "how_to_grow": [
-            "Use well-drained soil.",
-            "Treat seeds before sowing.",
-            "Avoid waterlogging."
+            "Sow seeds at 3–4 cm depth with row spacing of 30–45 cm.",
+            "Treat seeds with Rhizobium and PSB biofertilizers before sowing.",
+            "Irrigate at branching, flowering, and pod development stages.",
+            "Weed once at 20–25 days after sowing.",
+            "Harvest in 2–3 pickings when pods turn black."
+        ],
+        "soil_care": [
+            "Avoid waterlogged conditions; ensure field drainage.",
+            "Shallow tillage to avoid disturbing nitrogen-fixing nodules.",
+            "Incorporate green manure or previous legume residue."
+        ],
+        "pest_care": [
+            "Spray neem oil for jassids, thrips, and whiteflies.",
+            "Monitor for pod borer; use Bt spray (Bacillus thuringiensis) if infestation is high.",
+            "Use yellow sticky traps for whitefly monitoring."
         ],
         "common_diseases": [
-            "Yellow mosaic virus",
+            "Yellow mosaic virus (spread by whitefly)",
+            "Cercospora leaf spot",
             "Powdery mildew",
-            "Root rot"
+            "Root rot (Rhizoctonia solani)"
         ],
         "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash if required"
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Starter dose of Urea (10–15 kg/ha only)"
         ],
         "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
+            "Rhizobium biofertilizer (essential for nitrogen fixation)",
+            "Phosphate solubilizing bacteria (PSB)",
+            "Farmyard manure (3–4 tonnes/hectare)",
             "Neem cake"
         ],
         "purchase_links": [
             {
-                "name": "Blackgram Seeds",
-                "url": "https://www.amazon.in/s?k=blackgram+seeds"
+                "name": "Black Gram Seeds (Urad)",
+                "url": "https://www.amazon.in/s?k=black+gram+urad+seeds"
             },
             {
-                "name": "Organic Fertilizer for Blackgram",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+blackgram"
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
-                "name": "Chemical Fertilizer for Blackgram",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+blackgram"
+                "name": "Fertilizer for Black Gram",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+black+gram"
             }
         ]
     },
     "mungbean": {
-        "season": "Kharif, Rabi, or summer season",
-        "water_requirement": "Low to moderate water requirement",
+        "season": "Kharif (June to September) and Zaid/summer (March to June)",
+        "water_requirement": "Low to moderate; 4–5 irrigations during dry season",
+        "ideal_soil": "Well-drained sandy loam or loamy soil; pH 6.2 to 7.2",
         "how_to_grow": [
-            "Grow in well-drained sandy loam soil.",
-            "Use treated seeds.",
-            "Avoid excess moisture during flowering."
+            "Sow seeds at 2–3 cm depth with row spacing of 30–45 cm.",
+            "Seed treatment with Rhizobium and Thiram before sowing.",
+            "Irrigate at branching, flowering, and pod filling stages.",
+            "Weed at 15–20 days after sowing to reduce competition.",
+            "Harvest when 80% of pods are mature (yellowish-brown)."
+        ],
+        "soil_care": [
+            "Plough to a fine tilth for good seed-soil contact.",
+            "Avoid standing water; ridge-furrow system helps drainage.",
+            "Incorporate crop residues to improve organic matter."
+        ],
+        "pest_care": [
+            "Monitor for pod borer, jassids, and bruchid beetle (in stored seed).",
+            "Apply neem oil for sucking pest control.",
+            "Use Bt formulations for pod borer management at flowering."
         ],
         "common_diseases": [
-            "Yellow mosaic virus",
+            "Yellow mosaic virus (YMV)",
             "Powdery mildew",
-            "Cercospora leaf spot"
+            "Cercospora leaf spot",
+            "Bacterial leaf spot"
         ],
         "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash if required"
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Low starter nitrogen (Urea 10–15 kg/ha)"
         ],
         "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
+            "Rhizobium biofertilizer (seed treatment)",
+            "Phosphate solubilizing bacteria (PSB)",
+            "Vermicompost (2 tonnes/hectare)",
             "Farmyard manure"
         ],
         "purchase_links": [
             {
-                "name": "Mungbean Seeds",
-                "url": "https://www.amazon.in/s?k=mungbean+seeds"
+                "name": "Mung Bean Seeds (Moong)",
+                "url": "https://www.amazon.in/s?k=mung+bean+moong+seeds"
             },
             {
-                "name": "Organic Fertilizer for Mungbean",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mungbean"
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
-                "name": "Chemical Fertilizer for Mungbean",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mungbean"
+                "name": "Fertilizer for Mung Bean",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+moong"
             }
         ]
     },
     "mothbeans": {
-        "season": "Kharif season, suitable for dry regions",
-        "water_requirement": "Low water requirement",
+        "season": "Kharif crop; sown June to July in arid and semi-arid regions",
+        "water_requirement": "Very low water requirement; extremely drought-tolerant",
+        "ideal_soil": "Sandy or sandy loam soil; well-drained; pH 6.0 to 7.5",
         "how_to_grow": [
-            "Grow in dry and sandy soil.",
-            "Avoid waterlogging.",
-            "Use drought-tolerant varieties."
+            "Sow seeds at 2–3 cm depth with row spacing of 30–45 cm.",
+            "Inoculate seeds with Rhizobium before sowing for nitrogen fixation.",
+            "Crop survives on rainfall; additional irrigation only if very dry.",
+            "Weed once at 3 weeks after sowing.",
+            "Harvest pods progressively as they mature, since pods ripen unevenly."
+        ],
+        "soil_care": [
+            "Suitable for poor sandy soils; no heavy tillage needed.",
+            "Add minimal compost since the crop is adapted to low-fertility soils.",
+            "Avoid clay-heavy soils that retain excess water."
+        ],
+        "pest_care": [
+            "Monitor for pod borer and aphids.",
+            "Spray neem oil for pest management.",
+            "Use light traps to control moths at nighttime."
         ],
         "common_diseases": [
             "Yellow mosaic virus",
-            "Root rot",
-            "Powdery mildew"
+            "Powdery mildew",
+            "Leaf spot"
         ],
         "chemical_fertilizers": [
-            "SSP",
-            "DAP in small quantity"
+            "SSP or DAP (Phosphorus source)",
+            "Low or no Nitrogen fertilizer needed (nitrogen-fixing legume)"
         ],
         "organic_suggestions": [
-            "Rhizobium biofertilizer",
+            "Rhizobium biofertilizer (seed treatment)",
             "Compost",
-            "Farmyard manure"
+            "Farmyard manure in small quantities"
         ],
         "purchase_links": [
             {
-                "name": "Mothbean Seeds",
-                "url": "https://www.amazon.in/s?k=mothbean+seeds"
+                "name": "Moth Bean Seeds (Matki)",
+                "url": "https://www.amazon.in/s?k=moth+bean+matki+seeds"
             },
             {
-                "name": "Organic Fertilizer for Mothbeans",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mothbeans"
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
-                "name": "Chemical Fertilizer for Mothbeans",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+mothbeans"
+                "name": "Fertilizer for Moth Bean",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+moth+bean"
             }
         ]
     },
     "pigeonpeas": {
-        "season": "Kharif season",
-        "water_requirement": "Low to moderate water requirement",
+        "season": "Kharif crop; sown June to July; harvested November to January (long-duration varieties)",
+        "water_requirement": "Low water requirement; drought-tolerant",
+        "ideal_soil": "Well-drained sandy loam or medium black soil; pH 6.5 to 7.5",
         "how_to_grow": [
-            "Use well-drained soil.",
-            "Maintain proper spacing for branching.",
-            "Avoid waterlogging."
+            "Sow seeds at 3–5 cm depth with row spacing of 60–75 cm.",
+            "Treat seeds with Rhizobium and fungicide before sowing.",
+            "Provide one or two supplemental irrigations at flowering and pod fill during prolonged dry spells.",
+            "Intercropping with sorghum or maize (2:1 ratio) is a popular system in dryland farming.",
+            "Harvest when pods turn brown; thresh manually or by machine."
         ],
-        "common_diseases": [
-            "Wilt",
-            "Sterility mosaic disease",
-            "Phytophthora blight"
+        "soil_care": [
+            "Deep plough before sowing to prepare a good seedbed.",
+            "Avoid waterlogging as the crop is sensitive to root zone saturation.",
+            "Being a legume, it improves soil nitrogen for subsequent crops."
         ],
-        "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash if required"
-        ],
-        "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
-            "Farmyard manure"
-        ],
-        "purchase_links": [
-            {
-                "name": "Pigeonpea Seeds",
-                "url": "https://www.amazon.in/s?k=pigeonpea+seeds"
-            },
-            {
-                "name": "Organic Fertilizer for Pigeonpeas",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+pigeonpeas"
-            },
-            {
-                "name": "Chemical Fertilizer for Pigeonpeas",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+pigeonpeas"
-            }
-        ]
-    },
-    "kidneybeans": {
-        "season": "Rabi season or cool climate season",
-        "water_requirement": "Moderate water requirement",
-        "how_to_grow": [
-            "Grow in well-drained loamy soil.",
-            "Avoid waterlogging.",
-            "Provide irrigation during flowering and pod formation."
-        ],
-        "common_diseases": [
-            "Anthracnose",
-            "Rust",
-            "Root rot"
-        ],
-        "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash"
-        ],
-        "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
-            "Farmyard manure"
-        ],
-        "purchase_links": [
-            {
-                "name": "Kidneybean Seeds",
-                "url": "https://www.amazon.in/s?k=kidneybean+seeds"
-            },
-            {
-                "name": "Organic Fertilizer for Kidneybeans",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+kidneybeans"
-            },
-            {
-                "name": "Chemical Fertilizer for Kidneybeans",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+kidneybeans"
-            }
-        ]
-    },
-    "chickpea": {
-        "season": "Rabi season",
-        "water_requirement": "Low water requirement",
-        "how_to_grow": [
-            "Grow in well-drained soil.",
-            "Avoid excess irrigation.",
-            "Treat seeds before sowing."
+        "pest_care": [
+            "Serious pest: Helicoverpa (pod borer) — use pheromone traps.",
+            "Apply Bt spray or NPV (Nuclear Polyhedrosis Virus) for pod borer control.",
+            "Monitor for pod fly and plume moth during pod development."
         ],
         "common_diseases": [
             "Fusarium wilt",
-            "Ascochyta blight",
-            "Root rot"
+            "Sterility mosaic disease (spread by eriophyid mite)",
+            "Phytophthora stem blight",
+            "Alternaria leaf spot"
         ],
         "chemical_fertilizers": [
-            "DAP",
-            "SSP",
-            "Potash if required"
+            "DAP or SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Low starter nitrogen only"
         ],
         "organic_suggestions": [
-            "Rhizobium biofertilizer",
-            "Compost",
-            "Farmyard manure"
-        ],
-        "purchase_links": [
-            {
-                "name": "Chickpea Seeds",
-                "url": "https://www.amazon.in/s?k=chickpea+seeds"
-            },
-            {
-                "name": "Organic Fertilizer for Chickpea",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+chickpea"
-            },
-            {
-                "name": "Chemical Fertilizer for Chickpea",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+chickpea"
-            }
-        ]
-    },
-    "coffee": {
-        "season": "Best planted during monsoon",
-        "water_requirement": "Moderate water requirement",
-        "how_to_grow": [
-            "Grow under partial shade.",
-            "Use well-drained acidic soil.",
-            "Maintain regular pruning and shade management."
-        ],
-        "common_diseases": [
-            "Coffee leaf rust",
-            "Berry disease",
-            "Root disease"
-        ],
-        "chemical_fertilizers": [
-            "NPK fertilizer",
-            "Magnesium sulphate",
-            "Micronutrients"
-        ],
-        "organic_suggestions": [
-            "Compost",
-            "Farmyard manure",
-            "Coffee pulp compost",
+            "Rhizobium biofertilizer (seed treatment)",
+            "Phosphate solubilizing bacteria (PSB)",
+            "Farmyard manure (3–4 tonnes/hectare)",
             "Neem cake"
         ],
         "purchase_links": [
             {
-                "name": "Coffee Plant",
-                "url": "https://www.amazon.in/s?k=coffee+plant"
+                "name": "Pigeon Pea Seeds (Tur / Arhar)",
+                "url": "https://www.amazon.in/s?k=pigeon+pea+tur+arhar+seeds"
+            },
+            {
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
+            },
+            {
+                "name": "Fertilizer for Pigeon Pea",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+pigeon+pea"
+            }
+        ]
+    },
+    "kidneybeans": {
+        "season": "Kharif in hills (June to July); Rabi in plains (October to November)",
+        "water_requirement": "Moderate water requirement; sensitive to waterlogging",
+        "ideal_soil": "Well-drained fertile loamy soil; pH 6.0 to 7.0",
+        "how_to_grow": [
+            "Sow seeds at 4–5 cm depth with row spacing of 45–60 cm.",
+            "Treat seeds with Rhizobium leguminosarum before sowing.",
+            "Provide trellis or stake support for climbing varieties.",
+            "Irrigate at flowering and pod development stages.",
+            "Harvest dry beans when pods are completely dry and brown."
+        ],
+        "soil_care": [
+            "Incorporate compost or FYM before planting.",
+            "Avoid compact soils; good soil aeration is essential for nodulation.",
+            "Maintain consistent soil moisture but avoid waterlogging."
+        ],
+        "pest_care": [
+            "Monitor for bean aphid, pod borer, and bruchid beetle.",
+            "Apply neem oil for aphid and pod borer control.",
+            "Use Bt formulation at flowering for pod borer management."
+        ],
+        "common_diseases": [
+            "Bean common mosaic virus (BCMV)",
+            "Angular leaf spot (Pseudocercospora griseola)",
+            "Rust (Uromyces appendiculatus)",
+            "Root rot (Fusarium solani)"
+        ],
+        "chemical_fertilizers": [
+            "DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Low starter nitrogen (Urea 10–15 kg/ha)"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer (seed treatment)",
+            "Vermicompost",
+            "Farmyard manure",
+            "Trichoderma for root rot prevention"
+        ],
+        "purchase_links": [
+            {
+                "name": "Kidney Bean Seeds (Rajma)",
+                "url": "https://www.amazon.in/s?k=kidney+bean+rajma+seeds"
+            },
+            {
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
+            },
+            {
+                "name": "Fertilizer for Kidney Bean",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+rajma+kidney+bean"
+            }
+        ]
+    },
+    "chickpea": {
+        "season": "Rabi crop; sown October to November; harvested February to March",
+        "water_requirement": "Low water requirement; drought-tolerant; 1–2 irrigations sufficient",
+        "ideal_soil": "Well-drained sandy loam or loamy soil; pH 6.0 to 7.0",
+        "how_to_grow": [
+            "Sow seeds at 5–8 cm depth with row spacing of 30–45 cm.",
+            "Seed treatment with Rhizobium and Trichoderma before sowing.",
+            "One irrigation at pre-flowering and one at pod filling is usually adequate.",
+            "Avoid late sowing, which reduces yield significantly.",
+            "Harvest when leaves turn yellow and pods become dry and hard."
+        ],
+        "soil_care": [
+            "Prepare a fine seedbed with one deep plough and two cross harrowings.",
+            "Chickpea improves soil nitrogen for subsequent cereal crops.",
+            "Avoid waterlogging; excess soil moisture triggers root diseases."
+        ],
+        "pest_care": [
+            "Helicoverpa (pod borer) is the most damaging pest.",
+            "Use pheromone traps for monitoring and Bt spray for control.",
+            "Apply NPV (Helicoverpa NPV) at pod initiation for effective management."
+        ],
+        "common_diseases": [
+            "Fusarium wilt",
+            "Ascochyta blight (Ascochyta rabiei)",
+            "Botrytis grey mould",
+            "Root rot (Rhizoctonia solani)"
+        ],
+        "chemical_fertilizers": [
+            "DAP or SSP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Zinc sulphate if Zn deficiency present",
+            "Minimal or no nitrogen fertilizer (nitrogen-fixing legume)"
+        ],
+        "organic_suggestions": [
+            "Rhizobium biofertilizer (seed treatment — critical)",
+            "Phosphate solubilizing bacteria (PSB)",
+            "Farmyard manure (3–4 tonnes/hectare incorporated before sowing)",
+            "Trichoderma seed treatment for wilt prevention"
+        ],
+        "purchase_links": [
+            {
+                "name": "Chickpea Seeds (Desi / Kabuli Chana)",
+                "url": "https://www.amazon.in/s?k=chickpea+chana+seeds"
+            },
+            {
+                "name": "Rhizobium Biofertilizer",
+                "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
+            },
+            {
+                "name": "Fertilizer for Chickpea",
+                "url": "https://www.amazon.in/s?k=fertilizer+for+chickpea+chana"
+            }
+        ]
+    },
+    "coffee": {
+        "season": "Planted during monsoon (June to August); main harvest November to February",
+        "water_requirement": "Moderate and well-distributed; requires dry spell during flowering",
+        "ideal_soil": "Deep, well-drained laterite or loamy soil rich in organic matter; pH 6.0 to 6.5",
+        "how_to_grow": [
+            "Plant shade-grown coffee under silver oak or erythrina shade trees at 3m x 3m spacing.",
+            "Use certified Arabica or Robusta seedlings from a reputed nursery.",
+            "Plant in pits of 45cm x 45cm x 45cm filled with compost-enriched topsoil.",
+            "Train to a single-stem or multi-stem system through regular pruning.",
+            "Harvest ripe red cherries by selective hand-picking for best quality."
+        ],
+        "soil_care": [
+            "Mulch heavily with shade tree leaf fall to build organic matter.",
+            "Inter-plant with pepper or cardamom for biodiversity and income.",
+            "Apply lime if soil pH drops below 5.5 due to acidification."
+        ],
+        "pest_care": [
+            "Monitor for Coffee Berry Borer (CBB) — most critical pest; use trapping with Methanol:Ethanol lures.",
+            "Spray Beauveria bassiana biopesticide for CBB management.",
+            "Monitor for mealybug and scale insects; apply neem oil spray.",
+            "Use Yellow sticky traps for whitefly detection."
+        ],
+        "common_diseases": [
+            "Coffee leaf rust (Hemileia vastatrix) — most damaging disease globally",
+            "Black rot (Koleroga noxia)",
+            "Brown eye spot (Cercospora coffeicola)",
+            "Wilt (Fusarium stilboides)"
+        ],
+        "chemical_fertilizers": [
+            "Urea (Nitrogen source)",
+            "SSP or DAP (Phosphorus source)",
+            "MOP (Potassium source)",
+            "Borax spray for flowering support and fruit retention"
+        ],
+        "organic_suggestions": [
+            "Coffee pulp compost (highly recommended — made from processing waste)",
+            "Vermicompost",
+            "Neem cake (1–2 kg/plant)",
+            "Biofertilizers: Azospirillum + PSB for young plantations"
+        ],
+        "purchase_links": [
+            {
+                "name": "Coffee Plant / Seedling",
+                "url": "https://www.amazon.in/s?k=coffee+plant+seedling"
             },
             {
                 "name": "Organic Fertilizer for Coffee",
-                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coffee"
+                "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coffee+plant"
             },
             {
                 "name": "Chemical Fertilizer for Coffee",
-                "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+coffee"
+                "url": "https://www.amazon.in/s?k=fertilizer+for+coffee+plant"
             }
         ]
     }

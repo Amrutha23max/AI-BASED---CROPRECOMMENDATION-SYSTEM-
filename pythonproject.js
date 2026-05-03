@@ -1090,37 +1090,92 @@ function drawNPKChart(n, p, k) {
     ctx.fillText(bar.value, canvas.width - 48, y + 13);
   });
 }
-function displayPredictionResults(data, inputValues = {}) {
-  const bestCrop = data.best_crop || {};
-  const estimated = data.estimated_values || inputValues;
 
-  document.getElementById("soilColorBox").style.background = "#6b4f3f";
-  document.getElementById("soilTypeVal").textContent = data.soil_type || "Manual soil data";
 
-  const confidence = Math.round(bestCrop.confidence || bestCrop.probability || 0);
-  document.getElementById("confFill").style.width = confidence + "%";
-  document.getElementById("confPct").textContent = confidence + "%";
+function showResults() {
+ ///Prefer latestMLResult (your existing flow), fallback to passed data if needed
+ const d = window.latestMLResult || {};
+ const bestCrop = d.best_crop || {};
+ const estimated = d.estimated_values || {
+  N: d.nitrogen,
+  P: d.phosphorus,
+  K: d.potassium
+};
 
-  document.getElementById("cropEmoji").textContent = "🌿";
-  document.getElementById("cropName").textContent = bestCrop.name || bestCrop.crop || "Unknown";
+// --- Soil / UI basics ---
+document.getElementById("soilColorBox").style.background = d.soilColor || "#6b4f3f";
+document.getElementById("soilTypeVal").textContent =
+  d.soil_type ? `${d.soil_type} (${d.soil_confidence || 0}%)` : "Manual Input";
 
-  const explanation = Array.isArray(data.explanation)
-    ? data.explanation.join(" ")
-    : data.explanation || "No explanation available.";
+const confidence = Math.round(
+  bestCrop.confidence || bestCrop.probability || d.confidence || 0
+);
+document.getElementById("confFill").style.width = confidence + "%";
+document.getElementById("confPct").textContent = confidence + "%";
 
-  document.getElementById("xaiText").textContent = explanation;
+document.getElementById("cropEmoji").textContent = d.cropEmoji || "🌿";
+document.getElementById("cropName").textContent =
+  bestCrop.crop || bestCrop.name || d.crop || "Unknown";
 
-  drawNPKChart(
-    Number(estimated.N || estimated.nitrogen || 0),
-    Number(estimated.P || estimated.phosphorus || 0),
-    Number(estimated.K || estimated.potassium || 0)
-  );
+// --- Explanation (handles array or string) ---
+const explanation = Array.isArray(d.explanation)
+  ? d.explanation.join(" ")
+  : d.explanation || "No explanation available.";
+document.getElementById("xaiText").textContent = explanation;
 
-  renderAdvancedResults(data);
-  saveAnalysisToHistory(data);
+// --- NPK chart ---
+drawNPKChart(
+  Number(estimated.N || 0),
+  Number(estimated.P || 0),
+  Number(estimated.K || 0)
+);
 
-  goTo("results");
-  analysisDone = true;
+// --- Top 3 crops ---
+const top3 = d.top_3_crops || [];
+document.getElementById("topCrop1").textContent =
+  top3[0] ? `${top3[0].crop} (${top3[0].confidence}%)` : "—";
+document.getElementById("topCrop2").textContent =
+  top3[1] ? `${top3[1].crop} (${top3[1].confidence}%)` : "—";
+document.getElementById("topCrop3").textContent =
+  top3[2] ? `${top3[2].crop} (${top3[2].confidence}%)` : "—";
+
+// --- Fertilizer suggestions (your feature) ---
+const fertList = document.getElementById("fertilizerList");
+if (fertList) {
+  fertList.innerHTML = "";
+  if (d.fertilizer_suggestions && d.fertilizer_suggestions.length > 0) {
+    d.fertilizer_suggestions.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = f;
+      fertList.appendChild(li);
+    });
+  } else {
+    fertList.innerHTML = "<li>No fertilizer suggestions available</li>";
+  }
+}
+
+// --- Optional advanced hooks (from your friend’s code) ---
+if (typeof renderAdvancedResults === "function") {
+  renderAdvancedResults(d);
+}
+if (typeof saveAnalysisToHistory === "function") {
+  saveAnalysisToHistory(d);
+}
+
+goTo("results");
+}
+
+  
+function showCropGuidance() {
+  if (!latestMLResult || !latestMLResult.crop_guidance) {
+    alert("Guidance data not available.");
+    return;
+  }
+
+  const selected = latestMLResult.crop_guidance[0];
+  console.log(selected); // debug
+
+  goTo("guidance");
 }
 
 function showResults() {

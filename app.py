@@ -16,6 +16,11 @@ import shap
 from dotenv import load_dotenv
 import os
 
+import json
+
+with open("fertilizer_rules.json") as f:
+    fertilizer_rules = json.load(f)
+
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -145,6 +150,36 @@ def get_crop_guidance(top3):
         })
 
     return guidance_list
+def get_fertilizer_suggestions(N, P, K, mode="mixed"):
+    suggestions = []
+
+    # thresholds (you can tune later)
+    n_low = N < 50
+    p_low = P < 30
+    k_low = K < 50
+
+    def pick(rule_key):
+        if mode == "organic":
+            return fertilizer_rules[rule_key]["organic"]
+        elif mode == "chemical":
+            return fertilizer_rules[rule_key]["chemical"]
+        else:  # mixed
+            return fertilizer_rules[rule_key]["chemical"] + fertilizer_rules[rule_key]["organic"]
+
+    if n_low:
+        suggestions += ["Nitrogen is low"] + pick("nitrogen_low")
+
+    if p_low:
+        suggestions += ["Phosphorus is low"] + pick("phosphorus_low")
+
+    if k_low:
+        suggestions += ["Potassium is low"] + pick("potassium_low")
+
+    if not (n_low or p_low or k_low):
+        suggestions += ["Soil nutrients are balanced"] + pick("balanced")
+
+    # remove duplicates
+    return list(dict.fromkeys(suggestions))
 
 #init_db()
 
@@ -247,28 +282,114 @@ def chat():
         reply = f"AI error: {str(e)}"
 
     return jsonify({"reply": reply})
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     data = request.get_json(silent=True) or {}
+#      N = data["N"]
+#      P = data["P"]
+#      K = data["K"]
+
+# mode = data.get("mode", "mixed")
+
+# fertilizer_suggestions = get_fertilizer_suggestions(N, P, K, mode)
+
+#     try:
+#         input_data = [data[feature] for feature in feature_names]
+#         input_array = np.array(input_data).reshape(1, -1)
+
+#         proba = model.predict_proba(input_array)[0]
+#         top3 = get_top_3(proba)
+
+#         explanation = get_shap_explanation(
+#             input_array,
+#             top3[0]["crop"]
+#         )
+#         crop_guidance = get_crop_guidance(top3)
+
+#         return jsonify({
+#             "best_crop": top3[0],
+#             "top_3_crops": top3,
+#             "explanation": explanation,
+#             "crop_guidance": crop_guidance,
+#         })
+
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 400
+def validate_crop_input(data):
+    required = ["N", "P", "K", "temperature", "humidity", "ph", "rainfall"]
+
+    for field in required:
+        if field not in data:
+            return False, f"{field} is missing"
+
+        try:
+            data[field] = float(data[field])
+        except:
+            return False, f"{field} must be a number"
+
+    if data["N"] < 0 or data["P"] < 0 or data["K"] < 0:
+        return False, "N, P, K values cannot be negative"
+
+    if data["N"] > 150:
+        return False, "Nitrogen must be between 0 and 150"
+
+    if data["P"] > 50:
+        return False, "Phosphorus must be between 0 and 50"
+
+    if data["K"] > 300:
+        return False, "Potassium must be between 0 and 300"
+
+    if data["ph"] < 3.5 or data["ph"] > 9:
+        return False, "pH must be between 3.5 and 9.0"
+
+    if data["temperature"] < 0 or data["temperature"] > 60:
+        return False, "Temperature must be between 0 and 60°C"
+
+    if data["humidity"] < 0 or data["humidity"] > 100:
+        return False, "Humidity must be between 0 and 100"
+
+    if data["rainfall"] < 0:
+        return False, "Rainfall cannot be negative"
+
+    return True, ""
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(silent=True) or {}
 
     try:
+        # 1. Extract NPK
+        N = data["N"]
+        P = data["P"]
+        K = data["K"]
+
+        #  2. Fertilizer logic
+        mode = data.get("mode", "mixed")
+        fertilizer_suggestions = get_fertilizer_suggestions(N, P, K, mode)
+
+        #  3. ML input
         input_data = [data[feature] for feature in feature_names]
         input_array = np.array(input_data).reshape(1, -1)
 
+        #  4. Prediction
         proba = model.predict_proba(input_array)[0]
         top3 = get_top_3(proba)
 
+        #  5. SHAP explanation
         explanation = get_shap_explanation(
             input_array,
             top3[0]["crop"]
         )
+
+        #  6. Crop guidance
         crop_guidance = get_crop_guidance(top3)
 
+        # 7. FINAL RESPONSE
         return jsonify({
             "best_crop": top3[0],
             "top_3_crops": top3,
             "explanation": explanation,
             "crop_guidance": crop_guidance,
+            "fertilizer_suggestions": fertilizer_suggestions   
         })
 
     except Exception as e:
@@ -326,6 +447,8 @@ def predict_image():
         top3 = get_top_3(proba)
         explanation = get_shap_explanation(input_array, top3[0]["crop"])
         crop_guidance = get_crop_guidance(top3)
+        mode = request.form.get("mode", "mixed")
+        fertilizer_suggestions = get_fertilizer_suggestions(N, P, K, mode)
 
         return jsonify({
             "soil_type": soil_type,
@@ -342,6 +465,7 @@ def predict_image():
             "top_3_crops": top3,
             "explanation": explanation,
             "crop_guidance": crop_guidance,
+            "fertilizer_suggestions": fertilizer_suggestions
         })
 
 

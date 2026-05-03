@@ -1,0 +1,41 @@
+{
+    "nitrogen_low": {
+        "chemical": [
+            "Urea (Nitrogen source)",
+            "Ammonium sulphate"
+        ],
+        "organic": [
+            "Compost",
+            "Farmyard manure",
+            "Vermicompost"
+        ]
+    },
+    "phosphorus_low": {
+        "chemical": [
+            "DAP (Phosphorus source)",
+            "SSP"
+        ],
+        "organic": [
+            "Bone meal",
+            "Rock phosphate"
+        ]
+    },
+    "potassium_low": {
+        "chemical": [
+            "MOP (Potassium source)",
+            "Potash"
+        ],
+        "organic": [
+            "Wood ash",
+            "Banana peel compost"
+        ]
+    },
+    "balanced": {
+        "chemical": [
+            "NPK 19:19:19 fertilizer"
+        ],
+        "organic": [
+            "Compost + Vermicompost mix"
+        ]
+    }
+}

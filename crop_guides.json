@@ -35,14 +35,26 @@
         "purchase_links": [
             {
                 "name": "Rice Seeds",
+                "price": "₹250 - ₹800",
+                "rating": "4.3",
+                "reviews": "150+",
+                "image": "https://via.placeholder.com/220x160?text=Rice+Seeds",
                 "url": "https://www.amazon.in/s?k=rice+seeds"
             },
             {
                 "name": "Organic Fertilizer for Rice",
+                "price": "₹300 - ₹900",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+rice"
             },
             {
                 "name": "Chemical Fertilizer for Rice",
+                "price": "₹400 - ₹1200",
+                "rating": "4.1",
+                "reviews": "300+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+rice"
             }
         ]
@@ -83,14 +95,26 @@
         "purchase_links": [
             {
                 "name": "Maize Seeds",
+                "price": "₹200 - ₹750",
+                "rating": "4.2",
+                "reviews": "180+",
+                "image": "https://via.placeholder.com/220x160?text=Maize+Seeds",
                 "url": "https://www.amazon.in/s?k=maize+seeds"
             },
             {
                 "name": "Organic Fertilizer for Maize",
+                "price": "₹300 - ₹850",
+                "rating": "4.1",
+                "reviews": "120+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+maize"
             },
             {
                 "name": "Chemical Fertilizer for Maize",
+                "price": "₹350 - ₹1100",
+                "rating": "4.0",
+                "reviews": "250+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+maize"
             }
         ]
@@ -130,6 +154,10 @@
         "purchase_links": [
             {
                 "name": "Jute Seeds",
+                "price": "₹150 - ₹500",
+                "rating": "4.0",
+                "reviews": "80+",
+                "image": "https://via.placeholder.com/220x160?text=Jute+Seeds",
                 "url": "https://www.amazon.in/s?k=jute+seeds"
             }
         ]
@@ -176,14 +204,26 @@
         "purchase_links": [
             {
                 "name": "Cotton Seeds (Bt Cotton)",
+                "price": "₹700 - ₹1800",
+                "rating": "4.2",
+                "reviews": "220+",
+                "image": "https://via.placeholder.com/220x160?text=Cotton+Seeds",
                 "url": "https://www.amazon.in/s?k=cotton+seeds+bt"
             },
             {
                 "name": "Organic Fertilizer for Cotton",
+                "price": "₹400 - ₹1000",
+                "rating": "4.1",
+                "reviews": "140+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+cotton"
             },
             {
                 "name": "Chemical Fertilizer for Cotton",
+                "price": "₹450 - ₹1300",
+                "rating": "4.0",
+                "reviews": "310+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=urea+dap+mop+fertilizer+for+cotton"
             }
         ]
@@ -230,14 +270,26 @@
         "purchase_links": [
             {
                 "name": "Coconut Seedlings",
+                "price": "₹80 - ₹300",
+                "rating": "4.3",
+                "reviews": "95+",
+                "image": "https://via.placeholder.com/220x160?text=Coconut+Seedlings",
                 "url": "https://www.amazon.in/s?k=coconut+seedlings"
             },
             {
                 "name": "Organic Fertilizer for Coconut",
+                "price": "₹350 - ₹950",
+                "rating": "4.2",
+                "reviews": "160+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coconut"
             },
             {
                 "name": "Chemical Fertilizer for Coconut",
+                "price": "₹400 - ₹1200",
+                "rating": "4.1",
+                "reviews": "280+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=mop+urea+fertilizer+for+coconut"
             }
         ]
@@ -284,14 +336,26 @@
         "purchase_links": [
             {
                 "name": "Papaya Seeds (Red Lady / Taiwan)",
+                "price": "₹150 - ₹600",
+                "rating": "4.3",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Papaya+Seeds",
                 "url": "https://www.amazon.in/s?k=papaya+seeds+red+lady"
             },
             {
                 "name": "Organic Fertilizer for Papaya",
+                "price": "₹300 - ₹850",
+                "rating": "4.2",
+                "reviews": "130+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+papaya"
             },
             {
                 "name": "Chemical Fertilizer for Papaya",
+                "price": "₹350 - ₹1000",
+                "rating": "4.0",
+                "reviews": "175+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+papaya"
             }
         ]
@@ -338,14 +402,26 @@
         "purchase_links": [
             {
                 "name": "Orange Plant (Nagpur Mandarin)",
+                "price": "₹120 - ₹450",
+                "rating": "4.3",
+                "reviews": "110+",
+                "image": "https://via.placeholder.com/220x160?text=Orange+Plant",
                 "url": "https://www.amazon.in/s?k=orange+plant+nagpur+mandarin"
             },
             {
                 "name": "Organic Fertilizer for Orange",
+                "price": "₹350 - ₹950",
+                "rating": "4.2",
+                "reviews": "145+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+orange"
             },
             {
                 "name": "Chemical Fertilizer for Orange",
+                "price": "₹400 - ₹1200",
+                "rating": "4.1",
+                "reviews": "190+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+citrus+orange"
             }
         ]
@@ -392,14 +468,26 @@
         "purchase_links": [
             {
                 "name": "Apple Plant / Sapling",
+                "price": "₹200 - ₹700",
+                "rating": "4.4",
+                "reviews": "130+",
+                "image": "https://via.placeholder.com/220x160?text=Apple+Plant",
                 "url": "https://www.amazon.in/s?k=apple+plant+sapling"
             },
             {
                 "name": "Organic Fertilizer for Apple",
+                "price": "₹400 - ₹1100",
+                "rating": "4.2",
+                "reviews": "160+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+apple+tree"
             },
             {
                 "name": "Chemical Fertilizer for Apple",
+                "price": "₹450 - ₹1300",
+                "rating": "4.1",
+                "reviews": "210+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+apple+tree"
             }
         ]
@@ -446,14 +534,26 @@
         "purchase_links": [
             {
                 "name": "Muskmelon Seeds",
+                "price": "₹100 - ₹450",
+                "rating": "4.2",
+                "reviews": "170+",
+                "image": "https://via.placeholder.com/220x160?text=Muskmelon+Seeds",
                 "url": "https://www.amazon.in/s?k=muskmelon+seeds"
             },
             {
                 "name": "Organic Fertilizer for Muskmelon",
+                "price": "₹300 - ₹850",
+                "rating": "4.1",
+                "reviews": "100+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+muskmelon"
             },
             {
                 "name": "Chemical Fertilizer for Muskmelon",
+                "price": "₹350 - ₹1000",
+                "rating": "4.0",
+                "reviews": "140+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+muskmelon"
             }
         ]
@@ -500,14 +600,26 @@
         "purchase_links": [
             {
                 "name": "Watermelon Seeds",
+                "price": "₹100 - ₹500",
+                "rating": "4.3",
+                "reviews": "190+",
+                "image": "https://via.placeholder.com/220x160?text=Watermelon+Seeds",
                 "url": "https://www.amazon.in/s?k=watermelon+seeds"
             },
             {
                 "name": "Organic Fertilizer for Watermelon",
+                "price": "₹300 - ₹850",
+                "rating": "4.1",
+                "reviews": "115+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+watermelon"
             },
             {
                 "name": "Chemical Fertilizer for Watermelon",
+                "price": "₹350 - ₹1000",
+                "rating": "4.0",
+                "reviews": "160+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+watermelon"
             }
         ]
@@ -555,14 +667,26 @@
         "purchase_links": [
             {
                 "name": "Grape Vine Cutting / Sapling",
+                "price": "₹100 - ₹400",
+                "rating": "4.3",
+                "reviews": "105+",
+                "image": "https://via.placeholder.com/220x160?text=Grape+Vine",
                 "url": "https://www.amazon.in/s?k=grape+vine+plant+sapling"
             },
             {
                 "name": "Organic Fertilizer for Grapes",
+                "price": "₹400 - ₹1100",
+                "rating": "4.2",
+                "reviews": "135+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+grapes"
             },
             {
                 "name": "Chemical Fertilizer for Grapes",
+                "price": "₹450 - ₹1300",
+                "rating": "4.1",
+                "reviews": "185+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+grapes"
             }
         ]
@@ -610,14 +734,26 @@
         "purchase_links": [
             {
                 "name": "Mango Grafted Plant",
+                "price": "₹150 - ₹600",
+                "rating": "4.5",
+                "reviews": "320+",
+                "image": "https://via.placeholder.com/220x160?text=Mango+Plant",
                 "url": "https://www.amazon.in/s?k=mango+grafted+plant"
             },
             {
                 "name": "Organic Fertilizer for Mango",
+                "price": "₹400 - ₹1100",
+                "rating": "4.3",
+                "reviews": "210+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+mango"
             },
             {
                 "name": "Chemical Fertilizer for Mango",
+                "price": "₹450 - ₹1300",
+                "rating": "4.2",
+                "reviews": "275+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+mango+tree"
             }
         ]
@@ -664,14 +800,26 @@
         "purchase_links": [
             {
                 "name": "Banana Tissue Culture Plant",
+                "price": "₹30 - ₹150",
+                "rating": "4.3",
+                "reviews": "260+",
+                "image": "https://via.placeholder.com/220x160?text=Banana+Plant",
                 "url": "https://www.amazon.in/s?k=banana+tissue+culture+plant"
             },
             {
                 "name": "Organic Fertilizer for Banana",
+                "price": "₹350 - ₹950",
+                "rating": "4.2",
+                "reviews": "190+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+banana"
             },
             {
                 "name": "Chemical Fertilizer for Banana",
+                "price": "₹400 - ₹1200",
+                "rating": "4.1",
+                "reviews": "240+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=mop+urea+fertilizer+for+banana"
             }
         ]
@@ -719,14 +867,26 @@
         "purchase_links": [
             {
                 "name": "Pomegranate Plant (Bhagwa)",
+                "price": "₹100 - ₹400",
+                "rating": "4.4",
+                "reviews": "145+",
+                "image": "https://via.placeholder.com/220x160?text=Pomegranate+Plant",
                 "url": "https://www.amazon.in/s?k=pomegranate+plant+bhagwa"
             },
             {
                 "name": "Organic Fertilizer for Pomegranate",
+                "price": "₹350 - ₹950",
+                "rating": "4.2",
+                "reviews": "120+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+pomegranate"
             },
             {
                 "name": "Chemical Fertilizer for Pomegranate",
+                "price": "₹400 - ₹1200",
+                "rating": "4.1",
+                "reviews": "165+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+pomegranate"
             }
         ]
@@ -772,14 +932,26 @@
         "purchase_links": [
             {
                 "name": "Lentil Seeds (Masoor)",
+                "price": "₹120 - ₹400",
+                "rating": "4.1",
+                "reviews": "90+",
+                "image": "https://via.placeholder.com/220x160?text=Lentil+Seeds",
                 "url": "https://www.amazon.in/s?k=lentil+masoor+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Lentil",
+                "price": "₹300 - ₹900",
+                "rating": "4.0",
+                "reviews": "130+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=dap+ssp+fertilizer+for+lentil"
             }
         ]
@@ -825,14 +997,26 @@
         "purchase_links": [
             {
                 "name": "Black Gram Seeds (Urad)",
+                "price": "₹130 - ₹450",
+                "rating": "4.1",
+                "reviews": "110+",
+                "image": "https://via.placeholder.com/220x160?text=Black+Gram+Seeds",
                 "url": "https://www.amazon.in/s?k=black+gram+urad+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Black Gram",
+                "price": "₹300 - ₹900",
+                "rating": "4.0",
+                "reviews": "145+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+black+gram"
             }
         ]
@@ -878,14 +1062,26 @@
         "purchase_links": [
             {
                 "name": "Mung Bean Seeds (Moong)",
+                "price": "₹120 - ₹420",
+                "rating": "4.2",
+                "reviews": "155+",
+                "image": "https://via.placeholder.com/220x160?text=Mung+Bean+Seeds",
                 "url": "https://www.amazon.in/s?k=mung+bean+moong+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Mung Bean",
+                "price": "₹300 - ₹880",
+                "rating": "4.0",
+                "reviews": "125+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+moong"
             }
         ]
@@ -928,14 +1124,26 @@
         "purchase_links": [
             {
                 "name": "Moth Bean Seeds (Matki)",
+                "price": "₹100 - ₹380",
+                "rating": "4.0",
+                "reviews": "65+",
+                "image": "https://via.placeholder.com/220x160?text=Moth+Bean+Seeds",
                 "url": "https://www.amazon.in/s?k=moth+bean+matki+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Moth Bean",
+                "price": "₹250 - ₹800",
+                "rating": "3.9",
+                "reviews": "70+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+moth+bean"
             }
         ]
@@ -981,14 +1189,26 @@
         "purchase_links": [
             {
                 "name": "Pigeon Pea Seeds (Tur / Arhar)",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "135+",
+                "image": "https://via.placeholder.com/220x160?text=Pigeon+Pea+Seeds",
                 "url": "https://www.amazon.in/s?k=pigeon+pea+tur+arhar+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Pigeon Pea",
+                "price": "₹300 - ₹900",
+                "rating": "4.0",
+                "reviews": "155+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+pigeon+pea"
             }
         ]
@@ -1034,14 +1254,26 @@
         "purchase_links": [
             {
                 "name": "Kidney Bean Seeds (Rajma)",
+                "price": "₹130 - ₹450",
+                "rating": "4.2",
+                "reviews": "115+",
+                "image": "https://via.placeholder.com/220x160?text=Kidney+Bean+Seeds",
                 "url": "https://www.amazon.in/s?k=kidney+bean+rajma+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Kidney Bean",
+                "price": "₹300 - ₹900",
+                "rating": "4.0",
+                "reviews": "125+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+rajma+kidney+bean"
             }
         ]
@@ -1088,14 +1320,26 @@
         "purchase_links": [
             {
                 "name": "Chickpea Seeds (Desi / Kabuli Chana)",
+                "price": "₹140 - ₹480",
+                "rating": "4.3",
+                "reviews": "175+",
+                "image": "https://via.placeholder.com/220x160?text=Chickpea+Seeds",
                 "url": "https://www.amazon.in/s?k=chickpea+chana+seeds"
             },
             {
                 "name": "Rhizobium Biofertilizer",
+                "price": "₹150 - ₹500",
+                "rating": "4.2",
+                "reviews": "200+",
+                "image": "https://via.placeholder.com/220x160?text=Rhizobium+Biofertilizer",
                 "url": "https://www.amazon.in/s?k=rhizobium+biofertilizer"
             },
             {
                 "name": "Fertilizer for Chickpea",
+                "price": "₹300 - ₹900",
+                "rating": "4.1",
+                "reviews": "150+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+chickpea+chana"
             }
         ]
@@ -1143,14 +1387,26 @@
         "purchase_links": [
             {
                 "name": "Coffee Plant / Seedling",
+                "price": "₹100 - ₹500",
+                "rating": "4.4",
+                "reviews": "185+",
+                "image": "https://via.placeholder.com/220x160?text=Coffee+Plant",
                 "url": "https://www.amazon.in/s?k=coffee+plant+seedling"
             },
             {
                 "name": "Organic Fertilizer for Coffee",
+                "price": "₹400 - ₹1100",
+                "rating": "4.3",
+                "reviews": "140+",
+                "image": "https://via.placeholder.com/220x160?text=Organic+Fertilizer",
                 "url": "https://www.amazon.in/s?k=organic+fertilizer+for+coffee+plant"
             },
             {
                 "name": "Chemical Fertilizer for Coffee",
+                "price": "₹450 - ₹1300",
+                "rating": "4.1",
+                "reviews": "160+",
+                "image": "https://via.placeholder.com/220x160?text=Chemical+Fertilizer",
                 "url": "https://www.amazon.in/s?k=fertilizer+for+coffee+plant"
             }
         ]

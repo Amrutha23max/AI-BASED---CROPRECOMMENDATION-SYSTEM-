@@ -18,6 +18,8 @@ import os
 
 import json
 
+from xgboost import data
+
 with open("fertilizer_rules.json") as f:
     fertilizer_rules = json.load(f)
 
@@ -116,6 +118,9 @@ def preprocess_soil_image(image):
 def predict_soil_type(image):
     processed = preprocess_soil_image(image)
     preds = soil_model.predict(processed)
+    print("RAW PREDICTIONS:", preds)
+    print("CLASS INDEX:",int(np.argmax(preds)))
+    print("SOIL CLASSES:",soil_classes)
 
     class_idx = int(np.argmax(preds))
     confidence = round(float(preds[0][class_idx]) * 100, 2)
@@ -354,7 +359,14 @@ def validate_crop_input(data):
     return True, ""
 @app.route('/predict', methods=['POST'])
 def predict():
+
     data = request.get_json(silent=True) or {}
+    is_valid, error_msg = validate_crop_input(data)
+    if not is_valid:
+       return jsonify({"error": error_msg}), 400
+       
+    data["NPK_sum"] = data["N"] + data["P"] + data["K"]
+    data["NP_ratio"] = data["N"] / (data["P"] + 1)
 
     try:
         # 1. Extract NPK

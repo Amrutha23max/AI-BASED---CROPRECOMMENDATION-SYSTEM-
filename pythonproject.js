@@ -5,16 +5,14 @@
 // ---- TRANSLATIONS ----
 // ---- PAGE NAVIGATION CONFIG ----
 const BACKEND_URL = "https://crop-backend-lwhy.onrender.com";
+let latestPredictionData = null;
+let latestMLResult = null;
 // 1. PAGE CONFIGURATION
 let analysisDone = false;
-const pageSequence = [
-  "home", "phone", "otp", "location", "choice",
-  "upload", "manual", "analyzing", "results",
-  "history", "suggestions", "contact"
-];
+const pageSequence = ["home", "phone", "otp", "location", "choice", "upload", "manual", "analyzing", "results", "details","history", "suggestions", "contact"];
 
-let currentPageIndex = 0;
 
+let currentPageIndex = 0; // Start at home page
 const translations = {
   en: {
     navAbout: "AI-powered crop recommendations using soil and climate data.",
@@ -102,7 +100,7 @@ const translations = {
     sideHome: "🏠 Home",
     sideFeatures: "✨ Features",
     sideSuggestions: "💡 Suggestions",
-    sideHistory: "📜 History",
+    sideHistory: "🕒 History",
     sideAbout: "📖 About",
     sideContact: "📞 Contact",
     yourOtp: "YOUR OTP",
@@ -215,7 +213,7 @@ const translations = {
     sideHome: "🏠 హోమ్",
     sideFeatures: "✨ విశేషాలు",
     sideSuggestions: "💡 సూచనలు",
-    sideHistory: "📜 చరిత్ర",
+    sideHistory: "🕒 చరిత్ర",
     sideAbout: "📖 గురించి",
     sideContact: "📞 సంప్రదించండి",
     yourOtp: "మీ OTP",
@@ -327,7 +325,7 @@ const translations = {
     chatTitle: "🌱 AgriBot AI",
     sideHome: "🏠 होम",
     sideFeatures: "✨ विशेषताएं",
-    sideSuggestions: "💡 सुझाव",
+    sideSuggestions: "💡 सुझाव", 
     sideHistory: "📜 इतिहास",
     sideAbout: "📖 के बारे में",
     sideContact: "📞 संपर्क",
@@ -356,6 +354,12 @@ const translations = {
     locDetecting: "⏳ पता लगा रहे हैं...",
   },
 };
+function resetOTPFields(){
+   const inputs = document.querySelectorAll(".otp-input");
+
+  inputs.forEach(input => input.value = "");
+
+}
 function showToast(message, type = 'success') {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
@@ -364,21 +368,7 @@ function showToast(message, type = 'success') {
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
-const dummyResults = {
-  soilType: "Black Cotton Soil",
-  soilColor: "#3d2b1f",
-  ph: 7.8,
-  nitrogen: 42,
-  phosphorus: 28,
-  potassium: 65,
-  temperature: "28°C",
-  humidity: "72%",
-  rainfall: "850 mm/yr",
-  crop: "Cotton",
-  cropEmoji: "🌿",
-  confidence: 87,
-  explanation: "Black cotton soil has high clay content and excellent water retention. Its slightly alkaline pH (7.8) and moderate nitrogen levels are ideal for cotton cultivation.",
-};
+
 
 // ---- STATE ----
 let currentLang = "en";
@@ -423,7 +413,7 @@ function renderSuggestionsFromServer() {
       <div class="skel-line" style="width:40%; height:12px; margin-top:16px; margin-left:auto;"></div>
     </div>
   `).join('');
-  fetch("https://crop-backend-lwhy.onrender.com/get-suggestions")
+  fetch("http://127.0.0.1:5000/get-suggestions")
     .then(res => res.json())
     .then(data => {
       if (data.length === 0) {
@@ -441,7 +431,94 @@ function renderSuggestionsFromServer() {
       list.innerHTML = `<p style="text-align:center; color:#c62828; grid-column:1/-1;">${t.sugLoadError}</p>`;
     });
 }
+// function renderTop3CropCards(top3) {
+//   const box = document.getElementById("topCropsContainer");
+//   box.innerHTML = "";
 
+//   top3.forEach((crop, index) => {
+//     box.innerHTML += `
+//       <div class="top-crop-card">
+//         <h3>${crop.crop}</h3>
+//         <p>${crop.confidence}%</p>
+
+//         <button class="btn-primary"
+//           onclick="openCropDetails(${index})">
+//           View Details
+//         </button>
+//       </div>
+//     `;
+//   });
+// }
+function renderTop3CropCards(top3) {
+  const box = document.getElementById("topCropsContainer");
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  top3.forEach((crop, index) => {
+    box.innerHTML += `
+      <div class="top-crop-card">
+        <h3>${crop.crop}</h3>
+        <p>${crop.confidence}%</p>
+
+        <!-- 👇 ADD ONCLICK HERE -->
+        <button class="btn-primary"
+          onclick="openCropDetails(${index})">
+          View Details
+        </button>
+      </div>
+    `;
+  });
+}
+function openCropDetails(index) {
+  const data = latestMLResult || latestPredictionData;
+
+  if (!data || !data.crop_guidance || !data.crop_guidance[index]) {
+    showToast("Guidance not available for this crop.", "error");
+    return;
+  }
+
+  const selected = data.crop_guidance[index];
+  const guide = selected.guidance || {};
+
+
+  
+
+  // Crop name
+  document.getElementById("detailCropName").textContent =
+    selected.crop;
+
+  document.getElementById("detailCropEmoji").textContent =
+    getCropEmoji(selected.crop);
+
+  // Explanation
+  const explanation = Array.isArray(data.explanation)
+    ? data.explanation.map(e =>
+      `${e.feature} has ${e.effect} impact`
+    )
+    : [];
+
+  fillList("farmerExplanation", explanation);
+
+  // Guide
+  fillList("guideGrow", guide.how_to_grow);
+  fillList("guideDiseases", guide.common_diseases);
+
+  document.getElementById("guideWater").textContent =
+    guide.water_requirement || "—";
+
+  document.getElementById("guideSeason").textContent =
+    guide.season || "—";
+
+  // Fertilizer
+  renderFertilizers(data.fertilizer_suggestions);
+
+  // Products
+  renderProductCards(guide.purchase_links||guide.pageSequenceroducts || []);
+
+  // Navigate
+  goTo("details");
+}
 // ADD THIS ABOVE the goTo function
 const pageTitles = {
   en: {
@@ -540,7 +617,7 @@ function goTo(page, pushToHistory = true) {
   }
   if (page === "history") {
     renderHistory();
-  }
+  } 
   if (page === "home") {
     clearTimeout(slideTimer); // Stop old timer before starting new one
     slideIndex = 0;
@@ -550,8 +627,68 @@ function goTo(page, pushToHistory = true) {
   const titles = pageTitles[currentLang] || pageTitles.en;
 document.title = titles[page] || "AgriXAI";
 };
+function startImageAnalysis() {
+  const fileInput = document.getElementById("soilImage");
 
+  if (!fileInput || !fileInput.files.length) {
+    alert("Please select an image first");
+    return;
+  }
 
+  const formData = new FormData();
+  formData.append("image", fileInput.files[0]);
+
+  fetch("http://127.0.0.1:5000/predict-image", {
+    method: "POST",
+    body: formData
+  })
+    .then(res => parseJsonResponse(res))
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      latestMLResult=data;
+      latestPredictionData = data;
+      showResults();
+    })
+    .catch(err => {
+      console.error(err);
+      showToast(err.message || "Error analyzing image", "error");
+    });
+}
+document.getElementById("soilImage").addEventListener("change", function () {
+  const file = this.files[0];
+
+  if (!file) return;
+
+  const previewContainer = document.getElementById("previewContainer");
+  previewContainer.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.style.maxWidth = "100%";
+  img.style.borderRadius = "16px";
+  img.style.marginTop = "15px";
+
+  previewContainer.appendChild(img);
+});
+function handleImageSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const previewContainer = document.getElementById("previewContainer");
+  previewContainer.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.style.maxWidth = "100%";
+  img.style.borderRadius = "16px";
+  img.style.marginTop = "15px";
+
+  previewContainer.appendChild(img);
+
+  showToast("✅ Image selected", "success");
+}
 
 function navTo(page) {
   document.getElementById('sidebar').classList.remove('active');
@@ -583,7 +720,12 @@ function clearAllData() {
     document.getElementById('xaiText').innerText = '—';
     document.getElementById('confPct').innerText = '0%';
      document.getElementById('confFill').style.width = '0%';
-   
+    
+    const imgPreview = document.getElementById('imgPreview');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    if(imgPreview) imgPreview.style.display = 'none';
+    if(uploadPlaceholder) uploadPlaceholder.style.display = 'block';
+
     // 4. Resets Analysis Progress Bar
     const progressFill = document.getElementById('progressFill');
     if(progressFill) progressFill.style.width = '0%';
@@ -760,7 +902,7 @@ function previewImage(event) {
   };
   reader.readAsDataURL(file);
 }
-let latestPredictionData = null;
+
 async function fetchAndFillWeather() {
   if (!window.detectedLat || !window.detectedLon) return;
 
@@ -770,7 +912,7 @@ async function fetchAndFillWeather() {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    
+
     if (data.cod === 401 || data.cod === "401" || data.cod === 429) {
       showToast("⚠️ Weather service not ready. Please enter manually.", "error");
       return;
@@ -882,88 +1024,113 @@ function handleContinue() {
     .catch(() => {
       goTo('choice'); // even if geocoding fails, still continue
     });
-}
-
-function setProgress(pct) {
+} function setProgress(pct) {
   const fill = document.getElementById("progressFill");
   const label = document.getElementById("progressLabel");
 
   if (fill) fill.style.width = pct + "%";
   if (label) label.textContent = pct + "%";
-}
+}// --- Specific Start for Manual Path ---
+// function startManualAnalysis() {
+//   const inputs = document.querySelectorAll('#page-manual .input-field');
+  
+//   // Get values
+//   const n        = inputs[0].value.trim();
+//   const p        = inputs[1].value.trim();
+//   const k        = inputs[2].value.trim();
+//   const ph       = inputs[3].value.trim();
+//   const temp     = inputs[4].value.trim();
+//   const humidity = inputs[5].value.trim();
+//   const rainfall = inputs[6].value.trim();
 
-// --- Specific Start for Manual Path ---
+//   // Check all fields filled
+//   if (!n || !p || !k || !ph || !temp || !humidity || !rainfall) {
+//     showToast("⚠️ Please fill all fields before analyzing.", "error");
+    
+//     // Highlight empty fields in red
+//     inputs.forEach(input => {
+//       if (!input.value.trim()) {
+//         input.style.borderColor = "#c62828";
+//         setTimeout(() => { input.style.borderColor = ""; }, 2000);
+//       }
+//     });
+//     return;
+//   }
+
+//   // Check value ranges
+//   if (n < 0 || n > 150) {
+//     showToast("⚠️ Nitrogen must be between 0 and 150.", "error");
+//     inputs[0].style.borderColor = "#c62828";
+//     setTimeout(() => { inputs[0].style.borderColor = ""; }, 2000);
+//     return;
+//   }
+//   if (p < 0 || p > 50) {
+//     showToast("⚠️ Phosphorus must be between 0 and 50.", "error");
+//     inputs[1].style.borderColor = "#c62828";
+//     setTimeout(() => { inputs[1].style.borderColor = ""; }, 2000);
+//     return;
+//   }
+//   if (k < 0 || k > 300) {
+//     showToast("⚠️ Potassium must be between 0 and 300.", "error");
+//     inputs[2].style.borderColor = "#c62828";
+//     setTimeout(() => { inputs[2].style.borderColor = ""; }, 2000);
+//     return;
+//   }
+//   if (ph < 3.5 || ph > 9.0) {
+//     showToast("⚠️ pH must be between 3.5 and 9.0.", "error");
+//     inputs[3].style.borderColor = "#c62828";
+//     setTimeout(() => { inputs[3].style.borderColor = ""; }, 2000);
+//     return;
+//   }
+
+//   // All good — proceed
+//   updateManualStep(4);
+//   setTimeout(() => {
+//     goTo("analyzing");
+//     animateProgress();
+//   }, 400);
+// }
 function startManualAnalysis() {
   const inputs = document.querySelectorAll('#page-manual .input-field');
-  
-  // Get values
-  const n        = inputs[0].value.trim();
-  const p        = inputs[1].value.trim();
-  const k        = inputs[2].value.trim();
-  const ph       = inputs[3].value.trim();
-  const temp     = inputs[4].value.trim();
+
+  const n = inputs[0].value.trim();
+  const p = inputs[1].value.trim();
+  const k = inputs[2].value.trim();
+  const ph = inputs[3].value.trim();
+  const temp = inputs[4].value.trim();
   const humidity = inputs[5].value.trim();
   const rainfall = inputs[6].value.trim();
 
-  // Check all fields filled
   if (!n || !p || !k || !ph || !temp || !humidity || !rainfall) {
     showToast("⚠️ Please fill all fields before analyzing.", "error");
-    
-    // Highlight empty fields in red
-    inputs.forEach(input => {
-      if (!input.value.trim()) {
-        input.style.borderColor = "#c62828";
-        setTimeout(() => { input.style.borderColor = ""; }, 2000);
-      }
-    });
     return;
   }
 
-  // Check value ranges
-  if (n < 0 || n > 150) {
-    showToast("⚠️ Nitrogen must be between 0 and 150.", "error");
-    inputs[0].style.borderColor = "#c62828";
-    setTimeout(() => { inputs[0].style.borderColor = ""; }, 2000);
-    return;
-  }
-  if (p < 0 || p > 50) {
-    showToast("⚠️ Phosphorus must be between 0 and 50.", "error");
-    inputs[1].style.borderColor = "#c62828";
-    setTimeout(() => { inputs[1].style.borderColor = ""; }, 2000);
-    return;
-  }
-  if (k < 0 || k > 300) {
-    showToast("⚠️ Potassium must be between 0 and 300.", "error");
-    inputs[2].style.borderColor = "#c62828";
-    setTimeout(() => { inputs[2].style.borderColor = ""; }, 2000);
-    return;
-  }
-  if (ph < 3.5 || ph > 9.0) {
-    showToast("⚠️ pH must be between 3.5 and 9.0.", "error");
-    inputs[3].style.borderColor = "#c62828";
-    setTimeout(() => { inputs[3].style.borderColor = ""; }, 2000);
-    return;
-  }
+  if (n < 0 || n > 150) return showToast("⚠️ Nitrogen must be between 0 and 150.", "error");
+  if (p < 0 || p > 50) return showToast("⚠️ Phosphorus must be between 0 and 50.", "error");
+  if (k < 0 || k > 300) return showToast("⚠️ Potassium must be between 0 and 300.", "error");
+  if (ph < 3.5 || ph > 9.0) return showToast("⚠️ pH must be between 3.5 and 9.0.", "error");
 
-  // All good — proceed
   updateManualStep(4);
 
-submitManualPrediction({
-  N: Number(n),
-  P: Number(p),
-  K: Number(k),
-  ph: Number(ph),
-  temperature: Number(temp),
-  humidity: Number(humidity),
-  rainfall: Number(rainfall)
-});
+  submitManualPrediction({
+    N: Number(n),
+    P: Number(p),
+    K: Number(k),
+    ph: Number(ph),
+    temperature: Number(temp),
+    humidity: Number(humidity),
+    rainfall: Number(rainfall),
+    mode: "mixed"
+  });
 }
+
 async function submitManualPrediction(payload) {
   try {
     goTo("analyzing");
     setProgress(35);
 
-    const response = await fetch(`${BACKEND_URL}/predict`, {
+    const response = await fetch("http://127.0.0.1:5000/predict", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -978,83 +1145,30 @@ async function submitManualPrediction(payload) {
     }
 
     setProgress(100);
+    latestMLResult = data;
     latestPredictionData = data;
-    displayPredictionResults(data, payload);
+    showResults();
   } catch (err) {
     showToast(err.message || "Prediction failed. Try again.", "error");
     goTo("manual");
   }
 }
 
-async function startImageAnalysis() {
-  if (!selectedImageFile) {
-    showToast("Please upload a soil image first.", "error");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("image", selectedImageFile);
-  formData.append("temperature", 25);
-  formData.append("humidity", 80);
-  formData.append("rainfall", 200);
-
-  try {
-    goTo("analyzing");
-    setProgress(35);
-
-    const response = await fetch(`${BACKEND_URL}/predict-image`, {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await parseJsonResponse(response);
-
-    if (!response.ok || data.error) {
-      throw new Error(data.error || "Image prediction failed");
-    }
-
-    setProgress(100);
-    latestPredictionData = data;
-    displayPredictionResults(data, data.estimated_values || {});
-  } catch (err) {
-    showToast(err.message || "Image analysis failed. Try another image.", "error");
-    goTo("upload");
-  }
-}
-
-async function parseJsonResponse(response) {
-  const contentType = response.headers.get("content-type") || "";
-  const text = await response.text();
-
-  if (!contentType.includes("application/json")) {
-    throw new Error(
-      `Server returned ${response.status || "a non-JSON response"}. Check that the backend has /predict-image deployed.`
-    );
-  }
-
-  try {
-    return JSON.parse(text);
-  } catch (err) {
-    throw new Error("Server response was not valid JSON.");
-  }
-}
-
-
-function animateProgress() {
-  let pct = 0;
-  const fill  = document.getElementById("progressFill");
-  const label = document.getElementById("progressLabel");
-  const interval = setInterval(() => {
-    pct += Math.floor(Math.random() * 8) + 3;
-    if (pct >= 100) {
-      pct = 100;
-      clearInterval(interval);
-      setTimeout(showResults, 400);
-    }
-    fill.style.width  = pct + "%";
-    label.textContent = pct + "%";
-  }, 120);
-}
+// function animateProgress() {
+//   let pct = 0;
+//   const fill  = document.getElementById("progressFill");
+//   const label = document.getElementById("progressLabel");
+//   const interval = setInterval(() => {
+//     pct += Math.floor(Math.random() * 8) + 3;
+//     if (pct >= 100) {
+//       pct = 100;
+//       clearInterval(interval);
+//       setTimeout(showResults, 400);
+//     }
+//     fill.style.width  = pct + "%";
+//     label.textContent = pct + "%";
+//   }, 120);
+// }
 function drawNPKChart(n, p, k) {
   const canvas = document.getElementById('npkChart');
   if (!canvas) return;
@@ -1090,106 +1204,290 @@ function drawNPKChart(n, p, k) {
     ctx.fillText(bar.value, canvas.width - 48, y + 13);
   });
 }
+// function showResults() {
+//   if (!latestMLResult) {
+//     alert("No data from backend");
+//     return;
+//   }
+// function showResults() {
+//   if (!latestPredictionData && !latestMLResult) {
+//     alert("No data from backend");
+//     return;
+//   }
 
+//   const d = latestMLResult;
+//   document.getElementById("soilColorBox").style.background = d.soilColor || "#ccc";
 
-function showResults() {
- ///Prefer latestMLResult (your existing flow), fallback to passed data if needed
- const d = window.latestMLResult || {};
- const bestCrop = d.best_crop || {};
- const estimated = d.estimated_values || {
-  N: d.nitrogen,
-  P: d.phosphorus,
-  K: d.potassium
-};
+//   document.getElementById("cropEmoji").textContent = d.cropEmoji || "🌱";
 
-// --- Soil / UI basics ---
-document.getElementById("soilColorBox").style.background = d.soilColor || "#6b4f3f";
-document.getElementById("soilTypeVal").textContent =
-  d.soil_type ? `${d.soil_type} (${d.soil_confidence || 0}%)` : "Manual Input";
+//   document.getElementById("xaiText").textContent = d.explanation || "No explanation available";
+//   document.getElementById("soilTypeVal").textContent =
+//     d.soil_type ? `${d.soil_type} (${d.soil_confidence}%)` : "Manual Input";
+//   document.getElementById("confFill").style.width    = d.confidence + "%";
+//   document.getElementById("confPct").textContent     = d.confidence + "%";
+//   document.getElementById("cropEmoji").textContent   = d.cropEmoji;
+//   document.getElementById("cropName").textContent    = d.crop;
+//   document.getElementById("xaiText").textContent     = d.explanation;
+//   drawNPKChart(d.nitrogen, d.phosphorus, d.potassium);
+//   goTo("results");
+//   analysisDone = true;
+//   const top3 = d.top_3_crops || [];
 
-const confidence = Math.round(
-  bestCrop.confidence || bestCrop.probability || d.confidence || 0
-);
-document.getElementById("confFill").style.width = confidence + "%";
-document.getElementById("confPct").textContent = confidence + "%";
+//   document.getElementById("topCrop1").textContent =
+//     top3[0] ? `${top3[0].crop} (${top3[0].confidence}%)` : "—";
 
-document.getElementById("cropEmoji").textContent = d.cropEmoji || "🌿";
-document.getElementById("cropName").textContent =
-  bestCrop.crop || bestCrop.name || d.crop || "Unknown";
+//   document.getElementById("topCrop2").textContent =
+//     top3[1] ? `${top3[1].crop} (${top3[1].confidence}%)` : "—";
 
-// --- Explanation (handles array or string) ---
-const explanation = Array.isArray(d.explanation)
-  ? d.explanation.join(" ")
-  : d.explanation || "No explanation available.";
-document.getElementById("xaiText").textContent = explanation;
+//   document.getElementById("topCrop3").textContent =
+//     top3[2] ? `${top3[2].crop} (${top3[2].confidence}%)` : "—";
+//   const fertList = document.getElementById("fertilizerList");
+//   fertList.innerHTML = "";
 
-// --- NPK chart ---
-drawNPKChart(
-  Number(estimated.N || 0),
-  Number(estimated.P || 0),
-  Number(estimated.K || 0)
-);
+//   if (d.fertilizer_suggestions && d.fertilizer_suggestions.length > 0) {
+//     d.fertilizer_suggestions.forEach(f => {
+//       const li = document.createElement("li");
+//       li.textContent = f;
+//       fertList.appendChild(li);
+//     });
+//   } else {
+//     fertList.innerHTML = "<li>No fertilizer suggestions available</li>";
+//   }
+// }
+// function showCropGuidance() {
+//   if (!latestMLResult || !latestMLResult.crop_guidance) {
+//     alert("Guidance data not available.");
+//     return;
+//   }
 
-// --- Top 3 crops ---
-const top3 = d.top_3_crops || [];
-document.getElementById("topCrop1").textContent =
-  top3[0] ? `${top3[0].crop} (${top3[0].confidence}%)` : "—";
-document.getElementById("topCrop2").textContent =
-  top3[1] ? `${top3[1].crop} (${top3[1].confidence}%)` : "—";
-document.getElementById("topCrop3").textContent =
-  top3[2] ? `${top3[2].crop} (${top3[2].confidence}%)` : "—";
+//   const selected = latestMLResult.crop_guidance[0];
+//   console.log(selected); // debug
 
-// --- Fertilizer suggestions (your feature) ---
-const fertList = document.getElementById("fertilizerList");
-if (fertList) {
-  fertList.innerHTML = "";
-  if (d.fertilizer_suggestions && d.fertilizer_suggestions.length > 0) {
-    d.fertilizer_suggestions.forEach(f => {
-      const li = document.createElement("li");
-      li.textContent = f;
-      fertList.appendChild(li);
-    });
-  } else {
-    fertList.innerHTML = "<li>No fertilizer suggestions available</li>";
-  }
+//   goTo("guidance");
+// }
+function getCropEmoji(crop) {
+  const map = {
+    rice: "🌾",
+    wheat: "🌿",
+    cotton: "🌱",
+    maize: "🌽",
+    sugarcane: "🎋"
+  };
+  return map[crop?.toLowerCase()] || "🌿";
 }
-
-// --- Optional advanced hooks (from your friend’s code) ---
-if (typeof renderAdvancedResults === "function") {
-  renderAdvancedResults(d);
-}
-if (typeof saveAnalysisToHistory === "function") {
-  saveAnalysisToHistory(d);
-}
-
-goTo("results");
-}
-
+function fillList(id, items) {
   
-function showCropGuidance() {
-  if (!latestMLResult || !latestMLResult.crop_guidance) {
-    alert("Guidance data not available.");
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = "";
+
+  if (!items || items.length === 0) {
+    el.innerHTML = "<li>No data available</li>";
     return;
   }
 
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    el.appendChild(li);
+  });
+}
+async function parseJsonResponse(res) {
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "Request failed");
+  }
+  return data;
+}
+function renderFertilizers(fertilizers) {
+  const container = document.getElementById("fertilizerContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!fertilizers || fertilizers.length === 0) {
+    container.innerHTML = "<p>No fertilizer suggestions available.</p>";
+    return;
+  }
+
+  fertilizers.forEach(fert => {
+    const card = document.createElement("div");
+    card.className = "fertilizer-card";
+
+    if (typeof fert === "string") {
+      card.innerHTML = `<p>${fert}</p>`;
+    } else {
+      card.innerHTML = `
+        <h4>${fert.name || "Suggestion"}</h4>
+        <p>${fert.reason || ""}</p>
+      `;
+    }
+
+    container.appendChild(card);
+  });
+}
+function renderProductCards(products) {
+  const box = document.getElementById("productCards");
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  if (!products || products.length === 0) {
+    box.innerHTML = "<p>No products available.</p>";
+    return;
+  }
+
+  products.forEach(product => {
+    const name = product.name || "Agri Product";
+    const searchText = encodeURIComponent(name);
+    const imageText = encodeURIComponent(name.replace(/\s+/g, "+"));
+
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <img 
+        src="${product.image || `https://placehold.co/220x160/e8f5e9/1b5e20?text=${imageText}`}" 
+        alt="${name}"
+        onerror="this.src='https://placehold.co/220x160/e8f5e9/1b5e20?text=Agri+Product'"
+      />
+
+      <div class="product-info">
+        <h4>${name}</h4>
+        <p class="product-price">${product.price || "₹250 - ₹999"}</p>
+        <p class="product-rating">⭐ ${product.rating || "4.2"} | ${product.reviews || "100+"} reviews</p>
+        <a href="${product.url || `https://www.amazon.in/s?k=${searchText}`}" target="_blank" class="btn-primary">
+          View Product
+        </a>
+      </div>
+    `;
+
+    box.appendChild(card);
+  });
+}
+function showResults() {
+  const d = latestMLResult || latestPredictionData;
+
+  if (!d) {
+    alert("No data from backend");
+    return;
+  }
+
+  const bestCrop = d.best_crop || {};
+  const estimated = d.estimated_values || {};
+
+  document.getElementById("soilColorBox").style.background = d.soilColor || d.soil_color || "#6b4f3f";
+
+  document.getElementById("soilTypeVal").textContent =
+    d.soil_type ? `${d.soil_type} (${d.soil_confidence || 0}%)` : "Manual Input";
+
+  const confidence = Math.round(
+    bestCrop.confidence ?? bestCrop.probability ?? d.confidence ?? 0
+  );
+  document.getElementById("confFill").style.width = confidence + "%";
+  document.getElementById("confPct").textContent = confidence + "%";
+
+  document.getElementById("cropEmoji").textContent = d.cropEmoji || getCropEmoji(bestCrop.crop || d.crop);
+  
+  document.getElementById("cropName").textContent =
+    bestCrop.crop || bestCrop.name || d.crop || "Unknown";
+
+  const explanation = Array.isArray(d.explanation)
+    ? d.explanation.map(e =>
+      typeof e === "string"
+        ? e
+        : `${e.feature}: ${e.effect} impact, value ${e.value}`
+    ).join(" ")
+    : d.explanation || "No explanation available.";
+
+  document.getElementById("xaiText").textContent = explanation;
+
+  drawNPKChart(
+    Number(estimated.N || d.nitrogen || 0),
+    Number(estimated.P || d.phosphorus || 0),
+    Number(estimated.K || d.potassium || 0)
+  );
+
+  const top3 = d.top_3_crops || [];
+  renderTop3CropCards(top3);
+  //document.getElementById("topCrop1").textContent =
+  //   top3[0] ? `${top3[0].crop} (${top3[0].confidence}%)` : "—";
+  // document.getElementById("topCrop2").textContent =
+  //   top3[1] ? `${top3[1].crop} (${top3[1].confidence}%)` : "—";
+  // document.getElementById("topCrop3").textContent =
+  //   top3[2] ? `${top3[2].crop} (${top3[2].confidence}%)` : "—";
+
+  const fertList = document.getElementById("fertilizerList");
+  if (fertList) {
+    fertList.innerHTML = "";
+
+    if (d.fertilizer_suggestions && d.fertilizer_suggestions.length > 0) {
+      d.fertilizer_suggestions.forEach(f => {
+        const li = document.createElement("li");
+        li.textContent = typeof f === "string" ? f : `${f.name || ""} ${f.reason || ""}`;
+        fertList.appendChild(li);
+      });
+    } else {
+      fertList.innerHTML = "<li>No fertilizer suggestions available</li>";
+    }
+  }
+
+  
+  goTo("results");
+  analysisDone = true;
+}
+function showCropGuidance() {
+  // if (!latestMLResult || !latestMLResult.crop_guidance) {
+  //   alert("Guidance data not available.");
+  //   return;
+  // }
+  // if (!latestMLResult.crop_guidance || latestMLResult.crop_guidance.length === 0) {
+  //   alert("Guidance not available.");
+  //   return;
+  // }
+  if (!latestMLResult?.crop_guidance?.length) {
+    alert("Guidance not available.");
+    return;
+  }
   const selected = latestMLResult.crop_guidance[0];
-  console.log(selected); // debug
+  const guide = selected.guidance || {};
+
+  if (Object.keys(guide).length === 0) {
+    alert("Guidance not available for this crop yet");
+    return;
+  }
+
+  document.getElementById("guideCropName").textContent =
+    `${selected.crop} (${selected.confidence}%)`;
+
+  document.getElementById("guideSeason").textContent =
+    guide.season || "Not available";
+
+  document.getElementById("guideWater").textContent =
+    guide.water_requirement || "Not available";
+
+  fillList("guideGrow", guide.how_to_grow);
+  fillList("guideDiseases", guide.common_diseases);
+  fillList("guideChemical", guide.chemical_fertilizers);
+  fillList("guideOrganic", guide.organic_suggestions);
+
+  const linksBox = document.getElementById("guideLinks");
+  linksBox.innerHTML = "";
+
+  if (guide.purchase_links && guide.purchase_links.length > 0) {
+    guide.purchase_links.forEach(link => {
+      const a = document.createElement("a");
+      a.href = link.url;
+      a.target = "_blank";
+      a.textContent = `🛒 ${link.name}`;
+      linksBox.appendChild(a);
+    });
+  } else {
+    linksBox.textContent = "No purchase links available.";
+  }
 
   goTo("guidance");
 }
-
-function showResults() {
-  displayPredictionResults(latestPredictionData || {
-    best_crop: { name: dummyResults.crop, confidence: dummyResults.confidence },
-    explanation: [dummyResults.explanation],
-    top_3_crops: []
-  }, {
-    N: dummyResults.nitrogen,
-    P: dummyResults.phosphorus,
-    K: dummyResults.potassium
-  });
-}
-
 
 function openSugModal() {
   document.getElementById('sugModal').classList.add('open');
@@ -1210,12 +1508,13 @@ function handleExpertSubmit() {
     showToast(t.sugEmpty, "error");
     return;
   }
-  fetch("https://crop-backend-lwhy.onrender.com/add-suggestion", {
+  fetch("http://127.0.0.1:5000/add-suggestion", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, text: sug })
   })
-  .then(res => res.json())
+  .then(res => parseJsonResponse(res))
+
   .then(() => {
     document.getElementById('expertName').value = "";
     document.getElementById('expertSug').value = "";
@@ -1284,9 +1583,7 @@ document.addEventListener("DOMContentLoaded", () => {
   goTo(initialPage, false);
   
   // 5. Start the normal app functions
-  const initialLang = getActiveLanguage();
-  changeLang(translations[initialLang] ? initialLang : "en");
-  syncLanguageDropdown();
+  changeLang("en");
   showSlides();
   setTimeout(() => {
     document.getElementById('splash').classList.add('hidden');
@@ -1354,32 +1651,35 @@ function sendChatMessage() {
 </div>`;
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  fetch("https://crop-backend-lwhy.onrender.com/chat", {
+  fetch("http://127.0.0.1:5000/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      message: msg,
-      analysisDone: analysisDone,
-      lang: currentLang
-    })
+    body: JSON.stringify({ message: msg })
   })
-  .then(res => res.json())
-  .then(data => {
-    // Remove typing
-    const typingDots = document.getElementById("typingDots");
-    if (typingDots) typingDots.remove();
+    .then(res => parseJsonResponse(res))
+    .then(data => {
+      if (data.error) {
+        throw new Error("Invalid response from server");
+      }
 
-    // Show bot reply
-    chatBox.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
-    speakBotReply(data.reply);
-  })
-  .catch(err => {
-    chatBox.innerHTML += `<div class="bot-msg">Server error. Try again.</div>`;
-  });
+      // Remove typing
+      const typingDots = document.getElementById("typingDots");
+      if (typingDots) typingDots.remove();
+
+      // Show bot reply
+      chatBox.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      speakBotReply(data.reply);
+    })
+    .catch(err => {
+      console.error(err);
+      chatBox.innerHTML += `<div class="bot-msg">Server error. Try again.</div>`;
+    });
 }
+  
 
 // ---- VOICE INPUT (Speech-to-Text) ----
 let recognition = null;
@@ -1509,370 +1809,4 @@ function toggleTTS() {
   }
   if (!ttsEnabled && window.speechSynthesis) window.speechSynthesis.cancel();
   showToast(ttsEnabled ? t.ttsOn : t.ttsOff, "info");
-}
-
-function renderAdvancedResults(data) {
-  renderTopCrops(data.top_3_crops || []);
-  renderFarmerExplanation(data.explanation || []);
-  renderCropGuide(data.crop_guide || {});
-  renderFertilizers(data.fertilizer_suggestions || []);
-  renderPurchaseLinks(data.best_crop);
-}
-
-function renderTopCrops(crops) {
-  const container = document.getElementById("topCropsContainer");
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  crops.forEach((crop, index) => {
-    container.innerHTML += `
-      <div class="crop-card">
-        <div class="crop-rank">Rank #${index + 1}</div>
-        <div class="crop-name">${crop.name || crop.crop}</div>
-        <div class="crop-score">Confidence: ${crop.confidence}%</div>
-      </div>
-    `;
-  });
-}
-
-function renderFarmerExplanation(explanations) {
-  const container = document.getElementById("farmerExplanation");
-
-  if (!container) return;
-
-  if (!explanations.length) {
-    container.innerHTML = "No explanation available.";
-    return;
-  }
-
-  container.innerHTML = explanations
-    .map(item => `<p>✅ ${item}</p>`)
-    .join("");
-}
-
-function renderCropGuide(guide) {
-  document.getElementById("guideGrow").textContent = guide.how_to_grow || "N/A";
-
-  document.getElementById("guideWater").textContent = guide.water_requirement || "N/A";
-
-  document.getElementById("guideSeason").textContent = guide.season || "N/A";
-
-  document.getElementById("guideSoil").textContent = guide.soil_care || "N/A";
-
-  document.getElementById("guidePest").textContent = guide.pest_care || "N/A";
-}
-
-function renderFertilizers(fertilizers) {
-  const container = document.getElementById("fertilizerContainer");
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  fertilizers.forEach(fert => {
-    container.innerHTML += `
-      <div class="fertilizer-card">
-        <h4>${fert.name}</h4>
-        <p>${fert.reason}</p>
-      </div>
-    `;
-  });
-}
-
-function renderPurchaseLinks(bestCrop) {
-  const container = document.getElementById("purchaseLinks");
-
-  if (!container || !bestCrop) return;
-
-  const cropName = bestCrop.name || bestCrop.crop || "crop";
-
-  const links = [
-    {
-      title: `${cropName} Seeds`,
-      url: `https://www.amazon.in/s?k=${cropName}+seeds`
-    },
-    {
-      title: `Fertilizers for ${cropName}`,
-      url: `https://www.amazon.in/s?k=${cropName}+fertilizer`
-    },
-    {
-      title: `${cropName} Farming Tools`,
-      url: `https://www.amazon.in/s?k=${cropName}+farming+tools`
-    }
-  ];
-
-  container.innerHTML = links.map(link => `
-    <div class="purchase-card">
-      <a href="${link.url}" target="_blank">
-        ${link.title}
-      </a>
-    </div>
-  `).join("");
-}
-
-let selectedRating = 0;
-
-function setRating(rating) {
-  selectedRating = rating;
-}
-
-async function submitFeedback(useful) {
-  const comment = document.getElementById("feedbackComment").value;
-
-  const payload = {
-    rating: selectedRating,
-    useful,
-    comment,
-    crop: latestPredictionData?.best_crop?.name || latestPredictionData?.best_crop?.crop || "Unknown"
-  };
-
-  try {
-    await fetch(`${BACKEND_URL}/submit-feedback`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    alert("Feedback submitted successfully!");
-  }
-  catch(err) {
-    console.error(err);
-    alert("Failed to submit feedback");
-  }
-}
-
-function saveAnalysisToHistory(data) {
-  const history = JSON.parse(localStorage.getItem("cropHistory") || "[]");
-
-  history.unshift({
-    crop: data.best_crop?.name || "Unknown",
-    confidence: data.best_crop?.confidence || 0,
-    date: new Date().toLocaleString(),
-    data
-  });
-
-  localStorage.setItem("cropHistory", JSON.stringify(history.slice(0, 20)));
-}
-
-function renderHistory() {
-  const history = JSON.parse(localStorage.getItem("cropHistory") || "[]");
-
-  const container = document.getElementById("historyContainer");
-
-  if (!container) return;
-
-  if (!history.length) {
-    container.innerHTML = "<p>No history found.</p>";
-    return;
-  }
-
-  container.innerHTML = history.map(item => `
-    <div class="crop-card">
-      <h3>${item.crop}</h3>
-      <p>Confidence: ${item.confidence}%</p>
-      <p>${item.date}</p>
-    </div>
-  `).join("");
-}
-const dropZone = document.getElementById("dropZone");
-const fileInput = document.getElementById("soilImage");
-const previewContainer = document.getElementById("previewContainer");
-
-let selectedImageFile = null;
-const uploadBtn = document.querySelector(".upload-btn");
-
-uploadBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  fileInput.click();
-});
-fileInput.addEventListener("change", (e) => {
-  const file = e.target.files[0];
-
-  if (file) {
-    handleImageFile(file);
-  }
-});
-["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
-
-  dropZone.addEventListener(eventName, (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-
-});
-
-["dragenter", "dragover"].forEach(eventName => {
-
-  dropZone.addEventListener(eventName, () => {
-    dropZone.classList.add("dragover");
-  });
-
-});
-
-["dragleave", "drop"].forEach(eventName => {
-
-  dropZone.addEventListener(eventName, () => {
-    dropZone.classList.remove("dragover");
-  });
-
-});
-dropZone.addEventListener("drop", (e) => {
-
-  const files = e.dataTransfer.files;
-
-  if (files.length > 0) {
-    handleImageFile(files[0]);
-  }
-
-});
-function handleImageFile(file) {
-
-  if (!file.type.startsWith("image/")) {
-    alert("Please upload an image file.");
-    return;
-  }
-
-  const maxSizeMB = 5;
-
-  if (file.size > maxSizeMB * 1024 * 1024) {
-    alert("Image size must be below 5MB.");
-    return;
-  }
-
-  selectedImageFile = file;
-
-  updateUploadState(file);
-  showImagePreview(file);
-}
-
-function updateUploadState(file) {
-  if (uploadBtn) {
-    uploadBtn.textContent = "Image Selected";
-    uploadBtn.disabled = true;
-    uploadBtn.classList.add("disabled");
-  }
-
-  if (dropZone) {
-    dropZone.classList.add("has-file");
-    const title = dropZone.querySelector("h3");
-    const help = dropZone.querySelector("p");
-    if (title) title.textContent = file.name;
-    if (help) help.textContent = "Ready to analyze";
-  }
-
-  const analyzeBtn = document.getElementById("imageAnalyzeBtn");
-  if (analyzeBtn) analyzeBtn.disabled = false;
-}
-
-function translatePage(lang) {
-  if (!lang) return;
-
-  localStorage.setItem("agrixaiLanguage", lang);
-
-  const previousGoogleLang = getGoogleCookieLanguage();
-  const target = lang === "en" ? "/en/en" : `/en/${lang}`;
-  setGoogleTranslateCookie(target);
-
-  setLanguageDropdownValue(lang);
-
-  if (!translations[lang] || (previousGoogleLang && previousGoogleLang !== lang && !translations[previousGoogleLang])) {
-    location.reload();
-    return;
-  }
-
-  const applyTranslation = () => {
-    const googleSelect = document.querySelector(".goog-te-combo");
-    if (!googleSelect) {
-      if (translations[lang]) changeLang(lang);
-      return false;
-    }
-
-    googleSelect.value = lang;
-    googleSelect.dispatchEvent(new Event("change", { bubbles: true }));
-    if (translations[lang]) {
-      setTimeout(() => changeLang(lang), 150);
-      setTimeout(() => changeLang(lang), 600);
-    }
-    setTimeout(() => setLanguageDropdownValue(lang), 150);
-    setTimeout(() => setLanguageDropdownValue(lang), 600);
-    return true;
-  };
-
-  if (applyTranslation()) return;
-
-  let tries = 0;
-  const timer = setInterval(() => {
-    tries += 1;
-    if (applyTranslation() || tries > 20) {
-      clearInterval(timer);
-    }
-  }, 250);
-}
-
-function setGoogleTranslateCookie(value) {
-  document.cookie = `googtrans=${value}; path=/; SameSite=Lax`;
-  document.cookie = `googtrans=${value}; path=/; domain=${location.hostname}; SameSite=Lax`;
-
-  if (location.hostname.includes(".")) {
-    const rootDomain = "." + location.hostname.split(".").slice(-2).join(".");
-    document.cookie = `googtrans=${value}; path=/; domain=${rootDomain}; SameSite=Lax`;
-  }
-}
-
-function getActiveLanguage() {
-  return getGoogleCookieLanguage()
-    || localStorage.getItem("agrixaiLanguage")
-    || "en";
-}
-
-function getGoogleCookieLanguage() {
-  const cookie = document.cookie
-    .split(";")
-    .map(part => part.trim())
-    .find(part => part.startsWith("googtrans="));
-
-  if (!cookie) return "";
-
-  const value = decodeURIComponent(cookie.split("=")[1] || "");
-  const parts = value.split("/").filter(Boolean);
-  return parts[parts.length - 1] || "";
-}
-
-function setLanguageDropdownValue(lang) {
-  const select = document.getElementById("customLangSelect");
-  if (!select || !lang) return;
-
-  const hasOption = Array.from(select.options).some(option => option.value === lang);
-  if (hasOption) select.value = lang;
-}
-
-function syncLanguageDropdown() {
-  setLanguageDropdownValue(getActiveLanguage());
-}
-function showImagePreview(file) {
-
-  previewContainer.innerHTML = "";
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-
-    previewContainer.innerHTML = `
-      <img
-        src="${e.target.result}"
-        class="preview-image"
-        alt="Soil Preview"
-      />
-
-      <div class="file-name">
-        ${file.name}
-      </div>
-    `;
-  };
-
-  reader.readAsDataURL(file);
 }

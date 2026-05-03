@@ -306,20 +306,19 @@
     
     <!-- Right Side: The Webpage Content -->
     <div class="upload-wrapper">
-
+  
   <div id="dropZone" class="drop-zone">
     <div class="upload-content">
       <div class="upload-icon">📸</div>
       <h3>Drag & Drop Soil Image</h3>
       <p>or click below to choose image</p>
-      <button type="button" class="upload-btn">
-        Choose Image
-      </button>
+      <button class="btn-secondary" onclick="document.getElementById('soilImage').click()" data-key="chooseImgBtn">Choose Image</button>
       <input
         type="file"
         id="soilImage"
         accept="image/*"
         hidden
+        onchange="handleImageSelect(event)"
       />
     </div>
   </div>
@@ -327,6 +326,7 @@
   <button id="imageAnalyzeBtn" class="btn-primary" onclick="startImageAnalysis()" style="margin-top:20px;">
   Analyze Soil
 </button>
+  </div>
 </div>
 </section>
 
@@ -433,89 +433,104 @@
         <p class="xai-text" id="xaiText">—</p>
     </div>
     <!-- TOP 3 CROPS -->
+    <!-- TOP 3 CROPS -->
     <div class="result-block">
       <h3 class="result-heading">🌾 Top 3 Recommended Crops</h3>
+      <p class="section-desc">Click a crop to view full guidance, fertilizers, diseases, and products.</p>
       <div id="topCropsContainer" class="top-crops-grid"></div>
     </div>
 
-    <!-- FARMER FRIENDLY EXPLANATION -->
+  
+
+
+
+    <button class="btn-secondary" onclick="startOver()" data-key="startOver">🔄 Start New Analysis</button>
+  </section>
+  <section id="page-details" class="page container">
+  
+    <h2 class="section-title">🌾 Crop Details</h2>
+  
+    <!-- Selected Crop -->
+    <div class="crop-card">
+      <div class="crop-emoji" id="detailCropEmoji">🌿</div>
+      <div class="crop-name" id="detailCropName">—</div>
+    </div>
+  
+    <!-- Farmer Explanation -->
     <div class="result-block">
       <h3 class="result-heading">🧠 Why This Crop?</h3>
       <div id="farmerExplanation" class="farmer-explanation"></div>
     </div>
-    <!-- CROP GUIDE -->
-<div class="result-block">
-  <h3 class="result-heading">📘 Complete Crop Guide</h3>
-
-  <div class="guide-grid">
-    <div class="guide-card">
-      <h4>🌱 How to Grow</h4>
-      <p id="guideGrow"></p>
+  
+    <!-- Crop Guide -->
+    <div class="result-block">
+      <h3 class="result-heading">📘 Crop Guide</h3>
+  
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h4>🌱 How to Grow</h4>
+          <ul id="guideGrow"></ul>
+        </div>
+  
+        <div class="guide-card">
+          <h4>💧 Water</h4>
+          <p id="guideWater"></p>
+        </div>
+  
+        <div class="guide-card">
+          <h4>☀️ Season</h4>
+          <p id="guideSeason"></p>
+        </div>
+  
+        <div class="guide-card">
+          <h4>🐛 Diseases</h4>
+          <ul id="guideDiseases"></ul>
+        </div>
+      </div>
     </div>
-
-    <div class="guide-card">
-      <h4>💧 Water Requirement</h4>
-      <p id="guideWater"></p>
+  
+    <!-- Fertilizer -->
+    <div class="result-block">
+      <h3 class="result-heading">🧪 Fertilizer Suggestions</h3>
+      <div id="fertilizerContainer" class="fertilizer-grid"></div>
     </div>
-
-    <div class="guide-card">
-      <h4>☀️ Best Season</h4>
-      <p id="guideSeason"></p>
+  
+    <!-- Products -->
+    <div class="result-block">
+      <h3 class="result-heading">🛒 Recommended Products</h3>
+      <div id="productCards" class="product-grid"></div>
     </div>
-    <div class="guide-card">
-      <h4>🌍 Soil Care</h4>
-      <p id="guideSoil"></p>
+    <!-- FEEDBACK SECTION -->
+    <div class="result-block">
+      <h3 class="result-heading">⭐ Feedback</h3>
+    
+      <div class="feedback-box">
+        <div class="rating-row">
+          <span onclick="setRating(1)">⭐</span>
+          <span onclick="setRating(2)">⭐</span>
+          <span onclick="setRating(3)">⭐</span>
+          <span onclick="setRating(4)">⭐</span>
+          <span onclick="setRating(5)">⭐</span>
+        </div>
+    
+        <textarea id="feedbackComment" class="input-field" placeholder="Tell us your feedback..."></textarea>
+    
+        <div class="feedback-actions">
+          <button class="btn-secondary" onclick="submitFeedback(true)">
+            👍 Useful
+          </button>
+          <button class="btn-secondary" onclick="submitFeedback(false)">
+            👎 Not Useful
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div class="guide-card">
-      <h4>🐛 Pest Care</h4>
-      <p id="guidePest"></p>
-    </div>
-  </div>
-</div>
-
-<!-- FERTILIZER SUGGESTIONS -->
-<div class="result-block">
-  <h3 class="result-heading">🧪 Fertilizer Suggestions</h3>
-  <div id="fertilizerContainer" class="fertilizer-grid"></div>
-</div>
-
-<!-- PURCHASE LINKS -->
-<div class="result-block">
-  <h3 class="result-heading">🛒 Useful Purchase Links</h3>
-  <div id="purchaseLinks" class="purchase-grid"></div>
-</div>
-<!-- FEEDBACK SECTION -->
-<div class="result-block">
-  <h3 class="result-heading">⭐ Feedback</h3>
-
-  <div class="feedback-box">
-    <div class="rating-row">
-      <span onclick="setRating(1)">⭐</span>
-      <span onclick="setRating(2)">⭐</span>
-      <span onclick="setRating(3)">⭐</span>
-      <span onclick="setRating(4)">⭐</span>
-      <span onclick="setRating(5)">⭐</span>
-    </div>
-
-    <textarea
-      id="feedbackComment"
-      class="input-field"
-      placeholder="Tell us your feedback..."
-    ></textarea>
-
-    <div class="feedback-actions">
-      <button class="btn-secondary" onclick="submitFeedback(true)">
-        👍 Useful
-      </button>
-      <button class="btn-secondary" onclick="submitFeedback(false)">
-        👎 Not Useful
-      </button>
-    </div>
-  </div>
-</div>
-    <button class="btn-secondary" onclick="startOver()" data-key="startOver">🔄 Start New Analysis</button>
-  </section>
+  
+    <button class="btn-secondary" onclick="goTo('results')">
+      ← Back
+    </button>
+  
+</section>
 
   <!-- ===== PAGE: SUGGESTIONS FORM ===== -->
 <section id="page-suggestions" class="page sug-page">
